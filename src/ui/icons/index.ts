@@ -23,3 +23,8 @@ export { default as GalleryIcon } from './GalleryIcon';
 export {default as VideoIcon} from './VideoIcon';
 export { default as ShowerIcon} from './ShowerIcon';
 export { default as ApartmentIcon } from './ApartmentIcon';
+export {default as BedIcon} from './BedIcon';
+export {default as ShareIcon} from './ShareIcon';
+export {default as HeartUnFillIcon} from './HeartUnFillIcon';
+export {default as PercentageIcon} from './PercentageIcon';
+export {default as MiceIcon} from './MiceIcon';

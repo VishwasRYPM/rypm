@@ -39,3 +39,34 @@ body {
   position: relative;
   top: -15px;
 }
+
+
+@keyframes slide-from-left {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes slide-from-right {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.9;
+  }
+}
+
+.animate-slide-from-left {
+  animation: slide-from-left 0.3s ease-out forwards;
+}
+
+.animate-slide-from-right {
+  animation: slide-from-right 0.3s ease-out forwards;
+}

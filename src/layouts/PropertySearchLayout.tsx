@@ -1,7 +1,7 @@
 // 'use client';
 
 import { ReactNode } from 'react';
-import Header from '@/ui/Header';
+//import Header from '@/ui/Header';
 import BottomNavigation from '@/ui/BottomNavigation';
 
 interface PropertySearchLayoutProps {
@@ -11,7 +11,7 @@ interface PropertySearchLayoutProps {
 const PropertySearchLayout = ({ children }: PropertySearchLayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen max-w-[480px] mx-auto bg-[#FFF]">
-      <Header />
+      {/* <Header /> */}
       <main className="flex-grow pb-16">
         {children}
       </main>

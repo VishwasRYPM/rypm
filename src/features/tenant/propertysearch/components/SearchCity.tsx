@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import PlaceIcon from '@mui/icons-material/Place';
+import {MiceIcon} from '@/ui/icons';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../slices/modalSlice';
@@ -13,7 +13,8 @@ import {
   SearchActionButton,
   MapActionButton,
   SearchButtonText,
-  MapButtonText
+  MapButtonText,
+  StyledPlaceIcon,
 } from '../styles/components/searchCityStyles';
 
 interface SearchCityProps {
@@ -30,7 +31,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
   onSearch,
   placeholder = "Search",
   value = "",
-  width = "70vw",
+  width = "61vw",
   insideModal = false,
 }) => {
   const dispatch = useDispatch();
@@ -76,37 +77,43 @@ const SearchCity: React.FC<SearchCityProps> = ({
       InputProps={{
         startAdornment: (
           <SearchIconWrapper position="start">
-            <SearchIcon fontSize="small" />
+            <SearchIcon  />
           </SearchIconWrapper>
         ),
-        endAdornment: showSearchButton ? (
-          <SearchButtonAdornment position="end">
-            <SearchActionButton
-              onClick={handleSearchClick}
-              aria-label="Search"
-              edge="end"
-              size="small"
-            >
-              <SearchButtonText variant="body2">
-                Search
-              </SearchButtonText>
-            </SearchActionButton>
-          </SearchButtonAdornment>
-        ) : (
-          <MapButtonAdornment position="end">
-            <MapActionButton
-              onClick={handleClick}
-              aria-label="Map"
-              edge="end"
-              size="small"
-            >
-              <PlaceIcon fontSize="small" />
-              <MapButtonText variant="body2">
-                Map
-              </MapButtonText>
-            </MapActionButton>
-          </MapButtonAdornment>
+        endAdornment: (
+          <>
+            {!showSearchButton && (
+              <MiceIcon className="w-[21px] h-[15px] mr-2 cursor-pointer" />
+            )}
+            {showSearchButton ? (
+              <SearchButtonAdornment position="end">
+                <SearchActionButton
+                  onClick={handleSearchClick}
+                  aria-label="Search"
+                  edge="end"
+                  size="small"
+                >
+                  <SearchButtonText variant="body2">
+                    Search
+                  </SearchButtonText>
+                </SearchActionButton>
+              </SearchButtonAdornment>
+            ) : (
+              <MapButtonAdornment position="end">
+                <MapActionButton
+                  onClick={handleClick}
+                  aria-label="Map"
+                  edge="end"
+                  size="small"
+                >
+                  <StyledPlaceIcon />
+                  <MapButtonText variant="body2">Map</MapButtonText>
+                </MapActionButton>
+              </MapButtonAdornment>
+            )}
+          </>
         ),
+        
       }}
     />
   );

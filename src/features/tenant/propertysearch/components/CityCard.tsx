@@ -28,7 +28,7 @@ const CityCard: React.FC<CityCardProps> = ({
 
   return (
     <div 
-      className="bg-white rounded-2xl shadow-md overflow-hidden relative w-full h-[55vw]"
+      className="overflow-hidden relative w-full h-[100vw]"
       onClick={handleCityCardClick}
     >
       {/* Background Image */}

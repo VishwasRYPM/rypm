@@ -3,7 +3,6 @@ import { Box, IconButton, Typography } from '@mui/material';
 
 const CardContainer = styled(Box)(({ theme }) => ({
   width: '100%',
-  borderRadius: '16px',
   margin: '0 auto',
   backgroundColor: 'white',
   display: 'flex',
@@ -14,7 +13,6 @@ const MediaContainer = styled(Box)(({ theme }) => ({
   position: 'relative', 
   width: '100%', 
   height: '330px',
-  borderRadius: '16px 16px 0 0',
   overflow: 'hidden'
 }));
 
@@ -27,11 +25,8 @@ const ActionButtonsContainer = styled(Box)(({ theme }) => ({
 }));
 
 const ShareButton = styled(IconButton)(({ theme }) => ({
-  backgroundColor: 'rgba(237, 242, 250, 0.5)', 
-  '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.9)' },
-  width: 27,
-  height: 27,
-  color: '#20364D'
+  width: 30,
+  height: 30,
 }));
 
 const FavoriteButton = styled(IconButton)(({ theme }) => ({
@@ -39,7 +34,6 @@ const FavoriteButton = styled(IconButton)(({ theme }) => ({
   '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.9)' },
   width: 27,
   height: 27,
-  color: '#EF6D7F'
 }));
 
 const VideoControlsContainer = styled(Box)(({ theme }) => ({
@@ -47,7 +41,6 @@ const VideoControlsContainer = styled(Box)(({ theme }) => ({
   bottom: 10, 
   left: 10, 
   backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-  borderRadius: '50%', 
   width: 36, 
   height: 36, 
   display: 'flex', 
@@ -76,7 +69,6 @@ const MediaCountContainer = styled(Box)(({ theme }) => ({
   height: '19px',
   backgroundColor: 'rgba(248, 248, 248, 0.20)',
   backdropFilter: 'blur(2.5px)',
-  borderRadius: '20px',
   justifyContent: 'center',
   alignItems: 'center'
 }));
@@ -97,6 +89,46 @@ const VideoCountBox = styled(Box)(({ theme }) => ({
   height: '19px'
 }));
 
+const VideoOverlay = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: 'rgba(0, 0, 0, 0.2)',
+  opacity: 0,
+  transition: 'opacity 0.3s ease',
+  zIndex: 15,
+  cursor: 'pointer',
+  '&:hover': {
+    opacity: 1,
+  },
+  '&.visible': {
+    opacity: 1,
+  }
+}));
+
+
+
+const PlayPauseButton = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '60px',
+  height: '60px',
+  borderRadius: '50%',
+  background: 'rgba(0, 0, 0, 0.6)',
+  color: 'white',
+  transition: 'transform 0.2s ease, background-color 0.2s ease',
+  '&:hover': {
+    transform: 'scale(1.1)',
+    background: 'rgba(0, 0, 0, 0.7)',
+  }
+}));
+
 const CountText = styled(Typography)(({ theme }) => ({
   color: '#FFF',
   fontSize: '12px',
@@ -107,9 +139,10 @@ const InfoBox1 = styled(Box)(({ theme }) => ({
   display: 'flex', 
   justifyContent: 'space-between', 
   alignItems: 'center', 
-  backgroundColor: '#EDF2FA', 
-  height: '38px',
-  padding: '0 8px',
+  background: 'rgba(32, 54, 77, 0.30)',
+  backdropFilter: 'blur(3.55px)',
+  height: '25x',
+  padding: '0 16px',
   width: '100%'
 }));
 
@@ -117,10 +150,10 @@ const InfoBox2 = styled(Box)(({ theme }) => ({
   display: 'flex', 
   justifyContent: 'space-between', 
   alignItems: 'center', 
-  backgroundColor: '#20364D', 
-  height: '38px', 
-  padding: '0 8px',
-  borderRadius: '0 0 16px 16px',
+  background: 'rgba(32, 54, 77, 0.30)',
+  backdropFilter: 'blur(3.55px)',
+  height: '40px', 
+  padding: '0 16px',
   width: '100%'
 }));
 
@@ -178,4 +211,6 @@ export  {
     PropertyTypeContainer,
     Divider,
     DaysAgoContainer,
+    VideoOverlay,
+    PlayPauseButton,
 };

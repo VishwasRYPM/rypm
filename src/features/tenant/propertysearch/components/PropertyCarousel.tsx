@@ -24,11 +24,11 @@ interface PropertyData {
   daysAgo: number;
 }
 
-interface PropertyCarouselProps {
-  city: string;
-  country: string | null;
-}
-const PropertyCarousel: React.FC<PropertyCarouselProps> = ({ city, country }) =>  {
+// interface PropertyCarouselProps {
+//   city: string;
+//   country: string | null;
+// }
+const PropertyCarousel: React.FC = () =>  {
   const properties: PropertyData[] = [
     {
       id: '1',
