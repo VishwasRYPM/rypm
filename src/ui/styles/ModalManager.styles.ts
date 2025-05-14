@@ -1,5 +1,6 @@
 import { SxProps, Theme } from '@mui/material/styles';
 
+// Base modal paper styles
 export const modalPaperSx = {
   borderRadius: '24px',
   border: '5px solid #EDF2FA',
@@ -16,6 +17,29 @@ export const modalPaperSx = {
   },
   scrollbarWidth: 'none', 
   msOverflowStyle: 'none', 
+};
+
+// Modal-specific styles
+export const getModalPaperStyles = (modalType: string): SxProps<Theme> => {
+  const baseStyles = { ...modalPaperSx };
+  
+  // Apply specific styles based on modal type
+  switch (modalType) {
+    case 'filterSettings':
+      return {
+        ...baseStyles,
+        height: '600px', // Increased height for filter settings modal
+        maxHeight: '80vh', // Ensure it doesn't go off-screen on smaller devices
+      };
+    case 'searchCity':
+      return {
+        ...baseStyles,
+        // You can customize searchCity modal height here if needed
+      };
+    // Add more cases for other modal types as needed
+    default:
+      return baseStyles;
+  }
 };
 
 export const modalContainerSx: SxProps<Theme> = {

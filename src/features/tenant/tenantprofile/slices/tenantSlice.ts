@@ -8,7 +8,7 @@ interface TenantState {
 }
 
 const initialState: TenantState = {
-  activeMainTab: 'Home',
+  activeMainTab: 'Properties',
   activeSubTab: null,
   activeForm: null,
   notifications: 1,

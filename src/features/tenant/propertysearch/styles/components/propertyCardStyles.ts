@@ -12,8 +12,8 @@ const CardContainer = styled(Box)(({ theme }) => ({
 const MediaContainer = styled(Box)(({ theme }) => ({
   position: 'relative', 
   width: '100%', 
-  height: '330px',
-  overflow: 'hidden'
+  height: '393px',
+  overflow: 'hidden',
 }));
 
 const ActionButtonsContainer = styled(Box)(({ theme }) => ({
@@ -135,24 +135,26 @@ const CountText = styled(Typography)(({ theme }) => ({
   fontWeight: 700
 }));
 
+const MainInfoContainer=styled(Box)(({ theme }) => ({
+  backdropFilter: 'blur(3.55px)',
+    background: 'rgba(32, 54, 77, 0.30)',
+}));
+
 const InfoBox1 = styled(Box)(({ theme }) => ({
   display: 'flex', 
   justifyContent: 'space-between', 
   alignItems: 'center', 
-  background: 'rgba(32, 54, 77, 0.30)',
-  backdropFilter: 'blur(3.55px)',
-  height: '25x',
+  height: '30px',
   padding: '0 16px',
   width: '100%'
 }));
 
+
 const InfoBox2 = styled(Box)(({ theme }) => ({
   display: 'flex', 
   justifyContent: 'space-between', 
-  alignItems: 'center', 
-  background: 'rgba(32, 54, 77, 0.30)',
-  backdropFilter: 'blur(3.55px)',
-  height: '40px', 
+  alignItems: 'flex-start', 
+  height: '30px', 
   padding: '0 16px',
   width: '100%'
 }));
@@ -213,4 +215,5 @@ export  {
     DaysAgoContainer,
     VideoOverlay,
     PlayPauseButton,
+    MainInfoContainer,
 };
