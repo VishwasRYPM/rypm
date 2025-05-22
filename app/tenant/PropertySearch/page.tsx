@@ -1,5 +1,5 @@
 import PropertySearchLayout from '@/layouts/PropertySearchLayout';
-import PropertySearch from '@/features/tenant/propertysearch/components/PropertySearch';
+import PropertySearch from '@/features/tenant/propertysearch/page/PropertySearch';
 
 export default function Home() {
   return (

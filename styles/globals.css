@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
 /* 
 :root {
   --background: #ffffff;
@@ -69,4 +71,13 @@ body {
 
 .animate-slide-from-right {
   animation: slide-from-right 0.3s ease-out forwards;
+}
+
+/* Hide scrollbar completely */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;     /* Firefox */
 }

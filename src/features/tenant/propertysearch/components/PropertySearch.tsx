@@ -1,62 +1,88 @@
-'use client';
-import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { RootState } from '@/store/rootReducer';
-import PropertySearchBar from './PropertySearchBar';
-// import SearchResultsHeader from './SearchResultsHeader';
-//import CityCard from './CityCard';
-import PropertyCarousel from './PropertyCarousel';
+// 'use client';
+// import React, { useState } from 'react';
+// import PropertySearchBar from './PropertySearchBar';
+// import PropertyCarousel from './PropertyCarousel';
+// import MapView from './Map/MapView';
+// import BottomNavigation from '@/ui/BottomNavigation';
 
-const PropertySearch: React.FC = () => {
-  // const cityData = [
-  //   { city: 'Toronto', country: 'Canada', propertiesCount: 3654, imageUrl: '/images/toronto.png' },
-  //   { city: 'New York', country: 'USA', propertiesCount: 2364, imageUrl: '/images/new york, USA.png' },
-  //   { city: 'Panama city', country: 'Panama', propertiesCount: 1821, imageUrl: '/images/Panama.png' },
-  // ];
+// const PropertySearch: React.FC = () => {
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
 
-  const [searchTerm, setSearchTerm] = useState("");
-  // const dispatch = useDispatch();
-  
- 
-  // const selectedCity = useSelector((state: RootState) => state.propertySearch?.selectedCity);
-  // const selectedCountry = useSelector((state: RootState) => state.propertySearch?.selectedCountry);
+//     const handleMapToggle = () => {
+//     setViewMode(viewMode === 'list' ? 'map' : 'list');
+//   };
 
-  // Get the selected city and country from Redux
-  // const selectedCity = useSelector((state: RootState) => 
-  //   state.propertySearch ? state.propertySearch.selectedCity : null
-  // );
-  // const selectedCountry = useSelector((state: RootState) => 
-  //   state.propertySearch ? state.propertySearch.selectedCountry : null
-  //);
+//   return (
+//     <>
+//      <div className={`flex flex-col ${viewMode === 'map' ? 'h-screen' : ''}`}>
+//       {/* PropertySearchBar with different styling based on view mode */}
+//       <div className={`${viewMode === 'map' ? 'absolute top-0 left-0 right-0 z-10 pt-2 px-2' : ''}`}>
+//         <PropertySearchBar 
+//           searchTerm={searchTerm} 
+//           onSearchChange={setSearchTerm} 
+//           isMapView={viewMode === 'map'}
+//           onMapToggle={handleMapToggle}
+//         />
+//       </div>
+      
+//       {/* Content area */}
+//       {viewMode === 'list' ? (
+//         <>
+//           <PropertyCarousel />
+//           <BottomNavigation /> {/* Only show BottomNavigation in list view */}
+//         </>
+//       ) : (
+//         <div className="flex-grow">
+//           <MapView />
+//         </div>
+//       )}
+//     </div>
+//     </>
+//   );
+// };
 
-  // return (
-  //   <>
-  //     <PropertySearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-  //      <SearchResultsHeader />
-  //       {selectedCity ? (
-  //       // Show property listings for selected city
-  //       <>
-  //         <PropertyCarousel city={selectedCity} country={selectedCountry}   />
-  //       </>
-  //     ) : (
-  //       // Show city selection
-  //       <div className=" py-1">
-  //         <div className=" grid grid-cols-1 md:grid-cols-1 gap-3">
-  //           {cityData.map((city) => (
-  //             <CityCard key={city.city} {...city} />
-  //           ))}
-  //         </div>
-  //       </div>
-  //     )}
-  //   </>
-  // );
+// export default PropertySearch;
 
-  return (
-    <>
-      <PropertySearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-      <PropertyCarousel  />
-    </>
-  );
-};
 
-export default PropertySearch;
+
+
+// 'use client';
+// import React, { useState } from 'react';
+// import PropertySearchBar from './PropertySearchBar';
+// import PropertyCarousel from './PropertyCarousel';
+// import BottomNavigation from '@/ui/BottomNavigation';
+// import PropertyMapView from './Map/PropertyMapView';
+
+// const PropertySearch: React.FC = () => {
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [viewMode, setViewMode] = useState<'list' | 'map'>('list');
+
+//   const handleMapToggle = () => {
+//     setViewMode(viewMode === 'list' ? 'map' : 'list');
+//   };
+
+//   return (
+//     <div className={`flex flex-col ${viewMode === 'map' ? 'h-screen' : ''}`}>
+//       {viewMode === 'list' ? (
+//         <>
+//           <div>
+//             <PropertySearchBar 
+//               searchTerm={searchTerm} 
+//               onSearchChange={setSearchTerm} 
+//               isMapView={false}
+//               onMapToggle={handleMapToggle}
+//             />
+//           </div>
+//           <PropertyCarousel />
+//           <BottomNavigation /> 
+//         </>
+//       ) : (
+//         <PropertyMapView onBackToList={handleMapToggle} />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default PropertySearch;
+

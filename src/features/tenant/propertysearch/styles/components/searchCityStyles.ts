@@ -15,7 +15,7 @@ export const StyledTextField = styled(TextField)(({ width }: { width?: string })
       border: 'none',
     },
     '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
-      marginRight: '-8px',
+      marginRight: '-5px',
     },
   },
   '& input::placeholder': {

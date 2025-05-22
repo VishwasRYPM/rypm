@@ -9,7 +9,7 @@ const theme = createTheme({
       main: '#4caf50', // Green for verified badge
     },
     background: {
-      default: '#f5f7fa',
+      default: '#FFF',
       paper: '#ffffff',
     },
   },

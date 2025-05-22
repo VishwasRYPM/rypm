@@ -3,6 +3,9 @@
 import React from 'react';
 import {MiceIcon} from '@/ui/icons';
 import SearchIcon from '@mui/icons-material/Search';
+import ListIcon from '@mui/icons-material/List';
+import MapIcon from '@mui/icons-material/Map';
+import { IconButton } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../slices/modalSlice';
 import {
@@ -19,26 +22,37 @@ import {
 
 interface SearchCityProps {
   onChange?: (value: string) => void;
+  onMapToggle?: () => void;
   onSearch?: () => void;
   placeholder?: string;
   value?: string;
   width?: string;
   insideModal?: boolean;
+    isMapView?: boolean;
+
 }
 
 const SearchCity: React.FC<SearchCityProps> = ({
   onChange,
+  onMapToggle,
   onSearch,
   placeholder = "Search",
   value = "",
   width = "61vw",
   insideModal = false,
+  isMapView = false,
 }) => {
   const dispatch = useDispatch();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(event.target.value);
+    }
+  };
+
+    const handleMapToggle = () => {
+    if (onMapToggle) {
+      onMapToggle();
     }
   };
 
@@ -85,6 +99,24 @@ const SearchCity: React.FC<SearchCityProps> = ({
             {!showSearchButton && (
               <MiceIcon className="w-[21px] h-[15px] mr-2 cursor-pointer" />
             )}
+            {/* {!showSearchButton && (
+              <>
+                <MiceIcon className="w-[21px] h-[15px] mr-2 cursor-pointer" />
+                {onMapToggle && (
+                  <IconButton 
+                    onClick={handleMapToggle} 
+                    size="small" 
+                    sx={{ padding: '4px', marginRight: '4px' }}
+                  >
+                    {isMapView ? (
+                      <ListIcon className="w-5 h-5" />
+                    ) : (
+                      <MapIcon className="w-5 h-5" />
+                    )}
+                  </IconButton>
+                )}
+              </>
+            )} */}
             {showSearchButton ? (
               <SearchButtonAdornment position="end">
                 <SearchActionButton
@@ -101,7 +133,8 @@ const SearchCity: React.FC<SearchCityProps> = ({
             ) : (
               <MapButtonAdornment position="end">
                 <MapActionButton
-                  onClick={handleClick}
+                 // onClick={handleClick}
+                  onClick={handleMapToggle}
                   aria-label="Map"
                   edge="end"
                   size="small"
