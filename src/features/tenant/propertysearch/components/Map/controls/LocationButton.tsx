@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React, { useState, useEffect, useRef } from "react";
 import { LocationIcon } from "@/ui/icons";
 import mapboxgl from "mapbox-gl";
@@ -228,6 +229,58 @@ const LocationButton: React.FC<LocationButtonProps> = ({
     }
   };
 
+  // Add a global backdrop when sheets are shown
+// In the useEffect for backdrop management:
+useEffect(() => {
+  // Create or remove backdrop based on sheet visibility
+  if (showPermissionSheet || showLocationOffSheet) {
+    // Create backdrop if it doesn't exist
+    let backdrop = document.getElementById('location-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.id = 'location-backdrop';
+      backdrop.style.position = 'fixed';
+      backdrop.style.top = '0';
+      backdrop.style.left = '0';
+      backdrop.style.right = '0';
+      backdrop.style.bottom = '0';
+      backdrop.style.zIndex = '40'; // Lower z-index than the sheet (50)
+      backdrop.style.backgroundColor = 'rgba(3, 29, 68, 0.30)';
+      
+      // Create a separate element for the blur effect
+      const blurElement = document.createElement('div');
+      blurElement.style.position = 'absolute';
+      blurElement.style.top = '0';
+      blurElement.style.left = '0';
+      blurElement.style.right = '0';
+      blurElement.style.bottom = '0';
+      blurElement.style.backdropFilter = 'blur(2px)';
+      (blurElement.style as any)['-webkit-backdrop-filter'] = 'blur(2px)';
+      
+      // Add the blur element to the backdrop
+      backdrop.appendChild(blurElement);
+      
+      // Add the backdrop to the body
+      document.body.appendChild(backdrop);
+    }
+  } else {
+    // Remove backdrop if sheets are closed
+    const backdrop = document.getElementById('location-backdrop');
+    if (backdrop) {
+      document.body.removeChild(backdrop);
+    }
+  }
+
+  // Cleanup function
+  return () => {
+    const backdrop = document.getElementById('location-backdrop');
+    if (backdrop) {
+      document.body.removeChild(backdrop);
+    }
+  };
+}, [showPermissionSheet, showLocationOffSheet]);
+
+
   return (
     <>
       {/* Custom Location Button */}
@@ -260,12 +313,12 @@ const LocationButton: React.FC<LocationButtonProps> = ({
             viewBox="0 0 20 20"
             fill="none"
           >
-            <path
+                       <path
               d="M9.99968 5.33325C9.0767 5.33325 8.17444 5.60695 7.40702 6.11973C6.63959 6.63251 6.04145 7.36134 5.68824 8.21406C5.33503 9.06678 5.24261 10.0051 5.42268 10.9103C5.60274 11.8156 6.0472 12.6471 6.69984 13.2998C7.35249 13.9524 8.18401 14.3969 9.08925 14.5769C9.9945 14.757 10.9328 14.6646 11.7855 14.3114C12.6383 13.9581 13.3671 13.36 13.8799 12.5926C14.3926 11.8252 14.6663 10.9229 14.6663 9.99992C14.6649 8.7627 14.1727 7.57657 13.2979 6.70172C12.423 5.82688 11.2369 5.33473 9.99968 5.33325Z"
               fill="#D40000"
             />
             <path
-                           d="M19.3333 9.33333H18.6329C18.4717 7.27422 17.5807 5.34032 16.1202 3.87986C14.6597 2.41941 12.7258 1.52837 10.6667 1.3672V0.666667C10.6667 0.489856 10.5964 0.320286 10.4714 0.195262C10.3464 0.0702379 10.1768 0 10 0C9.82319 0 9.65362 0.0702379 9.5286 0.195262C9.40357 0.320286 9.33333 0.489856 9.33333 0.666667V1.3672C7.27422 1.52837 5.3403 2.41941 3.87982 3.87986C2.41934 5.34032 1.52827 7.27422 1.36707 9.33333H0.666667C0.489856 9.33333 0.320286 9.40357 0.195262 9.5286C0.0702379 9.65362 0 9.82319 0 10C0 10.1768 0.0702379 10.3464 0.195262 10.4714C0.320286 10.5964 0.489856 10.6667 0.666667 10.6667H1.36707C1.52827 12.7258 2.41934 14.6597 3.87982 16.1201C5.3403 17.5806 7.27422 18.4716 9.33333 18.6328V19.3333C9.33333 19.5101 9.40357 19.6797 9.5286 19.8047C9.65362 19.9298 9.82319 20 10 20C10.1768 20 10.3464 19.9298 10.4714 19.8047C10.5964 19.6797 10.6667 19.5101 10.6667 19.3333V18.6328C12.7258 18.4716 14.6597 17.5806 16.1202 16.1201C17.5807 14.6597 18.4717 12.7258 18.6329 10.6667H19.3333C19.5101 10.6667 19.6797 10.5964 19.8047 10.4714C19.9298 10.3464 20 10.1768 20 10C20 9.82319 19.9298 9.65362 19.8047 9.5286C19.6797 9.40357 19.5101 9.33333 19.3333 9.33333ZM10 17.3333C8.5496 17.3333 7.13178 16.9032 5.92582 16.0974C4.71986 15.2916 3.77993 14.1463 3.22488 12.8063C2.66984 11.4664 2.52462 9.99187 2.80757 8.56934C3.09053 7.14681 3.78897 5.84014 4.81455 4.81455C5.84014 3.78897 7.14681 3.09053 8.56934 2.80757C9.99187 2.52462 11.4664 2.66984 12.8063 3.22488C14.1463 3.77993 15.2916 4.71986 16.0974 5.92582C16.9032 7.13178 17.3333 8.5496 17.3333 10C17.331 11.9442 16.5576 13.8081 15.1829 15.1829C13.8081 16.5576 11.9442 17.331 10 17.3333Z"
+              d="M19.3333 9.33333H18.6329C18.4717 7.27422 17.5807 5.34032 16.1202 3.87986C14.6597 2.41941 12.7258 1.52837 10.6667 1.3672V0.666667C10.6667 0.489856 10.5964 0.320286 10.4714 0.195262C10.3464 0.0702379 10.1768 0 10 0C9.82319 0 9.65362 0.0702379 9.5286 0.195262C9.40357 0.320286 9.33333 0.489856 9.33333 0.666667V1.3672C7.27422 1.52837 5.3403 2.41941 3.87982 3.87986C2.41934 5.34032 1.52827 7.27422 1.36707 9.33333H0.666667C0.489856 9.33333 0.320286 9.40357 0.195262 9.5286C0.0702379 9.65362 0 9.82319 0 10C0 10.1768 0.0702379 10.3464 0.195262 10.4714C0.320286 10.5964 0.489856 10.6667 0.666667 10.6667H1.36707C1.52827 12.7258 2.41934 14.6597 3.87982 16.1201C5.3403 17.5806 7.27422 18.4716 9.33333 18.6328V19.3333C9.33333 19.5101 9.40357 19.6797 9.5286 19.8047C9.65362 19.9298 9.82319 20 10 20C10.1768 20 10.3464 19.9298 10.4714 19.8047C10.5964 19.6797 10.6667 19.5101 10.6667 19.3333V18.6328C12.7258 18.4716 14.6597 17.5806 16.1202 16.1201C17.5807 14.6597 18.4717 12.7258 18.6329 10.6667H19.3333C19.5101 10.6667 19.6797 10.5964 19.8047 10.4714C19.9298 10.3464 20 10.1768 20 10C20 9.82319 19.9298 9.65362 19.8047 9.5286C19.6797 9.40357 19.5101 9.33333 19.3333 9.33333ZM10 17.3333C8.5496 17.3333 7.13178 16.9032 5.92582 16.0974C4.71986 15.2916 3.77993 14.1463 3.22488 12.8063C2.66984 11.4664 2.52462 9.99187 2.80757 8.56934C3.09053 7.14681 3.78897 5.84014 4.81455 4.81455C5.84014 3.78897 7.14681 3.09053 8.56934 2.80757C9.99187 2.52462 11.4664 2.66984 12.8063 3.22488C14.1463 3.77993 15.2916 4.71986 16.0974 5.92582C16.9032 7.13178 17.3333 8.5496 17.3333 10C17.331 11.9442 16.5576 13.8081 15.1829 15.1829C13.8081 16.5576 11.9442 17.331 10 17.3333Z"
               fill="#D40000"
             />
           </svg>
@@ -274,7 +327,7 @@ const LocationButton: React.FC<LocationButtonProps> = ({
 
       {/* Loading Indicator for Geolocation */}
       {isLocating && (
-        <div className="absolute bottom-5 right-5 z-[11] bg-white/80 rounded p-2 pointer-events-none">
+        <div className="absolute bottom-5 right-5 z-[51] bg-white/80 rounded p-2 pointer-events-none">
           <div className="flex items-center">
             <svg
               className="animate-spin h-5 w-5 mr-2 text-blue-500"
@@ -302,10 +355,10 @@ const LocationButton: React.FC<LocationButtonProps> = ({
       )}
 
       {/* Permission Bottom Sheet - Normal flow when location is available */}
-      {showPermissionSheet && (
-        <div className="max-h-[60vh] overflow-y-auto fixed bottom-0 left-0 right-0 z-50 bg-[#20364D]/50 backdrop-blur-[8px] shadow-lg rounded-t-3xl transform transition-all duration-300 ease-in-out animate-[slideUp_0.3s_ease-out_forwards]">
-          <div className="px-6 py-4 flex flex-col items-center">
-            <div className="mb-1 p-2 rounded-full">
+      {showPermissionSheet && ReactDOM.createPortal (
+        <div className="max-h-[60vh] overflow-y-auto fixed bottom-0 left-0 right-0 z-50 bg-[rgba(3,29,68,0.4)] backdrop-blur-[5px] shadow-lg rounded-t-3xl transform transition-all duration-300 ease-in-out animate-[slideUp_0.3s_ease-out_forwards]">
+          <div className="px-6 py-4 h-[48vh] flex flex-col items-center">
+            <div className="mb-3 p-2 rounded-full">
               <LocationIcon className="w-6 h-8 text-white" />
             </div>
             <p className="text-center text-white text-sm sm:text-base font-normal leading-[1em] sm:leading-[1.25em] mb-5">
@@ -314,14 +367,14 @@ const LocationButton: React.FC<LocationButtonProps> = ({
             </p>
 
             {/* Accuracy Selection */}
-            <div className="flex justify-center space-x-6 w-full mb-3">
+            <div className="flex justify-center space-x-6 w-full mb-5">
               {/* Precise Location Option */}
               <div
                 className="flex flex-col items-center cursor-pointer"
                 onClick={() => setSelectedAccuracy("precise")}
               >
                 <div
-                  className={`w-22 h-22 rounded-full bg-white border ${
+                  className={`w-24 h-24 rounded-full bg-white border ${
                     selectedAccuracy === "precise"
                       ? "border-blue-500 border-2"
                       : "border-gray-200"
@@ -330,7 +383,7 @@ const LocationButton: React.FC<LocationButtonProps> = ({
                   <img
                     src="/images/precise-map.png"
                     alt="Precise location"
-                    className="w-22 h-22 object-cover"
+                    className="w-24 h-24 object-cover"
                   />
                   {selectedAccuracy === "precise" && (
                     <div className="absolute -top-1 -right-1 bg-blue-500 rounded-full w-5 h-5 flex items-center justify-center">
@@ -364,7 +417,7 @@ const LocationButton: React.FC<LocationButtonProps> = ({
                 onClick={() => setSelectedAccuracy("approximate")}
               >
                 <div
-                  className={`w-22 h-22 rounded-full bg-white border ${
+                  className={`w-24 h-24 rounded-full bg-white border ${
                     selectedAccuracy === "approximate"
                       ? "border-blue-500 border-2"
                       : "border-gray-200"
@@ -373,7 +426,7 @@ const LocationButton: React.FC<LocationButtonProps> = ({
                   <img
                     src="/images/approximate.png"
                     alt="Approximate location"
-                    className="w-22 h-22 object-cover"
+                    className="w-24 h-24 object-cover"
                   />
                   {selectedAccuracy === "approximate" && (
                     <div className="absolute -top-1 -right-1 bg-blue-500 rounded-full w-5 h-5 flex items-center justify-center">
@@ -404,7 +457,7 @@ const LocationButton: React.FC<LocationButtonProps> = ({
 
             <button
               onClick={() => handlePermission(true, "whileUsing")}
-              className="w-[15.5rem] py-3 bg-gray-800 rounded-full text-white font-medium"
+              className="w-[15.5rem] py-3 bg-gray-800 rounded-full text-white font-medium mb-3"
             >
               While using the app
             </button>
@@ -416,18 +469,19 @@ const LocationButton: React.FC<LocationButtonProps> = ({
             </button>
             <button
               onClick={() => handlePermission(false)}
-              className="w-full py-1 rounded-full text-white font-medium text-[14px]"
+              className="w-full py-2 rounded-full text-white font-medium text-[14px]"
             >
               Don't allow
             </button>
           </div>
-        </div>
+        </div>,
+      document.body
       )}
 
       {/* Location Off Bottom Sheet - When device location is off or permission denied */}
-      {showLocationOffSheet && (
-        <div className="max-h-[60vh] overflow-y-auto fixed bottom-0 left-0 right-0 z-50 bg-[#20364D]/50 backdrop-blur-[8px] shadow-lg rounded-t-3xl transform transition-all duration-300 ease-in-out animate-[slideUp_0.3s_ease-out_forwards]">
-          <div className="px-6 py-5 flex flex-col items-center">
+      {showLocationOffSheet && ReactDOM.createPortal (
+        <div className=" overflow-y-auto fixed bottom-0 left-0 right-0 z-50 bg-[rgba(3,29,68,0.4)] backdrop-blur-[5px] shadow-lg rounded-t-3xl transform transition-all duration-300 ease-in-out animate-[slideUp_0.3s_ease-out_forwards]">
+          <div className="px-6 py-5 max-h-[48vh] flex flex-col items-center">
             <div className="mb-1 p-2 rounded-full bg-red-500/20">
               <LocationIcon className="w-6 h-8 text-red-500" />
             </div>
@@ -471,7 +525,8 @@ const LocationButton: React.FC<LocationButtonProps> = ({
               Cancel
             </button>
           </div>
-        </div>
+        </div>,
+      document.body
       )}
     </>
   );

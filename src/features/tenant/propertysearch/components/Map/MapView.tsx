@@ -661,9 +661,6 @@
 // };
 
 // export default MapView;
-
-
-
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -672,11 +669,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { Box } from "@mui/material";
 import LocationButton from "./controls/LocationButton";
 import LocalInfoButton from "./controls/LocalInfoButton";
-import MapButton from "./controls/MapButton";
+import MapButton, { mapStyles } from "./controls/MapButton";
 import DrawButton from "./controls/DrawButton";
 import ControlsContainer from "./controls/ControlsContainer";
-import MapStylesControl from "./features/MapStyles/MapStylesControl";
-import CategoryTabs from "./features/LocalInfo/CategoryTabs";
 import { useLocalInfo } from "./hooks/useLocalInfo";
 
 // Replace with your actual Mapbox access token
@@ -699,6 +694,13 @@ const MapView: React.FC<MapViewProps> = ({
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
 
+  // Active mode state
+  const [activeMode, setActiveMode] = useState<'map' | 'localInfo' | 'draw'>('map');
+  
+  // Map style state
+  const [showStyleOptions, setShowStyleOptions] = useState(false);
+  const [currentStyle, setCurrentStyle] = useState('streets');
+  
   // Use the local info hook
   const {
     isLocalInfoActive,
@@ -706,10 +708,9 @@ const MapView: React.FC<MapViewProps> = ({
     toggleLocalInfo,
     handleCategoryChange
   } = useLocalInfo();
-  
-  // Placeholder state for other buttons
-  const [isMapActive, setIsMapActive] = useState(true);
-  const [isDrawActive, setIsDrawActive] = useState(false);
+
+  // Reference for click outside detection
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Map initialization (once only)
   useEffect(() => {
@@ -734,6 +735,38 @@ const MapView: React.FC<MapViewProps> = ({
     };
   }, [initialLocation.lat, initialLocation.lng, zoom]);
 
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowStyleOptions(false);
+      }
+    }
+
+    // Add event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Remove event listener on cleanup
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
+  // Handle mode changes
+  const handleLocalInfoClick = () => {
+    setActiveMode('localInfo');
+    setShowStyleOptions(false); // Close dropdown when switching modes
+  };
+
+  const handleMapClick = () => {
+    setActiveMode('map');
+    // Don't close dropdown here since we want to toggle it
+  };
+
+  const handleDrawClick = () => {
+    setActiveMode('draw');
+    setShowStyleOptions(false); // Close dropdown when switching modes
+  };
+
   return (
     <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
       {/* Map Container */}
@@ -749,49 +782,42 @@ const MapView: React.FC<MapViewProps> = ({
       {/* Category Tabs - Slide in from top when local info is active */}
       <div 
         className={`absolute top-0 left-0 right-0 z-20 bg-white shadow-md transition-transform duration-300 ease-in-out ${
-          isLocalInfoActive ? 'transform-none' : '-translate-y-full'
+          activeMode === 'localInfo' ? 'transform-none' : '-translate-y-full'
         }`}
       >
-        <CategoryTabs onCategoryChange={handleCategoryChange} />
+        {/* We'll implement this later */}
       </div>
 
       {/* Map Controls */}
       {mapLoaded && (
         <>
-          {/* Location Button - Top Right */}
+          {/* Location Button - Bottom Right */}
           <div className="absolute bottom-25 right-4 z-10">
             <LocationButton map={map.current} />
           </div>
           
           {/* Bottom Center Controls - Local Info, Map, Draw */}
-        <div className="absolute bottom-8 left-0 right-0 z-10 flex justify-center">
-  <div className="flex items-center gap-4">
-    <LocalInfoButton 
-      isActive={isLocalInfoActive} 
-      onClick={toggleLocalInfo} 
-    />
-    <MapButton 
-      isActive={isMapActive} 
-      onClick={() => {
-        setIsMapActive(true);
-        setIsDrawActive(false);
-      }} 
-    />
-    <DrawButton 
-      isActive={isDrawActive} 
-      onClick={() => {
-        setIsDrawActive(true);
-        setIsMapActive(false);
-      }} 
-    />
-  </div>
-</div>
-
-          
-          {/* Top Right Controls */}
-          <ControlsContainer position="top-right">
-            <MapStylesControl map={map.current} />
-          </ControlsContainer>
+          <div className="absolute bottom-8 left-0 right-0 z-9 flex justify-center">
+            <div className="flex items-center gap-4" ref={dropdownRef}>
+              <LocalInfoButton 
+                isActive={activeMode === 'localInfo'} 
+                onClick={handleLocalInfoClick} 
+              />
+              <MapButton 
+                isActive={activeMode === 'map'} 
+                onClick={handleMapClick}
+                map={map.current}
+                showStyleOptions={showStyleOptions}
+                setShowStyleOptions={setShowStyleOptions}
+                currentStyle={currentStyle}
+                setCurrentStyle={setCurrentStyle}
+              />
+              <DrawButton 
+                isActive={activeMode === 'draw'} 
+                onClick={handleDrawClick} 
+              />
+            </div>
+          </div>
         </>
       )}
 

@@ -39,10 +39,10 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
           sx={{ padding: "1px" }}
           onClick={() => dispatch(openModal({ modalType: "filterSettings" }))}
         >
-          <FilterIcon width={31} height={31} color="#20364D" />
+          <FilterIcon width={30} height={30} color="#20364D" />
         </IconButton>
         <IconButton aria-label="Favorites" sx={{ padding: "1px" }}>
-          <HeartFilledIcon color="#20364D" />
+          <HeartFilledIcon  />
         </IconButton>
         <IconButton aria-label="Calendar" sx={{ padding: "1px" }}>
           <CalendarFilledIcon color="#20364D" />
