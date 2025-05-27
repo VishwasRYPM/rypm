@@ -18,22 +18,9 @@ const DrawButton: React.FC<DrawButtonProps> = ({
       }`}
       onClick={onClick}
     >
-      <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="20" 
-        height="20" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="white" 
-        strokeWidth="1.5" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
-      >
-        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-        <path d="M2 2l7.586 7.586"></path>
-        <path d="M11 11l5 5"></path>
-      </svg>
+     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
+  <path d="M1.24841 12.5439C2.48279 10.5744 6.22365 4.97825 10.5998 1.83099C13.8909 -0.535285 16.9996 2.58863 14.5891 5.7341C12.232 8.81134 9.06978 13.0466 7.72062 15.1489C6.32114 17.3285 8.71598 19.9641 11.1124 17.456C12.7147 15.7791 14.3831 13.8509 16.0782 12.4254C18.3677 10.5026 20.3317 12.201 19.3332 14.368C18.6098 15.9353 18.0862 16.6265 17.4824 17.9443C16.8801 19.2639 17.5186 20.8438 18.4322 20.9803C19.5643 21.149 20.2814 20.2208 21.2484 18.7756" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
       <span className="text-white text-[10px] font-bold">Draw</span>
     </button>
   );
