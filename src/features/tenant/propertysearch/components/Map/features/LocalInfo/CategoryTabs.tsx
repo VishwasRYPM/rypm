@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 
-export type POICategory = 
+export type LocalInfoCategory = 
+  | "all"
+  | "grocery" 
+  | "education"
   | "restaurants" 
-  | "cafes" 
-  | "hotels" 
+  | "healthcare" 
+  | "fitness" 
   | "shopping" 
-  | "attractions" 
-  | "parks" 
-  | "hospitals" 
-  | "schools" 
-  | "atms" 
-  | "gas_stations";
+  | "business" 
+  | "travel" 
+  | "services";
 
 interface CategoryTabsProps {
-  onCategoryChange: (category: POICategory) => void;
+  selectedCategory: LocalInfoCategory;
+  onCategoryChange: (category: LocalInfoCategory) => void;
 }
 
 interface TabPanelProps {
@@ -50,21 +51,22 @@ const a11yProps = (index: number) => {
   };
 };
 
-const categories: { label: string; value: POICategory; icon: string }[] = [
+const categories: { label: string; value: LocalInfoCategory; icon: string }[] = [
+  { label: "All", value: "all", icon: "🌟" },
+  { label: "Grocery", value: "grocery", icon: "🛒" },
+  { label: "Education", value: "education", icon: "🎓" },
   { label: "Restaurants", value: "restaurants", icon: "🍽️" },
-  { label: "Cafes", value: "cafes", icon: "☕" },
-  { label: "Hotels", value: "hotels", icon: "🏨" },
+  { label: "Healthcare", value: "healthcare", icon: "🏥" },
+  { label: "Fitness", value: "fitness", icon: "💪" },
   { label: "Shopping", value: "shopping", icon: "🛍️" },
-  { label: "Attractions", value: "attractions", icon: "🎭" },
-  { label: "Parks", value: "parks", icon: "🌳" },
-  { label: "Hospitals", value: "hospitals", icon: "🏥" },
-  { label: "Schools", value: "schools", icon: "🏫" },
-  { label: "ATMs", value: "atms", icon: "💰" },
-  { label: "Gas Stations", value: "gas_stations", icon: "⛽" }
+  { label: "Business", value: "business", icon: "🏢" },
+  { label: "Travel", value: "travel", icon: "✈️" },
+  { label: "Services", value: "services", icon: "🔧" }
 ];
 
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ onCategoryChange }) => {
-  const [value, setValue] = useState(0);
+const CategoryTabs: React.FC<CategoryTabsProps> = ({ selectedCategory, onCategoryChange }) => {
+  const currentIndex = categories.findIndex(cat => cat.value === selectedCategory);
+  const [value, setValue] = useState(currentIndex >= 0 ? currentIndex : 0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

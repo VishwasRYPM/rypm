@@ -17,6 +17,10 @@ import { useMapProperties, MapProperty } from "./hooks/useMapProperties";
 import { useMapDraw } from "./hooks/useMapDraw";
 import PropertyMarker from "./components/PropertyMarker";
 import PropertyPopup from "./components/PropertyPopup";
+import CategoryTabs from "./features/LocalInfo/CategoryTabs";
+import { useGooglePlaces } from "./hooks/useGooglePlaces";
+import PlaceMarker from "./components/PlaceMarker";
+import PlacePopup from "./components/PlacePopup";
 
 // Replace with your actual Mapbox access token
 const MAPBOX_ACCESS_TOKEN =
@@ -44,6 +48,8 @@ const MapView: React.FC<MapViewProps> = ({
   const [selectedProperty, setSelectedProperty] = useState<MapProperty | null>(
     null
   );
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const [showPlacePopup, setShowPlacePopup] = useState(false);
 
   // Active mode state
   const [activeMode, setActiveMode] = useState<"map" | "localInfo" | "draw">(
@@ -74,116 +80,123 @@ const MapView: React.FC<MapViewProps> = ({
     getCurrentPoints,
   } = useMapDraw();
 
+  const {
+    places,
+    loading: placesLoading,
+    error: placesError,
+    searchPlaces,
+    clearPlaces,
+  } = useGooglePlaces();
+
   // Reference for click outside detection
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Get filtered properties based on draw state
   const displayProperties = filterPropertiesInArea(properties);
-  const shouldShowMarkers = !drawState.isDrawMode && !drawState.isDrawing;
-
+  const shouldShowMarkers =
+    !drawState.isDrawMode && !drawState.isDrawing && !isLocalInfoActive;
 
   // Add this function before your useEffects:
-const initializeDrawingLayers = useCallback(() => {
-  if (!map.current) return;
+  const initializeDrawingLayers = useCallback(() => {
+    if (!map.current) return;
 
-  // Check if sources already exist, if not add them
-  if (!map.current.getSource("drawing-line-source")) {
-    map.current.addSource("drawing-line-source", {
-      type: "geojson",
-      data: {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "LineString",
-          coordinates: [],
+    // Check if sources already exist, if not add them
+    if (!map.current.getSource("drawing-line-source")) {
+      map.current.addSource("drawing-line-source", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: [],
+          },
         },
-      },
-    });
-  }
-
-  if (!map.current.getSource("drawing-polygon-source")) {
-    map.current.addSource("drawing-polygon-source", {
-      type: "geojson",
-      data: {
-        type: "Feature",
-        properties: {},
-        geometry: {
-          type: "Polygon",
-          coordinates: [[]],
-        },
-      },
-    });
-  }
-
-  if (!map.current.getSource("overlay-source")) {
-    map.current.addSource("overlay-source", {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: []
-      },
-    });
-  }
-
-  // Check if layers already exist, if not add them
-  if (!map.current.getLayer("drawing-line")) {
-    map.current.addLayer({
-      id: "drawing-line",
-      type: "line",
-      source: "drawing-line-source",
-      paint: {
-        "line-color": "#001D3D",
-        "line-width": 5,
-      },
-      layout: {
-        "line-cap": "round",
-        "line-join": "round",
-      },
-    });
-  }
-
-  if (!map.current.getLayer("drawing-fill")) {
-    map.current.addLayer({
-      id: "drawing-fill",
-      type: "fill",
-      source: "drawing-polygon-source",
-      paint: {
-        "fill-color": "#20364D",
-        "fill-opacity": 0.3,
-      },
-    });
-  }
-
-  if (!map.current.getLayer("drawing-outline")) {
-    map.current.addLayer({
-      id: "drawing-outline",
-      type: "line",
-      source: "drawing-polygon-source",
-      paint: {
-        "line-color": "#001D3D",
-        "line-width": 5,
-      },
-    });
-  }
-
-  if (!map.current.getLayer("map-overlay")) {
-    map.current.addLayer({
-      id: "map-overlay",
-      type: "fill",
-      source: "overlay-source",
-      paint: {
-        "fill-color": "rgba(32, 54, 77, 0.30)",
-        "fill-opacity": 1,
-      },
-    });
-
-    // Make sure overlay is below drawing layers
-    if (map.current.getLayer("drawing-fill")) {
-      map.current.moveLayer("map-overlay", "drawing-fill");
+      });
     }
-  }
-}, []);
 
+    if (!map.current.getSource("drawing-polygon-source")) {
+      map.current.addSource("drawing-polygon-source", {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "Polygon",
+            coordinates: [[]],
+          },
+        },
+      });
+    }
+
+    if (!map.current.getSource("overlay-source")) {
+      map.current.addSource("overlay-source", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: [],
+        },
+      });
+    }
+
+    // Check if layers already exist, if not add them
+    if (!map.current.getLayer("drawing-line")) {
+      map.current.addLayer({
+        id: "drawing-line",
+        type: "line",
+        source: "drawing-line-source",
+        paint: {
+          "line-color": "#001D3D",
+          "line-width": 5,
+        },
+        layout: {
+          "line-cap": "round",
+          "line-join": "round",
+        },
+      });
+    }
+
+    if (!map.current.getLayer("drawing-fill")) {
+      map.current.addLayer({
+        id: "drawing-fill",
+        type: "fill",
+        source: "drawing-polygon-source",
+        paint: {
+          "fill-color": "#20364D",
+          "fill-opacity": 0.3,
+        },
+      });
+    }
+
+    if (!map.current.getLayer("drawing-outline")) {
+      map.current.addLayer({
+        id: "drawing-outline",
+        type: "line",
+        source: "drawing-polygon-source",
+        paint: {
+          "line-color": "#001D3D",
+          "line-width": 5,
+        },
+      });
+    }
+
+    if (!map.current.getLayer("map-overlay")) {
+      map.current.addLayer({
+        id: "map-overlay",
+        type: "fill",
+        source: "overlay-source",
+        paint: {
+          "fill-color": "rgba(32, 54, 77, 0.30)",
+          "fill-opacity": 1,
+        },
+      });
+
+      // Make sure overlay is below drawing layers
+      if (map.current.getLayer("drawing-fill")) {
+        map.current.moveLayer("map-overlay", "drawing-fill");
+      }
+    }
+  }, []);
 
   // Map initialization (once only)
   useEffect(() => {
@@ -209,52 +222,114 @@ const initializeDrawingLayers = useCallback(() => {
     };
   }, [initialLocation.lat, initialLocation.lng, zoom]);
 
-  // Setup drawing layers and controls when map loads
-// Replace your existing drawing layers setup useEffect with this:
-useEffect(() => {
-  if (!map.current || !mapLoaded) return;
-  
-  initializeDrawingLayers();
-}, [mapLoaded, initializeDrawingLayers]);
-
-
-// Add this new useEffect to handle style changes:
-// Keep updatePolygon where it is, but modify the style.load useEffect:
-useEffect(() => {
-  if (!map.current || !mapLoaded) return;
-
-  const handleStyleLoad = () => {
-    // Reinitialize drawing layers after style change
-    setTimeout(() => {
-      initializeDrawingLayers();
-      
-      // Restore any existing drawn polygon directly
-      if (drawState.hasDrawnArea && drawState.points.length >= 4) {
-        const source = map.current?.getSource("drawing-polygon-source");
-        if (source && "setData" in source) {
-          source.setData({
-            type: "Feature",
-            properties: {},
-            geometry: {
-              type: "Polygon",
-              coordinates: [drawState.points],
-            },
-          });
-        }
-      }
-    }, 100);
-  };
-
-  map.current.on('style.load', handleStyleLoad);
-
-  return () => {
-    if (map.current) {
-      map.current.off('style.load', handleStyleLoad);
+  useEffect(() => {
+    if (isLocalInfoActive && map.current) {
+      const center = map.current.getCenter();
+      searchPlaces(selectedCategory, { lat: center.lat, lng: center.lng });
+    } else {
+      clearPlaces();
     }
+  }, [isLocalInfoActive, selectedCategory, searchPlaces, clearPlaces]);
+
+  const handlePlaceClick = (place: any) => {
+    setSelectedPlace(place);
+    setShowPlacePopup(true);
+    console.log("Place clicked:", place);
   };
-}, [mapLoaded, initializeDrawingLayers, drawState.hasDrawnArea, drawState.points]);
 
+  const handlePlacePopupClose = () => {
+    setShowPlacePopup(false);
+    setSelectedPlace(null);
+  };
 
+  // Add place markers (add this after your property markers useEffect):
+  // Update this useEffect (around line 200):
+  useEffect(() => {
+    if (!map.current || !mapLoaded || placesLoading) return;
+
+    // Clear existing place markers
+    const existingPlaceMarkers = document.querySelectorAll(
+      "[data-place-marker]"
+    );
+    existingPlaceMarkers.forEach((marker) => marker.remove());
+
+    // Only show place markers if local info is active
+    if (!isLocalInfoActive) return;
+
+    // Add new place markers
+    places.forEach((place) => {
+      const markerElement = document.createElement("div");
+      markerElement.setAttribute("data-place-marker", "true");
+
+      const root = ReactDOM.createRoot(markerElement);
+      root.render(
+        <PlaceMarker
+          place={place}
+          onClick={handlePlaceClick}
+          isSelected={selectedPlace?.id === place.id}
+        />
+      );
+
+      new mapboxgl.Marker(markerElement)
+        .setLngLat([place.lng, place.lat])
+        .addTo(map.current!);
+    });
+  }, [
+    map.current,
+    mapLoaded,
+    places,
+    placesLoading,
+    isLocalInfoActive,
+    selectedPlace,
+  ]); // Add handlePlaceClick here if needed
+
+  // Setup drawing layers and controls when map loads
+  useEffect(() => {
+    if (!map.current || !mapLoaded) return;
+
+    initializeDrawingLayers();
+  }, [mapLoaded, initializeDrawingLayers]);
+
+  // Add this new useEffect to handle style changes:
+  // Keep updatePolygon where it is, but modify the style.load useEffect:
+  useEffect(() => {
+    if (!map.current || !mapLoaded) return;
+
+    const handleStyleLoad = () => {
+      // Reinitialize drawing layers after style change
+      setTimeout(() => {
+        initializeDrawingLayers();
+
+        // Restore any existing drawn polygon directly
+        if (drawState.hasDrawnArea && drawState.points.length >= 4) {
+          const source = map.current?.getSource("drawing-polygon-source");
+          if (source && "setData" in source) {
+            source.setData({
+              type: "Feature",
+              properties: {},
+              geometry: {
+                type: "Polygon",
+                coordinates: [drawState.points],
+              },
+            });
+          }
+        }
+      }, 100);
+    };
+
+    map.current.on("style.load", handleStyleLoad);
+
+    return () => {
+      if (map.current) {
+        map.current.off("style.load", handleStyleLoad);
+      }
+    };
+  }, [
+    mapLoaded,
+    initializeDrawingLayers,
+    drawState.hasDrawnArea,
+    drawState.points,
+  ]);
 
   // Setup drawing event listeners
   useEffect(() => {
@@ -406,16 +481,16 @@ useEffect(() => {
   }, [updatePolygon]);
 
   // Handle ESC key to cancel drawing
- useEffect(() => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && drawState.isDrawMode) {
-      cancelDrawing();
-      setActiveMode("map");
-    }
-  };
-  document.addEventListener("keydown", handleKeyDown);
-  return () => document.removeEventListener("keydown", handleKeyDown);
-}, [drawState.isDrawMode, cancelDrawing]);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && drawState.isDrawMode) {
+        cancelDrawing();
+        setActiveMode("map");
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [drawState.isDrawMode, cancelDrawing]);
   // Add property markers to map
   useEffect(() => {
     if (!map.current || !mapLoaded || loading) return;
@@ -543,27 +618,28 @@ useEffect(() => {
 
   // Handle mode changes
   const handleLocalInfoClick = () => {
-  setActiveMode("localInfo");
-  setShowStyleOptions(false);
-  // Cancel any active drawing
-  if (drawState.isDrawMode || drawState.isDrawing) {
-    cancelDrawing();
-  }
-};
+    toggleLocalInfo();
+    setShowStyleOptions(false); // Close dropdown when switching modes
 
- const handleMapClick = () => {
-  setActiveMode("map");
-  // Cancel any active drawing
-  if (drawState.isDrawMode || drawState.isDrawing) {
-    cancelDrawing();
-  }
-};
+    // Cancel any active drawing
+    if (drawState.isDrawMode || drawState.isDrawing) {
+      cancelDrawing();
+    }
+  };
 
-const handleDrawClick = () => {
-  setActiveMode("draw");
-  setShowStyleOptions(false);
-  toggleDrawMode();
-};
+  const handleMapClick = () => {
+    setActiveMode("map");
+    // Cancel any active drawing
+    if (drawState.isDrawMode || drawState.isDrawing) {
+      cancelDrawing();
+    }
+  };
+
+  const handleDrawClick = () => {
+    setActiveMode("draw");
+    setShowStyleOptions(false);
+    toggleDrawMode();
+  };
 
   return (
     <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
@@ -663,10 +739,15 @@ const handleDrawClick = () => {
       {/* Category Tabs - Slide in from top when local info is active */}
       <div
         className={`absolute top-0 left-0 right-0 z-20 bg-white shadow-md transition-transform duration-300 ease-in-out ${
-          activeMode === "localInfo" ? "transform-none" : "-translate-y-full"
+          isLocalInfoActive ? "transform-none" : "-translate-y-full"
         }`}
       >
-        {/* We'll implement this later */}
+        {isLocalInfoActive && (
+          <CategoryTabs
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
+        )}
       </div>
 
       {/* Map Controls */}
@@ -681,7 +762,7 @@ const handleDrawClick = () => {
           <div className="absolute bottom-13 left-0 right-0 z-9 flex justify-center">
             <div className="flex items-center gap-4" ref={dropdownRef}>
               <LocalInfoButton
-                isActive={activeMode === "localInfo"}
+                isActive={isLocalInfoActive} // Use this instead of activeMode === "localInfo"
                 onClick={handleLocalInfoClick}
               />
               <MapButton
@@ -774,7 +855,60 @@ const handleDrawClick = () => {
         .mapboxgl-canvas.drawing-cursor {
           cursor: crosshair !important;
         }
+
+        .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
       `}</style>
+
+      {isLocalInfoActive && placesLoading && (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-30">
+          <div className="bg-white rounded-lg shadow-lg px-4 py-2 flex items-center space-x-2">
+            <svg
+              className="animate-spin h-4 w-4 text-[#20364D]"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            <span className="text-sm text-gray-700">Loading places...</span>
+          </div>
+        </div>
+      )}
+
+      {/* Places Error Indicator */}
+      {isLocalInfoActive && placesError && (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-30">
+          <div className="bg-red-100 border border-red-400 text-red-700 rounded-lg px-4 py-2 text-sm">
+            {placesError}
+          </div>
+        </div>
+      )}
+
+      {/* Place Popup */}
+      {showPlacePopup && selectedPlace && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <PlacePopup place={selectedPlace} onClose={handlePlacePopupClose} />
+        </div>
+      )}
     </Box>
   );
 };
