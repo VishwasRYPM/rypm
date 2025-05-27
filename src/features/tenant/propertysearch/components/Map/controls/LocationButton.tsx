@@ -55,7 +55,6 @@ const LocationButton: React.FC<LocationButtonProps> = ({
             navigator.geolocation.getCurrentPosition(
               () => setLocationAvailable(true),
               (error) => {
-                console.log("Initial location check error:", error);
                 setLocationAvailable(false);
                 if (error.code === LocationErrorType.PERMISSION_DENIED) {
                   setLocationError(LocationErrorType.PERMISSION_DENIED);
@@ -70,7 +69,6 @@ const LocationButton: React.FC<LocationButtonProps> = ({
           }
         })
         .catch((error) => {
-          console.log("Permissions API error:", error);
           setLocationAvailable(false);
         });
     } else {
@@ -99,7 +97,6 @@ const LocationButton: React.FC<LocationButtonProps> = ({
 
       // Add event listeners
       geolocateRef.current.on("geolocate", () => {
-        console.log("Location found");
         setLocationActive(true);
         setIsLocating(false);
         setLocationError(null);
@@ -107,7 +104,6 @@ const LocationButton: React.FC<LocationButtonProps> = ({
       });
 
       geolocateRef.current.on("error", (err) => {
-        console.log("Location error", err);
         setLocationActive(false);
         setIsLocating(false);
 
@@ -119,13 +115,11 @@ const LocationButton: React.FC<LocationButtonProps> = ({
       });
 
       geolocateRef.current.on("trackuserlocationstart", () => {
-        console.log("Tracking started");
         setLocationActive(true);
         setLocationAvailable(true);
       });
 
       geolocateRef.current.on("trackuserlocationend", () => {
-        console.log("Tracking ended");
         setLocationActive(false);
       });
 
@@ -285,7 +279,7 @@ useEffect(() => {
     <>
       {/* Custom Location Button */}
       <button
-        className={`w-10 h-10 rounded-full flex items-center justify-center shadow-md bg-white`}
+        className={`w-7 h-7 rounded-full flex items-center justify-center shadow-md bg-white`}
         onClick={handleLocationButtonClick}
       >
         {locationAvailable ? (
