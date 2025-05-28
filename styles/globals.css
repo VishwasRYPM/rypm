@@ -42,6 +42,10 @@ body {
   top: -15px;
 }
 
+ html{
+  scroll-behavior:smooth;
+ }
+
 
 @keyframes slide-from-left {
   0% {

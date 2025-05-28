@@ -38,7 +38,7 @@ const SliderImage: React.FC<PropertyCardProps> = ({
   onFavorite,
 }) => {
   return (
-    <MediaContainer height='39.76vh' width='86.01vw' className="rounded-[16px] flex-shrink-0">
+    <MediaContainer height='39.76vh' width='86.01vw' className="rounded-[16px] flex-shrink-0 scrollbar-hide">
       <Image src={image} alt="Property" width={1000} height={1000} className="w-full h-full" />
 
       <MainInfoContainer className="absolute bottom-0 left-0 right-0 flex flex-col text-[#FFF]">

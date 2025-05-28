@@ -128,3 +128,4 @@ export { default as VentilationHoodOneIcon } from './VentilationHoodOneIcon';
 export {default as WheelChairIcon} from './WheelChairIcon';
 export {default as WhirlpoolIcon} from './WhirlpoolIcon';
 export {default as YogaRoomIcon} from './YogaRoomIcon';
+export {default as VideoPlayIcon } from './VideoPlayIcon';
