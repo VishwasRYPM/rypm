@@ -103,6 +103,14 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
     }
   };
 
+  const handleNavigatePhotosAndVideos = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(`/tenant/properties/${id}/photos-videos`);
+    }
+  };
+
   const handleBackClick = () => {
     router.push(`/tenant/PropertySearch`);
   };
@@ -163,7 +171,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
   return (
     <>
-      <div className=" w-fit  ">
+      <div className=" w-fit  hide-scrollbar">
         <MediaContainer height="46.13vh">
           <Image
             src="/images/modern house.png"
@@ -171,6 +179,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             width={393}
             height={14}
             className="w-full h-full object-cover"
+            onClick={handleNavigatePhotosAndVideos}
           />
 
           <BackButton>
@@ -470,7 +479,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
         </div>
 
         {/*Second Image slider */}
-        <div className="mt-5 px-4 flex flex-row  gap-2.5 w-[95.93vw] overflow-auto scroll-smooth">
+        <div className="mt-5 px-4 flex flex-row  gap-2.5 w-[95.93vw] overflow-auto scroll-smooth scrollbar-hide">
           {properties.map((properties) => (
             <SliderImage
               key={properties.id}
@@ -583,7 +592,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           </div>
         </div>
 
-        <footer className="h-20 w fixed bottom-0 left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
+        <footer className="h-20  fixed bottom-0 left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
           <div className=" flex flex-row gap-2 items-center">
             <div className="relative h-[40px] w-[40px] rounded-[50px] border-[1.5px] border-[#FFF]">
               <Image

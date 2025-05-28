@@ -9,7 +9,7 @@ interface HeadingProps {
 const Heading: React.FC<HeadingProps> = ({ text,className="text-[16px]" }) => {
   return (
       <div>
-          <h1 className={`${className} text-[#20364D] font-bold capitalize my-3`}>{text}</h1>
+          <h1 className={`${className} text-[#001D3D] font-bold capitalize my-3`}>{text}</h1>
       </div>
   );
 };
