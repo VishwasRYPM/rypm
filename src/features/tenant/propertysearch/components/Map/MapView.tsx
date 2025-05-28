@@ -906,11 +906,15 @@ useEffect(() => {
       )}
 
       {/* Place Popup */}
-      {showPlacePopup && selectedPlace && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <PlacePopup place={selectedPlace} onClose={handlePlacePopupClose} />
-        </div>
-      )}
+{showPlacePopup && selectedPlace && (
+  <div className="fixed inset-0 z-50 pointer-events-none">
+    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-[94vw] max-w-[420px] h-[177px] bg-white rounded-2xl shadow-xl pointer-events-auto">
+      <PlacePopup place={selectedPlace} onClose={handlePlacePopupClose} />
+    </div>
+  </div>
+)}
+
+
     </Box>
   );
 };

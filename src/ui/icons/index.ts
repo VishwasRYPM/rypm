@@ -1,8 +1,7 @@
 export { default as Logo } from './Logo';
 export { default as BellIcon } from './BellIcon';
 export { default as MenuIcon } from './MenuIcon';
-export { default as RatingIcon } from './RatingIcon';
-export { default as EditIcon } from './EditIcon';
+export { default as FiveRatingIcon } from './FiveRatingIcon';
 export { default as OnlineIcon } from './OnlineIcon';
 
 export { default as HomeIcon } from './HomeIcon';
@@ -10,7 +9,7 @@ export { default as HeartIcon } from './HeartIcon';
 export { default as CalendarIcon } from './CalendarIcon';
 export { default as SettingIcon } from './SettingIcon';
 export { default as HistoryIcon } from './HistoryIcon';
-
+export { default as EditIcon } from './EditIcon';
 export { default as ChatsIcon } from './ChatsIcon';
 export { default as BenefitsIcon } from './Benefits';
 
@@ -147,3 +146,5 @@ export { default as FitnessPopupIcon } from './FitnessPopupIcon';
 export { default as BusinessesPopupIcon } from './BusinessesPopupIcon';
 export { default as ServicesPopupIcon } from './ServicesPopupIcon';
 export { default as ShoppingPopupIcon } from './ShoppingPopupIcon';
+export { default as CloseIcon } from './CloseIcon';
+export { default as RatingIcon } from './RatingIcon';

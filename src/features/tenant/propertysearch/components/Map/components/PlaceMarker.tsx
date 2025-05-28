@@ -426,7 +426,7 @@ const PlaceMarker: React.FC<PlaceMarkerProps> = ({
     >
       <div
         className={`
-          flex items-center justify-center w-8 h-8 rounded-full shadow-lg transition-all duration-200
+          flex items-center justify-center transition-all duration-200
           ${isSelected 
             ? 'bg-[#20364D] border-2 border-white scale-110' 
             : 'bg-white border border-gray-300 hover:bg-gray-50'

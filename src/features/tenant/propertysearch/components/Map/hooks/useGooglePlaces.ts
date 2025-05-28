@@ -39,7 +39,7 @@ export function useGooglePlaces() {
   const searchPlaces = useCallback(async (
     category: LocalInfoCategory,
     center: { lat: number; lng: number },
-    radius: number = 2000 // 2km radius
+    radius: number = 2000 // 200m radius
   ) => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
     
