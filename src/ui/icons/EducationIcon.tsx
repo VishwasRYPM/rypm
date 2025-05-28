@@ -2,13 +2,13 @@ import React from "react";
 
 interface EducationIconProps {
   width?: number;
-  height?: number;
+  height?: number; 
   className?: string;
   color?: string;
 }
 
 const EducationIcon = ({
-  width = 15,
+  width = 17,
   height = 15,
   className = "",
   color = "#FFF",
@@ -18,6 +18,7 @@ const EducationIcon = ({
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
+      className={className}
       viewBox="0 0 17 15"
       fill="none"
     >

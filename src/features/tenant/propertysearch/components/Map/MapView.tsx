@@ -242,46 +242,48 @@ const MapView: React.FC<MapViewProps> = ({
     setSelectedPlace(null);
   };
 
-  // Add place markers (add this after your property markers useEffect):
-  // Update this useEffect (around line 200):
-  useEffect(() => {
-    if (!map.current || !mapLoaded || placesLoading) return;
+// In your useEffect where you render place markers
+useEffect(() => {
+  if (!map.current || !mapLoaded || placesLoading) return;
 
-    // Clear existing place markers
-    const existingPlaceMarkers = document.querySelectorAll(
-      "[data-place-marker]"
+  // Clear existing place markers
+  const existingPlaceMarkers = document.querySelectorAll(
+    "[data-place-marker]"
+  );
+  existingPlaceMarkers.forEach((marker) => marker.remove());
+
+  // Only show place markers if local info is active
+  if (!isLocalInfoActive) return;
+
+  // Add new place markers
+  places.forEach((place) => {
+    const markerElement = document.createElement("div");
+    markerElement.setAttribute("data-place-marker", "true");
+
+    const root = ReactDOM.createRoot(markerElement);
+    root.render(
+      <PlaceMarker
+        place={place}
+        onClick={handlePlaceClick}
+        isSelected={selectedPlace?.id === place.id}
+        searchCategory={selectedCategory} // Add this line
+      />
     );
-    existingPlaceMarkers.forEach((marker) => marker.remove());
 
-    // Only show place markers if local info is active
-    if (!isLocalInfoActive) return;
+    new mapboxgl.Marker(markerElement)
+      .setLngLat([place.lng, place.lat])
+      .addTo(map.current!);
+  });
+}, [
+  map.current,
+  mapLoaded,
+  places,
+  placesLoading,
+  isLocalInfoActive,
+  selectedPlace,
+  selectedCategory // Add this to dependencies
+]);
 
-    // Add new place markers
-    places.forEach((place) => {
-      const markerElement = document.createElement("div");
-      markerElement.setAttribute("data-place-marker", "true");
-
-      const root = ReactDOM.createRoot(markerElement);
-      root.render(
-        <PlaceMarker
-          place={place}
-          onClick={handlePlaceClick}
-          isSelected={selectedPlace?.id === place.id}
-        />
-      );
-
-      new mapboxgl.Marker(markerElement)
-        .setLngLat([place.lng, place.lat])
-        .addTo(map.current!);
-    });
-  }, [
-    map.current,
-    mapLoaded,
-    places,
-    placesLoading,
-    isLocalInfoActive,
-    selectedPlace,
-  ]); // Add handlePlaceClick here if needed
 
   // Setup drawing layers and controls when map loads
   useEffect(() => {
@@ -738,7 +740,7 @@ const MapView: React.FC<MapViewProps> = ({
 
       {/* Category Tabs - Slide in from top when local info is active */}
 <div
-  className={`absolute top-13 left-0 right-0 z-20 inline-flex items-center gap-1.5 backdrop-blur-sm transition-transform duration-300 ease-in-out ${
+  className={`absolute top-13 left-0 right-0 z-20 inline-flex items-center gap-1.5 transition-transform duration-300 ease-in-out ${
     isLocalInfoActive ? "transform-none" : "-translate-y-full"
   }`}
 >

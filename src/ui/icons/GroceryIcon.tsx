@@ -2,13 +2,13 @@ import React from "react";
 
 interface GroceryIconProps {
   width?: number;
-  height?: number;
+  height?: number; 
   className?: string;
   color?: string;
 }
 
 const GroceryIcon = ({
-  width = 15,
+  width = 13,
   height = 15,
   className = "",
   color = "#FFF",
@@ -16,8 +16,9 @@ const GroceryIcon = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="13"
-      height="15"
+      width={width}
+      height={height}
+      className={className}
       viewBox="0 0 13 15"
       fill="none"
     >

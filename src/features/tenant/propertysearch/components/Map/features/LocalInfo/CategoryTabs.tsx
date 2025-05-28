@@ -1,4 +1,16 @@
 import React from "react";
+import { 
+  AllIcons,
+  RestaurantsIcon,
+  GroceryIcon,
+  EducationIcon,
+  HealthcareIcon,
+  FitnessIcon,
+  ShoppingIcon,
+  BuisnessesIcon,
+  TravelIcon,
+  ServicesIcon
+} from "@/ui/icons";
 
 export type LocalInfoCategory =
   | "all"
@@ -17,18 +29,18 @@ interface CategoryTabsProps {
   onCategoryChange: (category: LocalInfoCategory) => void;
 }
 
-const categories: { label: string; value: LocalInfoCategory; icon: string }[] =
+const categories: { label: string; value: LocalInfoCategory; icon: React.ReactNode }[] =
   [
-    { label: "All", value: "all", icon: "🌟" },
-    { label: "Grocery", value: "grocery", icon: "🛒" },
-    { label: "Education", value: "education", icon: "🎓" },
-    { label: "Restaurants", value: "restaurants", icon: "🍽️" },
-    { label: "Healthcare", value: "healthcare", icon: "🏥" },
-    { label: "Fitness", value: "fitness", icon: "💪" },
-    { label: "Shopping", value: "shopping", icon: "🛍️" },
-    { label: "Business", value: "business", icon: "🏢" },
-    { label: "Travel", value: "travel", icon: "✈️" },
-    { label: "Services", value: "services", icon: "🔧" },
+    { label: "All", value: "all", icon: <AllIcons/> },
+    { label: "Grocery", value: "grocery", icon: <GroceryIcon/> },
+    { label: "Education", value: "education", icon: <EducationIcon/> },
+    { label: "Restaurants", value: "restaurants", icon: <RestaurantsIcon/> },
+    { label: "Healthcare", value: "healthcare", icon: <HealthcareIcon/> },
+    { label: "Fitness", value: "fitness", icon: <FitnessIcon/> },
+    { label: "Shopping", value: "shopping", icon: <ShoppingIcon/> },
+    { label: "Business", value: "business", icon: <BuisnessesIcon/> },
+    { label: "Travel", value: "travel", icon: <TravelIcon/> },
+    { label: "Services", value: "services", icon: <ServicesIcon/> },
   ];
 
 const CategoryTabs: React.FC<CategoryTabsProps> = ({
@@ -38,14 +50,14 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({
   return (
     <div className="w-full px-4 py-5">
       {/* Scrollable container with Tailwind classes */}
-      <div className="w-full inline-flex items-center  backdrop-blur-sm overflow-x-auto scrollbar-hide">
+      <div className="w-full inline-flex items-center overflow-x-auto scrollbar-hide">
         <div className="flex gap-1.5 min-w-max">
           {categories.map((category) => (
             <button
               key={category.value}
               onClick={() => onCategoryChange(category.value)}
               className={`
-  flex items-center gap-1 px-3 rounded-full font-medium h-[25px]
+  flex items-center gap-1.5 px-3 rounded-full font-medium h-[25px]
   transition-all duration-200 ease-in-out whitespace-nowrap backdrop-blur-[2px]
   ${
     selectedCategory === category.value
@@ -54,7 +66,7 @@ const CategoryTabs: React.FC<CategoryTabsProps> = ({
   }
 `}
             >
-              <span className="text-[12px]">{category.icon}</span>
+              <span>{category.icon}</span>
               <span className="text-[12px] font-semibold">
                 {category.label}
               </span>
