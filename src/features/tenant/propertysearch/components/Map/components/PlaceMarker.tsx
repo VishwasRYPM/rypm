@@ -300,7 +300,16 @@ import {
   ShoppingIcon,
   BuisnessesIcon,
   TravelIcon,
-  ServicesIcon
+  ServicesIcon,
+  RestaurantPopupIcon,
+  GroceryPopupIcon,
+  EducationPopupIcon,
+  HealthcarePopupIcon,
+  FitnessPopupIcon,
+  ShoppingPopupIcon,
+  BusinessesPopupIcon,
+  TravelPopupIcon,
+  ServicesPopupIcon
 } from "@/ui/icons";
 import { LocalInfoCategory } from '../features/LocalInfo/CategoryTabs';
 
@@ -377,15 +386,15 @@ const getCategoryIcon = (searchCategory: LocalInfoCategory, isSelected: boolean)
   
   const categoryIconMap: Record<LocalInfoCategory, React.ReactNode> = {
     all: <AllIcons color={iconColor} />,
-    restaurants: <RestaurantsIcon color={"#001D3D"} />,
-    grocery: <GroceryIcon color={"#001D3D"}/>,
-    education: <EducationIcon color={"#001D3D"} />,
-    healthcare: <HealthcareIcon color={"#001D3D"} />,
-    fitness: <FitnessIcon color={"#001D3D"} />,
-    shopping: <ShoppingIcon color={"#001D3D"}/>,
-    business: <BuisnessesIcon color={"#001D3D"}/>,
-    travel: <TravelIcon color={"#001D3D"}/>,
-    services: <ServicesIcon color={"#001D3D"} />
+    restaurants: <RestaurantPopupIcon />,
+    grocery: <GroceryPopupIcon/>,
+    education: <EducationPopupIcon />,
+    healthcare: <HealthcarePopupIcon />,
+    fitness: <FitnessPopupIcon />,
+    shopping: <ShoppingPopupIcon/>,
+    business: <BusinessesPopupIcon/>,
+    travel: <TravelPopupIcon/>,
+    services: <ServicesPopupIcon/>
   };
 
   return categoryIconMap[searchCategory] || <AllIcons color={"#001D3D"} />;
