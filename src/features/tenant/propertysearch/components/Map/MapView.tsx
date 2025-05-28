@@ -737,11 +737,11 @@ const MapView: React.FC<MapViewProps> = ({
       )}
 
       {/* Category Tabs - Slide in from top when local info is active */}
-      <div
-        className={`absolute top-0 left-0 right-0 z-20 bg-white shadow-md transition-transform duration-300 ease-in-out ${
-          isLocalInfoActive ? "transform-none" : "-translate-y-full"
-        }`}
-      >
+<div
+  className={`absolute top-13 left-0 right-0 z-20 inline-flex items-center gap-1.5 backdrop-blur-sm transition-transform duration-300 ease-in-out ${
+    isLocalInfoActive ? "transform-none" : "-translate-y-full"
+  }`}
+>
         {isLocalInfoActive && (
           <CategoryTabs
             selectedCategory={selectedCategory}
