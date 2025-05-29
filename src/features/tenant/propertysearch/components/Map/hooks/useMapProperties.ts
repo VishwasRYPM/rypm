@@ -14,7 +14,14 @@ export interface MapProperty {
   images: string[];
 }
 
-// Dummy data - replace with API call later
+export interface PropertyCluster {
+  id: string;
+  lat: number;
+  lng: number;
+  count: number;
+  properties: MapProperty[];
+}
+
 const dummyMapProperties: MapProperty[] = [
   {
     id: '1',
@@ -80,31 +87,276 @@ const dummyMapProperties: MapProperty[] = [
     country: 'Canada',
     address: '654 College St, Toronto, ON',
     images: ['/images/toronto.png']
-  }
+  },
+  {
+  id: '6',
+  lat: 34.1016,
+  lng: -118.3269,
+  price: '$2,800',
+  bedCount: 3,
+  bathCount: 2,
+  propertyType: 'Condo',
+  city: 'Los Angeles',
+  country: 'USA',
+  address: '100 Sunset Blvd, Los Angeles, CA',
+  images: ['/images/toronto.png']
+},
+{
+  id: '7',
+  lat: 40.7128,
+  lng: -74.0060,
+  price: '$1,950',
+  bedCount: 1,
+  bathCount: 1,
+  propertyType: 'Apartment',
+  city: 'New York',
+  country: 'USA',
+  address: '200 5th Ave, New York, NY',
+  images: ['/images/toronto.png']
+},
+{
+  id: '8',
+  lat: 41.8781,
+  lng: -87.6298,
+  price: '$1,600',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Apartment',
+  city: 'Chicago',
+  country: 'USA',
+  address: '300 Michigan Ave, Chicago, IL',
+  images: ['/images/toronto.png']
+},
+{
+  id: '9',
+  lat: 29.7604,
+  lng: -95.3698,
+  price: '$2,200',
+  bedCount: 3,
+  bathCount: 2,
+  propertyType: 'Townhouse',
+  city: 'Houston',
+  country: 'USA',
+  address: '400 Westheimer Rd, Houston, TX',
+  images: ['/images/toronto.png']
+},
+{
+  id: '10',
+  lat: 33.7490,
+  lng: -84.3880,
+  price: '$2,400',
+  bedCount: 2,
+  bathCount: 2,
+  propertyType: 'Condo',
+  city: 'Atlanta',
+  country: 'USA',
+  address: '500 Peachtree St, Atlanta, GA',
+  images: ['/images/toronto.png']
+},
+
+  {
+  id: '11',
+  lat: 51.5074,
+  lng: -0.1278,
+  price: '£2,300',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Flat',
+  city: 'London',
+  country: 'UK',
+  address: '10 Downing St, London',
+  images: ['/images/toronto.png']
+},
+{
+  id: '12',
+  lat: 53.4808,
+  lng: -2.2426,
+  price: '£1,600',
+  bedCount: 1,
+  bathCount: 1,
+  propertyType: 'Apartment',
+  city: 'Manchester',
+  country: 'UK',
+  address: '200 Deansgate, Manchester',
+  images: ['/images/toronto.png']
+},
+{
+  id: '13',
+  lat: 55.9533,
+  lng: -3.1883,
+  price: '£1,800',
+  bedCount: 2,
+  bathCount: 2,
+  propertyType: 'Flat',
+  city: 'Edinburgh',
+  country: 'UK',
+  address: '45 Princes St, Edinburgh',
+  images: ['/images/toronto.png']
+},
+{
+  id: '14',
+  lat: 52.4862,
+  lng: -1.8904,
+  price: '£1,400',
+  bedCount: 1,
+  bathCount: 1,
+  propertyType: 'Studio',
+  city: 'Birmingham',
+  country: 'UK',
+  address: '88 Broad St, Birmingham',
+  images: ['/images/toronto.png']
+},
+{
+  id: '15',
+  lat: 51.4545,
+  lng: -2.5879,
+  price: '£1,750',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Terraced',
+  city: 'Bristol',
+  country: 'UK',
+  address: '120 Park St, Bristol',
+  images: ['/images/toronto.png']
+},
+
+ {
+  id: '16',
+  lat: -33.8688,
+  lng: 151.2093,
+  price: '$2,200',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Apartment',
+  city: 'Sydney',
+  country: 'Australia',
+  address: '100 George St, Sydney',
+  images: ['/images/toronto.png']
+},
+{
+  id: '17',
+  lat: -37.8136,
+  lng: 144.9631,
+  price: '$1,950',
+  bedCount: 1,
+  bathCount: 1,
+  propertyType: 'Flat',
+  city: 'Melbourne',
+  country: 'Australia',
+  address: '250 Collins St, Melbourne',
+  images: ['/images/toronto.png']
+},
+{
+  id: '18',
+  lat: -27.4698,
+  lng: 153.0251,
+  price: '$1,800',
+  bedCount: 2,
+  bathCount: 2,
+  propertyType: 'Unit',
+  city: 'Brisbane',
+  country: 'Australia',
+  address: '70 Queen St, Brisbane',
+  images: ['/images/toronto.png']
+},
+{
+  id: '19',
+  lat: -31.9505,
+  lng: 115.8605,
+  price: '$1,600',
+  bedCount: 1,
+  bathCount: 1,
+  propertyType: 'Studio',
+  city: 'Perth',
+  country: 'Australia',
+  address: '90 Murray St, Perth',
+  images: ['/images/toronto.png']
+},
+{
+  id: '20',
+  lat: -34.9285,
+  lng: 138.6007,
+  price: '$1,750',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Apartment',
+  city: 'Adelaide',
+  country: 'Australia',
+  address: '15 Rundle Mall, Adelaide',
+  images: ['/images/toronto.png']
+},
+{
+  id: '21',
+  lat: 51.509865,
+  lng: -0.118092,
+  price: '£2,000',
+  bedCount: 2,
+  bathCount: 2,
+  propertyType: 'Flat',
+  city: 'London',
+  country: 'UK',
+  address: '221B Baker St, London',
+  images: ['/images/toronto.png']
+},
+{
+  id: '22',
+  lat: -33.8688,
+  lng: 151.2093,
+  price: '$2,400',
+  bedCount: 3,
+  bathCount: 2,
+  propertyType: 'Townhouse',
+  city: 'Sydney',
+  country: 'Australia',
+  address: '300 Pitt St, Sydney',
+  images: ['/images/toronto.png']
+},
+{
+  id: '23',
+  lat: 40.730610,
+  lng: -73.935242,
+  price: '$2,000',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Apartment',
+  city: 'Brooklyn',
+  country: 'USA',
+  address: '456 Flatbush Ave, Brooklyn, NY',
+  images: ['/images/toronto.png']
+},
+{
+  id: '24',
+  lat: 53.349805,
+  lng: -6.26031,
+  price: '£1,850',
+  bedCount: 2,
+  bathCount: 1,
+  propertyType: 'Flat',
+  city: 'Dublin',
+  country: 'UK',
+  address: '150 Dame St, Dublin',
+  images: ['/images/toronto.png']
+}
+
 ];
 
 export function useMapProperties() {
   const [properties, setProperties] = useState<MapProperty[]>([]);
+  const [clusters, setClusters] = useState<PropertyCluster[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Simulate API call
     const fetchProperties = async () => {
       try {
         setLoading(true);
-        // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // In future, replace this with actual API call:
-        // const response = await fetch('/api/properties/map');
-        // const data = await response.json();
-        // setProperties(data);
         
         setProperties(dummyMapProperties);
         setError(null);
       } catch (err) {
         setError('Failed to load properties');
+        console.error('Error loading properties:', err);
       } finally {
         setLoading(false);
       }
@@ -113,17 +365,77 @@ export function useMapProperties() {
     fetchProperties();
   }, []);
 
-  // Function to refresh properties (for future API integration)
+  const createClusters = (props: MapProperty[], zoomLevel: number): PropertyCluster[] => {
+    if (zoomLevel >= 12) {
+      return []; 
+    }
+
+    const clusters: PropertyCluster[] = [];
+    const clustered: Set<string> = new Set();
+    const threshold = 0.01; 
+
+    props.forEach(property => {
+      if (clustered.has(property.id)) return;
+
+      const nearbyProperties = props.filter(p => {
+        if (clustered.has(p.id) || p.id === property.id) return false;
+        
+        const distance = Math.sqrt(
+          Math.pow(p.lat - property.lat, 2) + Math.pow(p.lng - property.lng, 2)
+        );
+        
+        return distance < threshold;
+      });
+
+      if (nearbyProperties.length > 0) {
+        const allProperties = [property, ...nearbyProperties];
+        const centerLat = allProperties.reduce((sum, p) => sum + p.lat, 0) / allProperties.length;
+        const centerLng = allProperties.reduce((sum, p) => sum + p.lng, 0) / allProperties.length;
+
+        clusters.push({
+          id: `cluster-${property.id}`,
+          lat: centerLat,
+          lng: centerLng,
+          count: allProperties.length,
+          properties: allProperties
+        });
+
+        allProperties.forEach(p => clustered.add(p.id));
+      }
+    });
+
+    return clusters;
+  };
+
+  const getClusters = (zoomLevel: number): PropertyCluster[] => {
+    return createClusters(properties, zoomLevel);
+  };
+
+  const getIndividualProperties = (zoomLevel: number): MapProperty[] => {
+    if (zoomLevel >= 12) {
+      return properties; 
+    }
+
+    const clusters = getClusters(zoomLevel);
+    const clusteredPropertyIds = new Set(
+      clusters.flatMap(cluster => cluster.properties.map(p => p.id))
+    );
+
+    return properties.filter(p => !clusteredPropertyIds.has(p.id));
+  };
+
   const refreshProperties = async () => {
     setLoading(true);
-    // Add API call logic here
     setLoading(false);
   };
 
   return {
     properties,
+    clusters,
     loading,
     error,
-    refreshProperties
+    refreshProperties,
+    getClusters,
+    getIndividualProperties
   };
 }
