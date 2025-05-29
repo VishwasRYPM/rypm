@@ -1,5 +1,5 @@
 import React from 'react';
-import { Business } from '@mui/icons-material';
+import ClusterMarkerShape from './ClusterMarkerShape';
 
 interface ClusterMarkerProps {
   count: number;
@@ -20,27 +20,11 @@ const ClusterMarker: React.FC<ClusterMarkerProps> = ({
       `}
       onClick={onClick}
     >
-      <div
-        className={`
-          relative px-4 py-1 text-sm font-bold shadow-md flex items-center gap-1
-          ${isSelected 
-            ? 'bg-[#20364D] text-white after:border-t-[#20364D]' 
-            : 'bg-white text-[#20364D] after:border-t-white'
-          }
-          rounded-full
-          after:content-[''] after:absolute after:bottom-[-6px] after:left-1/2 after:-translate-x-1/2
-          after:border-[6px] after:border-x-transparent after:border-b-0 after:border-solid
-        `}
-      >
-        <Business 
-          sx={{ 
-            fontSize: 16, 
-            color: isSelected ? '#FFFFFF' : '#20364D' 
-          }} 
-        />
-        
-        <span>{count} units</span>
-      </div>
+      <ClusterMarkerShape 
+        count={count}
+        isSelected={isSelected}
+        className="select-none"
+      />
     </div>
   );
 };
