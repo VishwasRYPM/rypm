@@ -4,12 +4,14 @@ import SearchCity from "./SearchCity";
 import { IconButton } from "@mui/material";
 import { FilterIcon, HeartFilledIcon, CalendarFilledIcon } from "@/ui/icons";
 import { openModal } from "../slices/modalSlice";
+import { useRouter } from "next/navigation";
 
 interface PropertySearchBarProps {
   searchTerm: string;
   onSearchChange: (value: string) => void;
   isMapView?: boolean;
   onMapToggle?: () => void;
+  onClick?: () => void;
 }
 
 const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
@@ -17,8 +19,19 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
   onSearchChange,
   isMapView = false,
   onMapToggle,
+  onClick 
 }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  
+  const handleNavigateRentalPreference = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(`/tenant/PropertySearch/filter`);
+    }
+  };
+
   return (
  <div className={`flex items-center justify-between ${
       isMapView 
@@ -35,17 +48,17 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
       />
       <div className="flex gap-2 ">
         <IconButton
-          aria-label="Filter/Settings"
+          // aria-label="Filter/Settings"
           sx={{ padding: "1px" }}
-          onClick={() => dispatch(openModal({ modalType: "filterSettings" }))}
+          onClick={handleNavigateRentalPreference}
         >
-          <FilterIcon width={30} height={30} color="#20364D" />
+          <FilterIcon width={30} height={30} color="#001D3D" />
         </IconButton>
         <IconButton aria-label="Favorites" sx={{ padding: "1px" }}>
           <HeartFilledIcon  />
         </IconButton>
         <IconButton aria-label="Calendar" sx={{ padding: "1px" }}>
-          <CalendarFilledIcon color="#20364D" />
+          <CalendarFilledIcon color="#001D3D" />
         </IconButton>
       </div>
     </div>
