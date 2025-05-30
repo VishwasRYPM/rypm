@@ -15,6 +15,8 @@ export interface GooglePlace {
   isOpen?: boolean;
   userRatingsTotal?: number;
   businessStatus?: string;
+  distance?: string;
+  address: string;
 }
 
 // Map our categories to Google Places types

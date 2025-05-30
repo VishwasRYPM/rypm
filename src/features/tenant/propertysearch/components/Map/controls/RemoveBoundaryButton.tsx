@@ -10,7 +10,7 @@ const RemoveBoundaryButton: React.FC<RemoveBoundaryButtonProps> = ({
   propertiesCount 
 }) => {
   return (
-    <div className="absolute bottom-24 left-0 right-0 z-20 flex justify-center">
+    <div className="absolute bottom-28 left-0 right-0 z-20 flex justify-center">
   <button
     onClick={onRemove}
     className="inline-flex px-[10px] py-[5px] items-center gap-2 rounded-[16px] bg-[rgba(32,54,77,0.30)] transition-colors"
