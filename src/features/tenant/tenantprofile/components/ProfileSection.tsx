@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import Chip from '@mui/material/Chip';
-import {OnlineIcon, RatingIcon,EditIcon} from '@/ui/icons';
+import {OnlineIcon, FiveRatingIcon,EditIcon} from '@/ui/icons';
 
 const ProfileSection = () => {
   return (
@@ -39,7 +39,7 @@ const ProfileSection = () => {
             <span className="mr-1 text-[#001D3D] text-sm font-bold leading-[160%] capitalize">
               4/5
             </span>
-            <RatingIcon />
+            <FiveRatingIcon />
           </div>
         </div>
         <div className="flex flex-col space-y-2 ">

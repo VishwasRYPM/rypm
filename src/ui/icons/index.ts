@@ -1,8 +1,7 @@
 export { default as Logo } from './Logo';
 export { default as BellIcon } from './BellIcon';
 export { default as MenuIcon } from './MenuIcon';
-export { default as RatingIcon } from './RatingIcon';
-export { default as EditIcon } from './EditIcon';
+export { default as FiveRatingIcon } from './FiveRatingIcon';
 export { default as OnlineIcon } from './OnlineIcon';
 
 export { default as HomeIcon } from './HomeIcon';
@@ -10,7 +9,7 @@ export { default as HeartIcon } from './HeartIcon';
 export { default as CalendarIcon } from './CalendarIcon';
 export { default as SettingIcon } from './SettingIcon';
 export { default as HistoryIcon } from './HistoryIcon';
-
+export { default as EditIcon } from './EditIcon';
 export { default as ChatsIcon } from './ChatsIcon';
 export { default as BenefitsIcon } from './Benefits';
 
@@ -128,6 +127,27 @@ export { default as VentilationHoodOneIcon } from './VentilationHoodOneIcon';
 export {default as WheelChairIcon} from './WheelChairIcon';
 export {default as WhirlpoolIcon} from './WhirlpoolIcon';
 export {default as YogaRoomIcon} from './YogaRoomIcon';
+export {default as AllIcons} from './AllIcons';
+export { default as BuisnessesIcon } from './BuisnessesIcon';
+export { default as FitnessIcon } from './FitnessIcon';
+export { default as ShoppingIcon } from './ShoppingIcon';
+export { default as TravelIcon } from './TravelIcon';
+export { default as ServicesIcon } from './ServicesIcon';
+export { default as GroceryIcon } from './GroceryIcon';
+export { default as EducationIcon } from './EducationIcon';
+export { default as RestaurantsIcon } from './RestaurantsIcon';
+export { default as HealthcareIcon } from './HealthcareIcon';
+export {default as GroceryPopupIcon} from './GroceryPopupIcon';
+export {default as EducationPopupIcon} from './EducationPopupIcon';
+export {default as RestaurantPopupIcon} from './RestaurantPopupIcon';
+export {default as HealthcarePopupIcon} from './HealthcarePopupIcon';
+export { default as TravelPopupIcon } from './TravelPopupIcon';
+export { default as FitnessPopupIcon } from './FitnessPopupIcon';
+export { default as BusinessesPopupIcon } from './BusinessesPopupIcon';
+export { default as ServicesPopupIcon } from './ServicesPopupIcon';
+export { default as ShoppingPopupIcon } from './ShoppingPopupIcon';
+export { default as CloseIcon } from './CloseIcon';
+export { default as RatingIcon } from './RatingIcon';
 export {default as VideoPlayIcon } from './VideoPlayIcon';
 export {default as HeartFillIcon} from './HeartFillIcon';
 export {default as RentalPreferencePeopleIcon} from './RentalPreferencePeopleIcon';

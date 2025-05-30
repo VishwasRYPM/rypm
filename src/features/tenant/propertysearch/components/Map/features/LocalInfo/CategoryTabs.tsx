@@ -1,101 +1,80 @@
-import React, { useState } from "react";
-import { Box, Tabs, Tab, Typography } from "@mui/material";
+import React from "react";
+import { 
+  AllIcons,
+  RestaurantsIcon,
+  GroceryIcon,
+  EducationIcon,
+  HealthcareIcon,
+  FitnessIcon,
+  ShoppingIcon,
+  BuisnessesIcon,
+  TravelIcon,
+  ServicesIcon
+} from "@/ui/icons";
 
-export type POICategory = 
-  | "restaurants" 
-  | "cafes" 
-  | "hotels" 
-  | "shopping" 
-  | "attractions" 
-  | "parks" 
-  | "hospitals" 
-  | "schools" 
-  | "atms" 
-  | "gas_stations";
+export type LocalInfoCategory =
+  | "all"
+  | "grocery"
+  | "education"
+  | "restaurants"
+  | "healthcare"
+  | "fitness"
+  | "shopping"
+  | "business"
+  | "travel"
+  | "services";
 
 interface CategoryTabsProps {
-  onCategoryChange: (category: POICategory) => void;
+  selectedCategory: LocalInfoCategory;
+  onCategoryChange: (category: LocalInfoCategory) => void;
 }
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
+const categories: { label: string; value: LocalInfoCategory; icon: React.ReactNode }[] =
+  [
+    { label: "All", value: "all", icon: <AllIcons/> },
+    { label: "Grocery", value: "grocery", icon: <GroceryIcon/> },
+    { label: "Education", value: "education", icon: <EducationIcon/> },
+    { label: "Restaurants", value: "restaurants", icon: <RestaurantsIcon/> },
+    { label: "Healthcare", value: "healthcare", icon: <HealthcareIcon/> },
+    { label: "Fitness", value: "fitness", icon: <FitnessIcon/> },
+    { label: "Shopping", value: "shopping", icon: <ShoppingIcon/> },
+    { label: "Business", value: "business", icon: <BuisnessesIcon/> },
+    { label: "Travel", value: "travel", icon: <TravelIcon/> },
+    { label: "Services", value: "services", icon: <ServicesIcon/> },
+  ];
 
-const TabPanel = (props: TabPanelProps) => {
-  const { children, value, index, ...other } = props;
-
+const CategoryTabs: React.FC<CategoryTabsProps> = ({
+  selectedCategory,
+  onCategoryChange,
+}) => {
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`category-tabpanel-${index}`}
-      aria-labelledby={`category-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 2 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-};
-
-const a11yProps = (index: number) => {
-  return {
-    id: `category-tab-${index}`,
-    'aria-controls': `category-tabpanel-${index}`,
-  };
-};
-
-const categories: { label: string; value: POICategory; icon: string }[] = [
-  { label: "Restaurants", value: "restaurants", icon: "🍽️" },
-  { label: "Cafes", value: "cafes", icon: "☕" },
-  { label: "Hotels", value: "hotels", icon: "🏨" },
-  { label: "Shopping", value: "shopping", icon: "🛍️" },
-  { label: "Attractions", value: "attractions", icon: "🎭" },
-  { label: "Parks", value: "parks", icon: "🌳" },
-  { label: "Hospitals", value: "hospitals", icon: "🏥" },
-  { label: "Schools", value: "schools", icon: "🏫" },
-  { label: "ATMs", value: "atms", icon: "💰" },
-  { label: "Gas Stations", value: "gas_stations", icon: "⛽" }
-];
-
-const CategoryTabs: React.FC<CategoryTabsProps> = ({ onCategoryChange }) => {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    onCategoryChange(categories[newValue].value);
-  };
-
-  return (
-    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs 
-          value={value} 
-          onChange={handleChange} 
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="POI category tabs"
-        >
-          {categories.map((category, index) => (
-            <Tab 
+    <div className="w-full px-4 py-5">
+      {/* Scrollable container with Tailwind classes */}
+      <div className="w-full inline-flex items-center overflow-x-auto scrollbar-hide">
+        <div className="flex gap-1.5 min-w-max">
+          {categories.map((category) => (
+            <button
               key={category.value}
-              label={
-                <div className="flex items-center">
-                  <span className="mr-1">{category.icon}</span>
-                  <span>{category.label}</span>
-                </div>
-              } 
-              {...a11yProps(index)} 
-            />
+              onClick={() => onCategoryChange(category.value)}
+              className={`
+  flex items-center gap-1.5 px-3 rounded-full font-medium h-[25px]
+  transition-all duration-200 ease-in-out whitespace-nowrap backdrop-blur-[2px]
+  ${
+    selectedCategory === category.value
+      ? "bg-[#20364D] text-white shadow-md border-none"
+      : "bg-[rgba(0,29,61,0.30)] text-white"
+  }
+`}
+            >
+              <span>{category.icon}</span>
+              <span className="text-[12px] font-semibold">
+                {category.label}
+              </span>
+            </button>
           ))}
-        </Tabs>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -802,6 +802,10 @@ import { useMapProperties, MapProperty } from "./hooks/useMapProperties";
 import { useMapDraw } from "./hooks/useMapDraw";
 import PropertyMarker from "./components/PropertyMarker";
 import PropertyPopup from "./components/PropertyPopup";
+import CategoryTabs from "./features/LocalInfo/CategoryTabs";
+import { useGooglePlaces } from "./hooks/useGooglePlaces";
+import PlaceMarker from "./components/PlaceMarker";
+import PlacePopup from "./components/PlacePopup";
 import ClusterMarker from "./components/ClusterMarker";
 
 const MAPBOX_ACCESS_TOKEN =
@@ -837,6 +841,8 @@ const MapView: React.FC<MapViewProps> = ({
   const [selectedProperty, setSelectedProperty] = useState<MapProperty | null>(
     null
   );
+  const [selectedPlace, setSelectedPlace] = useState<any>(null);
+  const [showPlacePopup, setShowPlacePopup] = useState(false);
 
   const [activeMode, setActiveMode] = useState<"map" | "localInfo" | "draw">(
     "map"
@@ -864,11 +870,20 @@ const MapView: React.FC<MapViewProps> = ({
     getCurrentPoints,
   } = useMapDraw();
 
+  const {
+    places,
+    loading: placesLoading,
+    error: placesError,
+    searchPlaces,
+    clearPlaces,
+  } = useGooglePlaces();
+
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const displayProperties = filterPropertiesInArea(properties);
-  const shouldShowMarkers = !drawState.isDrawMode && !drawState.isDrawing;
-
+  const shouldShowMarkers =
+    !drawState.isDrawMode && !drawState.isDrawing && !isLocalInfoActive;
 
 const createClusters = useCallback((props: MapProperty[], zoomLevel: number): PropertyCluster[] => {
   if (zoomLevel >= 14) {
@@ -1066,33 +1081,86 @@ const createClusters = useCallback((props: MapProperty[], zoomLevel: number): Pr
   }, [initialLocation.lat, initialLocation.lng, zoom]);
 
   useEffect(() => {
-    if (!map.current || !mapLoaded) return;
+    if (isLocalInfoActive && map.current) {
+      const center = map.current.getCenter();
+      searchPlaces(selectedCategory, { lat: center.lat, lng: center.lng });
+    } else {
+      clearPlaces();
+    }
+  }, [isLocalInfoActive, selectedCategory, searchPlaces, clearPlaces]);
 
-    const handleZoomEnd = () => {
-      const newZoom = map.current?.getZoom() || zoom;
-      setCurrentZoom(newZoom);
-    };
+  const handlePlaceClick = (place: any) => {
+    setSelectedPlace(place);
+    setShowPlacePopup(true);
+    console.log("Place clicked:", place);
+  };
 
-    map.current.on('zoomend', handleZoomEnd);
+  const handlePlacePopupClose = () => {
+    setShowPlacePopup(false);
+    setSelectedPlace(null);
+  };
 
-    return () => {
-      if (map.current) {
-        map.current.off('zoomend', handleZoomEnd);
-      }
-    };
-  }, [mapLoaded, zoom]);
+// In your useEffect where you render place markers
+useEffect(() => {
+  if (!map.current || !mapLoaded || placesLoading) return;
 
+  // Clear existing place markers
+  const existingPlaceMarkers = document.querySelectorAll(
+    "[data-place-marker]"
+  );
+  existingPlaceMarkers.forEach((marker) => marker.remove());
+
+  // Only show place markers if local info is active
+  if (!isLocalInfoActive) return;
+
+  // Add new place markers
+  places.forEach((place) => {
+    const markerElement = document.createElement("div");
+    markerElement.setAttribute("data-place-marker", "true");
+
+    const root = ReactDOM.createRoot(markerElement);
+    root.render(
+      <PlaceMarker
+        place={place}
+        onClick={handlePlaceClick}
+        isSelected={selectedPlace?.id === place.id}
+        searchCategory={selectedCategory} // Add this line
+      />
+    );
+
+    new mapboxgl.Marker(markerElement)
+      .setLngLat([place.lng, place.lat])
+      .addTo(map.current!);
+  });
+}, [
+  map.current,
+  mapLoaded,
+  places,
+  placesLoading,
+  isLocalInfoActive,
+  selectedPlace,
+  selectedCategory // Add this to dependencies
+]);
+
+
+  // Setup drawing layers and controls when map loads
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
+
     initializeDrawingLayers();
   }, [mapLoaded, initializeDrawingLayers]);
 
+  // Add this new useEffect to handle style changes:
+  // Keep updatePolygon where it is, but modify the style.load useEffect:
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
+
     const handleStyleLoad = () => {
+      // Reinitialize drawing layers after style change
       setTimeout(() => {
         initializeDrawingLayers();
-        
+
+        // Restore any existing drawn polygon directly
         if (drawState.hasDrawnArea && drawState.points.length >= 4) {
           const source = map.current?.getSource("drawing-polygon-source");
           if (source && "setData" in source) {
@@ -1109,14 +1177,21 @@ const createClusters = useCallback((props: MapProperty[], zoomLevel: number): Pr
       }, 100);
     };
 
-    map.current.on('style.load', handleStyleLoad);
+    map.current.on("style.load", handleStyleLoad);
+
     return () => {
       if (map.current) {
-        map.current.off('style.load', handleStyleLoad);
+        map.current.off("style.load", handleStyleLoad);
       }
     };
-  }, [mapLoaded, initializeDrawingLayers, drawState.hasDrawnArea, drawState.points]);
+  }, [
+    mapLoaded,
+    initializeDrawingLayers,
+    drawState.hasDrawnArea,
+    drawState.points,
+  ]);
 
+  // Setup drawing event listeners
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
     const mapInstance = map.current;
@@ -1254,6 +1329,7 @@ const createClusters = useCallback((props: MapProperty[], zoomLevel: number): Pr
     updatePolygon();
   }, [updatePolygon]);
 
+  // Handle ESC key to cancel drawing
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && drawState.isDrawMode) {
@@ -1264,7 +1340,7 @@ const createClusters = useCallback((props: MapProperty[], zoomLevel: number): Pr
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [drawState.isDrawMode, cancelDrawing]);
-
+  // Add property markers to map
   useEffect(() => {
     if (!map.current || !mapLoaded || loading) return;
 
@@ -1379,15 +1455,17 @@ const handlePropertyClick = (property: MapProperty) => {
   }, [dropdownRef]);
 
   const handleLocalInfoClick = () => {
-    setActiveMode("localInfo");
-    setShowStyleOptions(false);
-    if (drawState.isDrawMode || drawState.isDrawing) {
-      cancelDrawing();
-    }
-  };
+      toggleLocalInfo();
+      setShowStyleOptions(false); // Close dropdown when switching modes
+
+        if (drawState.isDrawMode || drawState.isDrawing) {
+        cancelDrawing();
+      }
+    };
 
   const handleMapClick = () => {
     setActiveMode("map");
+    // Cancel any active drawing
     if (drawState.isDrawMode || drawState.isDrawing) {
       cancelDrawing();
     }
@@ -1487,11 +1565,18 @@ const handlePropertyClick = (property: MapProperty) => {
         />
       )}
 
-      <div
-        className={`absolute top-0 left-0 right-0 z-20 bg-white shadow-md transition-transform duration-300 ease-in-out ${
-          activeMode === "localInfo" ? "transform-none" : "-translate-y-full"
-        }`}
-      >
+      {/* Category Tabs - Slide in from top when local info is active */}
+<div
+  className={`absolute top-13 left-0 right-0 z-20 inline-flex items-center gap-1.5 transition-transform duration-300 ease-in-out ${
+    isLocalInfoActive ? "transform-none" : "-translate-y-full"
+  }`}
+>
+        {isLocalInfoActive && (
+          <CategoryTabs
+            selectedCategory={selectedCategory}
+            onCategoryChange={handleCategoryChange}
+          />
+        )}
       </div>
 
       {mapLoaded && (
@@ -1503,7 +1588,7 @@ const handlePropertyClick = (property: MapProperty) => {
           <div className="absolute bottom-13 left-0 right-0 z-9 flex justify-center">
             <div className="flex items-center gap-4" ref={dropdownRef}>
               <LocalInfoButton
-                isActive={activeMode === "localInfo"}
+                isActive={isLocalInfoActive} // Use this instead of activeMode === "localInfo"
                 onClick={handleLocalInfoClick}
               />
               <MapButton
@@ -1605,7 +1690,64 @@ const handlePropertyClick = (property: MapProperty) => {
         .mapboxgl-canvas.drawing-cursor {
           cursor: crosshair !important;
         }
+
+        .scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
       `}</style>
+
+      {isLocalInfoActive && placesLoading && (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-30">
+          <div className="bg-white rounded-lg shadow-lg px-4 py-2 flex items-center space-x-2">
+            <svg
+              className="animate-spin h-4 w-4 text-[#20364D]"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            <span className="text-sm text-gray-700">Loading places...</span>
+          </div>
+        </div>
+      )}
+
+      {/* Places Error Indicator */}
+      {isLocalInfoActive && placesError && (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-30">
+          <div className="bg-red-100 border border-red-400 text-red-700 rounded-lg px-4 py-2 text-sm">
+            {placesError}
+          </div>
+        </div>
+      )}
+
+      {/* Place Popup */}
+{showPlacePopup && selectedPlace && (
+  <div className="fixed inset-0 z-50 pointer-events-none">
+    <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-[94vw] max-w-[420px] h-[177px] bg-white rounded-2xl shadow-xl pointer-events-auto">
+      <PlacePopup place={selectedPlace} onClose={handlePlacePopupClose} />
+    </div>
+  </div>
+)}
+
+
     </Box>
   );
 };
