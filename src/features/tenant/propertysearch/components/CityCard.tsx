@@ -41,7 +41,7 @@ const CityCard: React.FC<CityCardProps> = ({
       />
 
       <div className="absolute bottom-0 w-full bg-[#EDF2FA] p-2 flex justify-between items-center">
-        <div className="flex items-center text-[#20364D] text-[16px] font-bold leading-[100%]">
+        <div className="flex items-center text-[#001D3D] text-[16px] font-bold leading-[100%]">
           <LocationOnIcon sx={{ color: 'black', width: 23, height: 25, marginRight: 0.5 }} />
           <span>{city}, {country}</span>
         </div>

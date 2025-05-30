@@ -13,9 +13,9 @@ const PropertyMarkerShapeAdvanced: React.FC<PropertyMarkerShapeAdvancedProps> = 
   className = "",
   minWidth = 75
 }) => {
-  const fillColor = isSelected ? '#20364D' : 'white';
-  const strokeColor = isSelected ? '#20364D' : '#D1D5DC';
-  const textColor = isSelected ? 'white' : '#20364D';
+  const fillColor = isSelected ? '#001D3D' : 'white';
+  const strokeColor = isSelected ? '#001D3D' : '#D1D5DC';
+  const textColor = isSelected ? 'white' : '#001D3D';
 
   // Calculate width based on text length
   const svgWidth = useMemo(() => {

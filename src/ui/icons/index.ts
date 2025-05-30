@@ -130,3 +130,5 @@ export {default as WhirlpoolIcon} from './WhirlpoolIcon';
 export {default as YogaRoomIcon} from './YogaRoomIcon';
 export {default as VideoPlayIcon } from './VideoPlayIcon';
 export {default as HeartFillIcon} from './HeartFillIcon';
+export {default as RentalPreferencePeopleIcon} from './RentalPreferencePeopleIcon';
+export {default as ListIcon} from './ListIcon';

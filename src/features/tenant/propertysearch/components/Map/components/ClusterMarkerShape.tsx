@@ -14,10 +14,10 @@ const ClusterMarkerShape: React.FC<ClusterMarkerShapeProps> = ({
   className = "",
   minWidth = 85
 }) => {
-  const fillColor = isSelected ? '#20364D' : 'white';
-  const strokeColor = isSelected ? '#20364D' : '#D1D5DC';
-  const textColor = isSelected ? 'white' : '#20364D';
-  const iconColor = isSelected ? '#FFFFFF' : '#20364D';
+  const fillColor = isSelected ? '#001D3D' : 'white';
+  const strokeColor = isSelected ? '#001D3D' : '#D1D5DC';
+  const textColor = isSelected ? 'white' : '#001D3D';
+  const iconColor = isSelected ? '#FFFFFF' : '#001D3D';
 
   const text = `${count} units`;
 

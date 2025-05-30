@@ -54,7 +54,7 @@ export class DrawToolControl implements mapboxgl.IControl {
 
   private updateButtonStyle() {
     if (this.isActive) {
-      this.button.style.backgroundColor = '#20364D';
+      this.button.style.backgroundColor = '#001D3D';
       this.button.style.color = 'white';
     } else {
       this.button.style.backgroundColor = '';

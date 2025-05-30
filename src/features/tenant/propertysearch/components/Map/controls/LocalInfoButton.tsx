@@ -13,7 +13,7 @@ const LocalInfoButton: React.FC<LocalInfoButtonProps> = ({
     <button
       className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] ${
         isActive 
-          ? "bg-[#20364D]" 
+          ? "bg-[#001D3D]" 
           : "bg-[rgba(32,54,77,0.30)]"
       }`}
       onClick={onClick}

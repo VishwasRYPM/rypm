@@ -178,6 +178,7 @@ import {
   RippleEffect,
   MicIconContainer,
 } from '../styles/components/searchCityStyles';
+import { ListIcon } from 'lucide-react';
 
 interface SearchCityProps {
   onChange?: (value: string) => void;
@@ -288,7 +289,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
     if (isListening) {
       return '#10B981'; // Green for listening
     }
-    return '#20364D'; // Default app color
+    return '#001D3D'; // Default app color
   };
 
   const getMicTooltip = () => {
@@ -316,7 +317,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        onClick={!insideModal ? handleClick : undefined}
+        // onClick={!insideModal ? handleClick : undefined}
         onKeyDown={handleKeyDown}
         fullWidth
         size="small"
@@ -337,7 +338,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
                   componentsProps={{
                     tooltip: {
                       sx: {
-                        bgcolor: error ? '#EF4444' : '#20364D',
+                        bgcolor: error ? '#EF4444' : '#001D3D',
                         color: 'white',
                         fontSize: '12px',
                         borderRadius: '8px',
@@ -348,7 +349,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     },
                     arrow: {
                       sx: {
-                        color: error ? '#EF4444' : '#20364D',
+                        color: error ? '#EF4444' : '#001D3D',
                       },
                     },
                   }}
@@ -387,13 +388,22 @@ const SearchCity: React.FC<SearchCityProps> = ({
               ) : (
                 <MapButtonAdornment position="end">
                   <MapActionButton
-                    onClick={handleMapToggle}
-                    aria-label="Map"
+                      onClick={handleMapToggle}
+                      //------------------------------------
+                      // onClick={() => {
+                      //                   if (!insideModal) {
+                      //                       dispatch(openModal({ modalType: 'searchCity' }));
+                      //                    } else if (onMapToggle) {
+                      //                      onMapToggle();
+                      //                     }
+                      //                   }}
+                      //-----------------------------------
+                    // aria-label={isMapView ? 'Map View' : 'List View'}
                     edge="end"
                     size="small"
                   >
-                    <StyledPlaceIcon />
-                    <MapButtonText variant="body2">Map</MapButtonText>
+                    {!isMapView ? <StyledPlaceIcon /> : <ListIcon/>}
+                    <MapButtonText variant="body2">{!isMapView ? 'Map' : 'List'}</MapButtonText>
                   </MapActionButton>
                 </MapButtonAdornment>
               )}
