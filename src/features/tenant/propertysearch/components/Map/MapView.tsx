@@ -1081,6 +1081,23 @@ const createClusters = useCallback((props: MapProperty[], zoomLevel: number): Pr
   }, [initialLocation.lat, initialLocation.lng, zoom]);
 
   useEffect(() => {
+  if (!map.current || !mapLoaded) return;
+  
+  const handleZoomEnd = () => {
+    const newZoom = map.current?.getZoom() || zoom;
+    setCurrentZoom(newZoom);
+  };
+
+  map.current.on('zoomend', handleZoomEnd);
+
+  return () => {
+    if (map.current) {
+      map.current.off('zoomend', handleZoomEnd);
+    }
+  };
+}, [mapLoaded, zoom]);
+
+  useEffect(() => {
     if (isLocalInfoActive && map.current) {
       const center = map.current.getCenter();
       searchPlaces(selectedCategory, { lat: center.lat, lng: center.lng });
