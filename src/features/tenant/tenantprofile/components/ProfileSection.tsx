@@ -24,7 +24,7 @@ const ProfileSection = () => {
         </div>
         <div className="flex-grow">
           <div className="flex items-center">
-            <h2 className="text-lg  text-[#20364D] font-bold leading-[100%] capitalize">
+            <h2 className="text-lg  text-[#001D3D] font-bold leading-[100%] capitalize">
               Mae
             </h2>
             <VerifiedIcon
@@ -36,7 +36,7 @@ const ProfileSection = () => {
             SwipeName
           </p>
           <div className="items-center mt-1">
-            <span className="mr-1 text-[#20364D] text-sm font-bold leading-[160%] capitalize">
+            <span className="mr-1 text-[#001D3D] text-sm font-bold leading-[160%] capitalize">
               4/5
             </span>
             <RatingIcon />
@@ -45,7 +45,7 @@ const ProfileSection = () => {
         <div className="flex flex-col space-y-2 ">
           <Chip
             label={
-              <span className="flex items-center text-[#20364D] text-xs font-bold leading-[120%] capitalize">
+              <span className="flex items-center text-[#001D3D] text-xs font-bold leading-[120%] capitalize">
                 Testimonials{" "}
                 <span className="ml-1 bg-[#1a2c42] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   7
@@ -63,7 +63,7 @@ const ProfileSection = () => {
           />
           <Chip
             label={
-              <span className="flex items-center text-[#20364D] text-xs font-bold leading-[120%] capitalize">
+              <span className="flex items-center text-[#001D3D] text-xs font-bold leading-[120%] capitalize">
                 Showings{" "}
                 <span className="ml-1 bg-[#1a2c42] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                   3

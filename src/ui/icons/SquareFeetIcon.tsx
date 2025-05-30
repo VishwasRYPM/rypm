@@ -11,7 +11,7 @@ const SquareFeetIcon = ({
   width = 24, 
   height = 24, 
   className = '',
-  color = '#20364D' 
+  color = '#001D3D' 
 }: SquareFeetIconProps) => {
   return (
    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none">

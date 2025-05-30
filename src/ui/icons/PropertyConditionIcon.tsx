@@ -12,7 +12,7 @@ const PropertyConditionIcon = ({
   width = 24, 
   height = 24, 
   className = '',
-    color = '#20364D' ,
+    color = '#001D3D' ,
 //   style = {},
 }: PropertyConditionIconProps) => {
     return (

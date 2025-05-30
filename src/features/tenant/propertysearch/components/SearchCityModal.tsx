@@ -220,7 +220,7 @@ const SearchCityModal: React.FC = () => {
                                     />
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className="text-[#20364D] text-[12px] font-bold leading-[100%]">
+                                    <div className="text-[#001D3D] text-[12px] font-bold leading-[100%]">
                                         {item.city}, {item.country}
                                     </div>
                                     <div className="text-[#A7BBCE] text-[12px] font-normal leading-[160%]">
@@ -256,7 +256,7 @@ const SearchCityModal: React.FC = () => {
                                     />
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className="text-[#20364D] text-[12px] font-bold leading-[100%]">
+                                    <div className="text-[#001D3D] text-[12px] font-bold leading-[100%]">
                                         {item.city}, {item.country}
                                     </div>
                                     <div className="text-[#63829E] text-[12px] font-normal leading-[160%]">
@@ -292,7 +292,7 @@ const SearchCityModal: React.FC = () => {
                                     />
                                 </div>
                                 <div className="flex flex-col">
-                                    <div className="text-[#20364D] text-[12px] font-bold leading-[100%]">
+                                    <div className="text-[#001D3D] text-[12px] font-bold leading-[100%]">
                                         {item.city}, {item.country}
                                     </div>
                                     <div className="flex items-center text-[#63829E] text-[12px] font-normal leading-[160%]">
@@ -333,7 +333,7 @@ const SearchCityModal: React.FC = () => {
                                         />
                                     </div>
                                     <div className="flex flex-col">
-                                    <div className="text-[#20364D] text-[12px] font-bold leading-[100%]">
+                                    <div className="text-[#001D3D] text-[12px] font-bold leading-[100%]">
                                         {item.city}, {item.country}
                                     </div>
                                     <div className="flex items-center text-[#63829E] text-[12px] font-normal leading-[160%]">
@@ -377,7 +377,7 @@ const SearchCityModal: React.FC = () => {
                                 />
                             </div>
                             <div className="flex flex-col">
-                                <div className="text-[#20364D] text-[12px] font-bold leading-[100%]">
+                                <div className="text-[#001D3D] text-[12px] font-bold leading-[100%]">
                                     {destination.city}, {destination.country}
                                 </div>
                                 <div className="text-[#A7BBCE] text-[12px] font-normal leading-[160%]">

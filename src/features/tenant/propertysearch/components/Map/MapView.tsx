@@ -148,7 +148,7 @@
 //       type: "fill",
 //       source: "drawing-polygon-source",
 //       paint: {
-//         "fill-color": "#20364D",
+//         "fill-color": "#001D3D",
 //         "fill-opacity": 0.3,
 //       },
 //     });
@@ -582,7 +582,7 @@
 //         <div className="absolute top-4 left-4 z-20 bg-white/90 rounded-lg px-3 py-2 shadow-md">
 //           <div className="flex items-center">
 //             <svg
-//               className="animate-spin h-4 w-4 mr-2 text-[#20364D]"
+//               className="animate-spin h-4 w-4 mr-2 text-[#001D3D]"
 //               xmlns="http://www.w3.org/2000/svg"
 //               fill="none"
 //               viewBox="0 0 24 24"
@@ -601,7 +601,7 @@
 //                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 //               ></path>
 //             </svg>
-//             <span className="text-sm text-[#20364D]">
+//             <span className="text-sm text-[#001D3D]">
 //               Loading properties...
 //             </span>
 //           </div>
@@ -630,7 +630,7 @@
 
 //       {/* Draw Mode Instructions */}
 //       {drawState.isDrawMode && (
-//         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-[#20364D] text-white rounded-lg px-4 py-2 shadow-lg">
+//         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-[#001D3D] text-white rounded-lg px-4 py-2 shadow-lg">
 //           <div className="flex items-center space-x-2">
 //             <svg
 //               width="16"
@@ -731,12 +731,12 @@
 //         }
         
 //         .mapboxgl-user-location-dot {
-//           background-color: #20364D !important;
+//           background-color: #001D3D !important;
 //         }
         
 //         .mapboxgl-user-location-dot::before,
 //         .mapboxgl-user-location-dot::after {
-//           background-color: #20364D !important;
+//           background-color: #001D3D !important;
 //         }
 
 //         /* Custom popup styles */
@@ -1010,7 +1010,7 @@ const createClusters = useCallback((props: MapProperty[], zoomLevel: number): Pr
         type: "fill",
         source: "drawing-polygon-source",
         paint: {
-          "fill-color": "#20364D",
+          "fill-color": "#001D3D",
           "fill-opacity": 0.3,
         },
       });
@@ -1413,7 +1413,7 @@ const handlePropertyClick = (property: MapProperty) => {
         <div className="absolute top-4 left-4 z-20 bg-white/90 rounded-lg px-3 py-2 shadow-md">
           <div className="flex items-center">
             <svg
-              className="animate-spin h-4 w-4 mr-2 text-[#20364D]"
+              className="animate-spin h-4 w-4 mr-2 text-[#001D3D]"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -1432,7 +1432,7 @@ const handlePropertyClick = (property: MapProperty) => {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <span className="text-sm text-[#20364D]">
+            <span className="text-sm text-[#001D3D]">
               Loading properties...
             </span>
           </div>
@@ -1458,7 +1458,7 @@ const handlePropertyClick = (property: MapProperty) => {
       )}
 
       {drawState.isDrawMode && (
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-[#20364D] text-white rounded-lg px-4 py-2 shadow-lg">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-[#001D3D] text-white rounded-lg px-4 py-2 shadow-lg">
           <div className="flex items-center space-x-2">
             <svg
               width="16"
@@ -1562,12 +1562,12 @@ const handlePropertyClick = (property: MapProperty) => {
         }
         
         .mapboxgl-user-location-dot {
-          background-color: #20364D !important;
+          background-color: #001D3D !important;
         }
         
         .mapboxgl-user-location-dot::before,
         .mapboxgl-user-location-dot::after {
-          background-color: #20364D !important;
+          background-color: #001D3D !important;
         }
 
         /* Custom popup styles */

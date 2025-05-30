@@ -24,7 +24,7 @@
 //           <div onClick={handleBackClick}>
 //             <BackIcon />
 //           </div>
-//           <h1 className="text-[#20364D] text-[18px] font-bold leading-[18px] capitalize">
+//           <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px] capitalize">
 //             Unit Feature
 //           </h1>
 //         </header>
