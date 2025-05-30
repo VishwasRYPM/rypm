@@ -10,8 +10,8 @@ interface WheelChairIconProps {
 const WheelChairIcon = ({ 
   width = 24, 
   height = 24, 
-  className = '',
-  color = '#001D3D' 
+  //className = '',
+  //color = '#001D3D' 
 }: WheelChairIconProps) => {
   return (
    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none">

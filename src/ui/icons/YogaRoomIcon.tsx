@@ -10,7 +10,7 @@ interface YogaRoomIconProps {
 const YogaRoomIcon = ({ 
   width = 24, 
   height = 24, 
-  className = '',
+  //className = '',
   color = '#001D3D' 
 }: YogaRoomIconProps) => {
   return (
