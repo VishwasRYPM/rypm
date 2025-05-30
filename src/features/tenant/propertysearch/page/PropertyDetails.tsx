@@ -103,6 +103,14 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
     }
   };
 
+  const handleNavigatePhotosAndVideos = () => {
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(`/tenant/properties/${id}/photos-videos`);
+    }
+  };
+
   const handleBackClick = () => {
     router.push(`/tenant/PropertySearch`);
   };
@@ -163,7 +171,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
   return (
     <>
-      <div className=" w-fit  ">
+      <div className=" w-fit  hide-scrollbar">
         <MediaContainer height="46.13vh">
           <Image
             src="/images/modern house.png"
@@ -171,6 +179,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             width={393}
             height={14}
             className="w-full h-full object-cover"
+            onClick={handleNavigatePhotosAndVideos}
           />
 
           <BackButton>
@@ -207,13 +216,13 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
         {/* First Details Content */}
         <div className="mt-6 px-4">
           {/* Price */}
-          <h1 className="text-[#20364D] text-[20px] font-bold capitalize">{property?.price}/<span className="text-[14px]">Month</span></h1>
+          <h1 className="text-[#001D3D] text-[20px] font-bold capitalize">{property?.price}/<span className="text-[14px]">Month</span></h1>
           {/* Address */}
           <div className=" mt-4 flex flex-row gap-1.5 items-start">
             <span className="mt-[7px]">
               <LocationPropertyDetailsIcon />
             </span>
-            <div className="text-[#20364D] text-[18px] font-bold leading-[25px] capitalize w-[344.867px]">
+            <div className="text-[#001D3D] text-[18px] font-bold leading-[25px] capitalize w-[344.867px]">
               <SplitAddress fullAddress={property?.address} />
             </div>
           </div>
@@ -222,20 +231,20 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           <div className="flex flex-row mt-4 justify-start">
             <span className="flex flex-row">
               <BedroomsDenIcon />
-              <p className="text-[12px] capitalize text-[#20364D] font-normal ml-1 mr-2">
+              <p className="text-[12px] capitalize text-[#001D3D] font-normal ml-1 mr-2">
                 3 Bedrooms + Den
               </p>
             </span>
             <span className="flex flex-row">
               <BathroomFillIcon />
-              <p className="text-[12px] capitalize text-[#20364D] font-normal ml-1 mr-2">
+              <p className="text-[12px] capitalize text-[#001D3D] font-normal ml-1 mr-2">
                 {" "}
                 2.5 Bathrooms
               </p>
             </span>
             <span className="flex flex-row">
               <ParkingIcon />
-              <p className="text-[12px] capitalize text-[#20364D] font-normal ml-1 mr-2">
+              <p className="text-[12px] capitalize text-[#001D3D] font-normal ml-1 mr-2">
                 {" "}
                 2 Parking
               </p>
@@ -244,7 +253,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
           {/* Unit Features */}
           <div className="mt-6">
-            <h1 className="text-[#20364D] text-[18px] font-bold leading-[18px]">
+            <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               Unit Features
             </h1>
             <div className="mt-5 rounded-[16px] border-[1.5px]  border-[#F8F9FB]">
@@ -328,7 +337,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
                 </div>
               </div>
 
-              <div className="text-[#20364D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
+              <div className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
                 <button onClick={handleNavigateUnitFeature}>Show More</button>
               </div>
             </div>
@@ -336,7 +345,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
           {/* Building Features */}
           <div className="mt-6">
-            <h1 className="text-[#20364D] text-[18px] font-bold leading-[18px]">
+            <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               Building Feature
             </h1>
             <div className="mt-5 rounded-[16px] border-[1.5px] border-[#F8F9FB]">
@@ -403,7 +412,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
                 />{" "}
                 <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(180deg,_rgba(255,255,255,0)_-41.89%,_#fff_100%)] h-16"></div>
               </div>
-              <div className="text-[#20364D] text-[14px] font-bold capitalize w-[100%] flex justify-center py-3.5">
+              <div className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] flex justify-center py-3.5">
                 <button onClick={handleNaviagteBuildingFeature}>
                   Show More
                 </button>
@@ -413,14 +422,14 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
           {/* Whats Near by */}
           <div className="mt-6">
-            <h1 className="text-[#20364D] text-[18px] font-bold leading-[18px]">
+            <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               What's Nearby
             </h1>
               <WhatsNearByButtonContainer/>
             {/* map */}
             <div>
               <div>Map</div>
-              <div className="text-[#20364D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
+              <div className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
                 <button onClick={handleNaviagtePropertyMapLocalInfo}>
                   View on map
                 </button>
@@ -430,7 +439,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
           {/* Know the place */}
           <div className="mt-6">
-            <h1 className="text-[#20364D] text-[18px] font-bold leading-[18px]">
+            <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               Know The Place
             </h1>
             <div className="mt-5">
@@ -457,20 +466,20 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
                 <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(180deg,_rgba(255,255,255,0)_-41.89%,_#fff_100%)] h-16"></div>
               </div>
               <button
-                className="text-[#20364D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center"
+                className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center"
                 onClick={handleNavigateKnowThePlace}
               >
                 Show More
               </button>
             </div>
-            <h1 className="text-[#20364D] mt-6 text-[18px] font-bold leading-[18px]">
+            <h1 className="text-[#001D3D] mt-6 text-[18px] font-bold leading-[18px]">
               Similar units
             </h1>
           </div>
         </div>
 
         {/*Second Image slider */}
-        <div className="mt-5 px-4 flex flex-row  gap-2.5 w-[95.93vw] overflow-auto scroll-smooth">
+        <div className="mt-5 px-4 flex flex-row  gap-2.5 w-[95.93vw] overflow-auto scroll-smooth scrollbar-hide">
           {properties.map((properties) => (
             <SliderImage
               key={properties.id}
@@ -490,11 +499,11 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
         <div className="mb-24  px-4 mt-6  ">
           {/* Median leased Price and average Days on */}
           <div className="mt-5">
-            <div className="text-[#20364D] text-[18px] font-bold leading-[25px] capitalize">
+            <div className="text-[#001D3D] text-[18px] font-bold leading-[25px] capitalize">
               Median Leased Price & Average Days On Market
             </div>
 
-            <div className="mt-5 mb-5 text-[#20364D] text-[14px] capitalize">
+            <div className="mt-5 mb-5 text-[#001D3D] text-[14px] capitalize">
               Pickering / Village East / Condo Townhouse
             </div>
             <div>
@@ -510,17 +519,17 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
               <h2 className="text-[#3A9A76] text-[14px] font-bold capitalize">
                 Day's <span className="lowercase">on Market</span>
               </h2>
-              <p className="text-[#20364D] text-[12px] leading-[16px] capitalize">
+              <p className="text-[#001D3D] text-[12px] leading-[16px] capitalize">
                 about the day's on market. Lorem ipsum dolor sit amet
                 consectetur. Neque nullam risus lectus{" "}
               </p>
             </div>
 
             <div className=" flex flex-col p-2.5 mt-2.5 items-start gap-2 w-[361px] rounded-[16px] bg-[#F8F9FB]">
-              <h2 className="text-[#20364D] text-[14px] font-bold capitalize">
+              <h2 className="text-[#001D3D] text-[14px] font-bold capitalize">
                 Median <span className="lowercase">Price</span>
               </h2>
-              <p className="text-[#20364D] text-[12px] leading-[16px] capitalize">
+              <p className="text-[#001D3D] text-[12px] leading-[16px] capitalize">
                 about median price. Lorem ipsum dolor sit amet consectetur.
                 Neque nullam risus lectus{" "}
               </p>
@@ -529,10 +538,10 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
           {/* Property Type Distributon */}
           <div className="mt-6">
-            <h1 className="text-[#20364D] text-[18px] font-bold leading-[18px]">
+            <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               Property Type Distribution
             </h1>
-            <div className="mt-5 text-[#20364D] text-[14px] capitalize mb-4">
+            <div className="mt-5 text-[#001D3D] text-[14px] capitalize mb-4">
               Pickering / Village East / Condo Townhouse
             </div>
             <div>
@@ -547,25 +556,25 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             <div className="mt-7 flex flex-row justify-between ">
               <div className="flex flex-row items-center gap-1">
                 <HousesColorDistributionIcon />
-                <p className="text-[#20364D] text-[14px] capitalize leading-[14px]">
+                <p className="text-[#001D3D] text-[14px] capitalize leading-[14px]">
                   Houses
                 </p>
               </div>
               <div className="flex flex-row items-center gap-1">
                 <BasementCorolDistributionIcon />
-                <p className="text-[#20364D] text-[14px] capitalize leading-[14px]">
+                <p className="text-[#001D3D] text-[14px] capitalize leading-[14px]">
                   Basements
                 </p>
               </div>
               <div className="flex flex-row items-center gap-1">
                 <CondosColorDistributionIcon />
-                <p className="text-[#20364D] text-[14px] capitalize leading-[14px]">
+                <p className="text-[#001D3D] text-[14px] capitalize leading-[14px]">
                   Condos
                 </p>
               </div>
               <div className="flex flex-row items-center gap-1">
                 <ApartmentsColorDistributionIcon />
-                <p className="text-[#20364D] text-[14px] capitalize leading-[14px]">
+                <p className="text-[#001D3D] text-[14px] capitalize leading-[14px]">
                   Apartments
                 </p>
               </div>
@@ -575,7 +584,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
               <h2 className="text-[#3A9A76] text-[14px] font-bold capitalize">
                 Condo Apt
               </h2>
-              <p className="text-[#20364D] text-[12px] leading-[16px] capitalize">
+              <p className="text-[#001D3D] text-[12px] leading-[16px] capitalize">
                 about the Condo apt. Lorem ipsum dolor sit amet consectetur.
                 Neque nullam risus lectus{" "}
               </p>
@@ -583,7 +592,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           </div>
         </div>
 
-        <footer className="h-20 w fixed bottom-0 left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
+        <footer className="h-20  fixed bottom-0 left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
           <div className=" flex flex-row gap-2 items-center">
             <div className="relative h-[40px] w-[40px] rounded-[50px] border-[1.5px] border-[#FFF]">
               <Image
@@ -605,7 +614,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           <div className="rounded-[16px] text-white p-3.5 border-[1.5px] border-white font-bold text-[16px]">
             Reserve
           </div>
-          <div className="rounded-[16px] bg-[#20364D] text-white  p-3.5 font-bold text-[16px]">
+          <div className="rounded-[16px] bg-[#001D3D] text-white  p-3.5 font-bold text-[16px]">
             Schedule Tour
           </div>
         </footer>

@@ -114,7 +114,7 @@ export const MapButtonAdornment = styled(InputAdornment)({
 });
 
 export const SearchActionButton = styled(IconButton)({
-  color: '#20364D',
+  color: '#001D3D',
   display: 'flex',
   alignItems: 'center',
   gap: '4px',
@@ -122,16 +122,17 @@ export const SearchActionButton = styled(IconButton)({
 });
 
 export const MapActionButton = styled(IconButton)({
-  color: '#a7bbce',
+  color: '#001D3D',
   width: '60px',
   height: '32px',
   padding: '2px 8px',
   display: 'flex',
   alignItems: 'center',
+  gap:'4px',
 });
 
 export const SearchButtonText = styled(Typography)({
-  color: '#20364D',
+  color: '#001D3D',
   whiteSpace: 'nowrap',
   fontSize: '12px',
   fontWeight: 700,
@@ -140,12 +141,12 @@ export const SearchButtonText = styled(Typography)({
 export const StyledPlaceIcon = styled(PlaceIcon)({
   width: '19px',
   height: '17px',
-  fill: '#20364D',
+  fill: '#001D3D',
   display: 'block', 
 });
 
 export const MapButtonText = styled(Typography)({
-  color: '#20364D',
+  color: '#001D3D',
   fontSize: '14px',
   fontStyle: 'normal',
   fontWeight: 400,

@@ -91,7 +91,7 @@ const VoiceSearchFeedback: React.FC<VoiceSearchFeedbackProps> = ({
           <Typography
             variant="body2"
             sx={{
-              color: transcript ? '#20364D' : '#6B7280',
+              color: transcript ? '#001D3D' : '#6B7280',
               fontStyle: transcript ? 'normal' : 'italic',
               minHeight: '20px',
               fontSize: '14px',

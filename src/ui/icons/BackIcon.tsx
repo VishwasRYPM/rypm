@@ -35,7 +35,7 @@ const BackIcon = ({
     width="30" 
     height="30" 
     rx="15" 
-    fill="#20364D" 
+    fill="#001D3D" 
     fillOpacity="0.3" 
   />
   <path 

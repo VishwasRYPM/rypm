@@ -28,7 +28,7 @@ export const TabItem = styled(Box, {
         left: 0,
         width: '100%',
         height: '2px',
-        backgroundColor: '#20364D',
+        backgroundColor: '#001D3D',
       }
     : {},
 }));
@@ -36,7 +36,7 @@ export const TabItem = styled(Box, {
 export const TabText = styled(Typography, {
   shouldForwardProp: (prop) => prop !== 'isActive',
 })<{ isActive: boolean }>(({ isActive }) => ({
-  color: isActive ? '#20364D' : '#A7BBCE',
+  color: isActive ? '#001D3D' : '#A7BBCE',
   fontWeight: isActive ? 600 : 400,
   fontSize: '12px',
 }));

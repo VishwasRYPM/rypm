@@ -11,7 +11,7 @@ const MiceIcon = ({
   width = 12,
   height = 15,
   className = "",
-  color = "#20364D",
+  color = "#001D3D",
 }: MiceIconProps) => {
   // Calculate the scale factor based on the original viewBox dimensions
   const originalWidth = 12;

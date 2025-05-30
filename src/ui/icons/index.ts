@@ -148,3 +148,7 @@ export { default as ServicesPopupIcon } from './ServicesPopupIcon';
 export { default as ShoppingPopupIcon } from './ShoppingPopupIcon';
 export { default as CloseIcon } from './CloseIcon';
 export { default as RatingIcon } from './RatingIcon';
+export {default as VideoPlayIcon } from './VideoPlayIcon';
+export {default as HeartFillIcon} from './HeartFillIcon';
+export {default as RentalPreferencePeopleIcon} from './RentalPreferencePeopleIcon';
+export {default as ListIcon} from './ListIcon';

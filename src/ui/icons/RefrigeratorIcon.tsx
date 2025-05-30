@@ -11,7 +11,7 @@ const RefigeratorIcon = ({
   width = 24, 
   height = 24, 
   className = '',
-  color = '#20364D' 
+  color = '#001D3D' 
 }: RefigeratorIconProps) => {
   return (
    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none">
@@ -20,13 +20,13 @@ const RefigeratorIcon = ({
 <path d="M4 4H20V20H4V4Z" fill="white"/>
 </mask>
 <g mask="url(#mask0_2414_9404)">
-<path d="M17.0625 19.5312H6.9375C6.41975 19.5312 6 19.1115 6 18.5938V5.40625C6 4.8885 6.41975 4.46875 6.9375 4.46875H17.0625C17.5803 4.46875 18 4.8885 18 5.40625V18.5938C18 19.1115 17.5803 19.5312 17.0625 19.5312Z" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6 14H18" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M11.25 16H12.75" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M11.25 12H12.75" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M16 10H14V6.5H16V10Z" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 19.5312V4.46875" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M8 6.5H10" stroke="#20364D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.0625 19.5312H6.9375C6.41975 19.5312 6 19.1115 6 18.5938V5.40625C6 4.8885 6.41975 4.46875 6.9375 4.46875H17.0625C17.5803 4.46875 18 4.8885 18 5.40625V18.5938C18 19.1115 17.5803 19.5312 17.0625 19.5312Z" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 14H18" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.25 16H12.75" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.25 12H12.75" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 10H14V6.5H16V10Z" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 19.5312V4.46875" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8 6.5H10" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 </svg>
 )};

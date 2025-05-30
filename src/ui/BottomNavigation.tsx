@@ -88,7 +88,7 @@
 //         )}
 //         <HomeIcon className={activeMainTab === 'Properties' ? 'text-white' : ''} />
 //         <span className={`text-[10px] mt-1 text-center font-bold leading-[160%] capitalize ${
-//           activeMainTab === 'Properties' ? 'text-white' : 'text-[#20364D]'
+//           activeMainTab === 'Properties' ? 'text-white' : 'text-[#001D3D]'
 //         }`}>Properties</span>
 //       </button>
       
@@ -106,7 +106,7 @@
 //         )}
 //         <PercentageIcon height={30} width={30} className={activeMainTab === 'Benefits' ? 'text-white' : ''} />
 //         <span className={`text-[10px] mt-1 text-center font-bold leading-[160%] capitalize ${
-//           activeMainTab === 'Benefits' ? 'text-white' : 'text-[#20364D]'
+//           activeMainTab === 'Benefits' ? 'text-white' : 'text-[#001D3D]'
 //         }`}>Benefits</span>
 //       </button>
       
@@ -126,7 +126,7 @@
 //         )}
 //         <LogoIcon height={25} width={30} className={activeMainTab === 'Play' ? 'text-white' : ''} />
 //         <span className={`text-[10px] mt-1 text-center font-bold leading-[160%] capitalize ${
-//           activeMainTab === 'Play' ? 'text-white' : 'text-[#20364D]'
+//           activeMainTab === 'Play' ? 'text-white' : 'text-[#001D3D]'
 //         }`}>Reels</span>
 //       </button>
       
@@ -144,7 +144,7 @@
 //         )}
 //         <ChatsIcon className={activeMainTab === 'Chats' ? 'text-white' : ''} />
 //         <span className={`text-[10px] mt-1 text-center font-bold leading-[160%] capitalize ${
-//           activeMainTab === 'Chats' ? 'text-white' : 'text-[#20364D]'
+//           activeMainTab === 'Chats' ? 'text-white' : 'text-[#001D3D]'
 //         }`}>Chats</span>
 //       </button>
       
@@ -172,7 +172,7 @@
 //           />
 //         </div>
 //         <span className={`text-[10px] mt-1 text-center font-bold leading-[160%] capitalize ${
-//           activeMainTab === 'Profile' ? 'text-white' : 'text-[#20364D]'
+//           activeMainTab === 'Profile' ? 'text-white' : 'text-[#001D3D]'
 //         }`}>Profile</span>
 //       </button>
 //     </div>

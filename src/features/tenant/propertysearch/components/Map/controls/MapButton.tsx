@@ -137,7 +137,7 @@ const changeMapStyle = (styleId: string) => {
       <button
         className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] ${
           isActive 
-            ? "bg-[#20364D]" 
+            ? "bg-[#001D3D]" 
             : "bg-[rgba(32,54,77,0.30)]"
         }`}
         onClick={handleClick}
@@ -154,7 +154,7 @@ const changeMapStyle = (styleId: string) => {
             .map(style => (
               <button
                 key={style.id}
-                className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] bg-[rgba(32,54,77,0.80)] hover:bg-[#20364D] transition-colors`}
+                className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] bg-[rgba(32,54,77,0.80)] hover:bg-[#001D3D] transition-colors`}
                 onClick={() => changeMapStyle(style.id)}
               >
                 {style.icon}
