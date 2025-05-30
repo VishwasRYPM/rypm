@@ -878,13 +878,6 @@ const MapView: React.FC<MapViewProps> = ({
     clearPlaces,
   } = useGooglePlaces();
 
-  const {
-    places,
-    loading: placesLoading,
-    error: placesError,
-    searchPlaces,
-    clearPlaces,
-  } = useGooglePlaces();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -1478,11 +1471,6 @@ const handlePropertyClick = (property: MapProperty) => {
     }
   };
 
-  const handleDrawClick = () => {
-    setActiveMode("draw");
-    setShowStyleOptions(false);
-    toggleDrawMode();
-  };
   const handleDrawClick = () => {
     setActiveMode("draw");
     setShowStyleOptions(false);
