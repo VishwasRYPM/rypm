@@ -17,11 +17,27 @@ export interface GooglePlace {
   businessStatus?: string;
   distance?: string;
   address: string;
+  website?: string;
+  phoneNumber?: string;
+  openingHours?: string[];
+  reviews?: PlaceReview[];
+  description?: string;
+}
+
+export interface PlaceReview {
+  author_name: string;
+  author_url?: string;
+  language: string;
+  profile_photo_url?: string;
+  rating: number;
+  relative_time_description: string;
+  text: string;
+  time: number;
 }
 
 // Map our categories to Google Places types
 const categoryToPlaceTypes: Record<LocalInfoCategory, string[]> = {
-  all: [], // We'll handle "all" by searching multiple types
+  all: [],
   grocery: ['grocery_or_supermarket', 'supermarket'],
   education: ['school', 'university'],
   restaurants: ['restaurant', 'meal_takeaway', 'cafe'],
@@ -41,7 +57,7 @@ export function useGooglePlaces() {
   const searchPlaces = useCallback(async (
     category: LocalInfoCategory,
     center: { lat: number; lng: number },
-    radius: number = 2000 // 200m radius
+    radius: number = 2000
   ) => {
     const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
     
@@ -58,7 +74,6 @@ export function useGooglePlaces() {
       let allPlaces: GooglePlace[] = [];
       
       if (category === 'all') {
-        // For "all", search multiple popular types
         const popularTypes = ['restaurant', 'hospital', 'school', 'bank', 'gas_station'];
         
         for (const type of popularTypes) {
@@ -66,10 +81,8 @@ export function useGooglePlaces() {
           allPlaces = [...allPlaces, ...places];
         }
         
-        // Remove duplicates and limit results
         allPlaces = removeDuplicates(allPlaces).slice(0, 20);
       } else {
-        // Search for specific category
         const types = categoryToPlaceTypes[category];
         
         for (const type of types) {
@@ -89,6 +102,57 @@ export function useGooglePlaces() {
     }
   }, []);
 
+  // New function to get detailed place information
+  const getPlaceDetails = useCallback(async (placeId: string): Promise<GooglePlace | null> => {
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
+    
+    if (!apiKey) {
+      console.error('Google Places API key not found');
+      return null;
+    }
+
+    try {
+      const response = await fetch(`/api/places/details?place_id=${placeId}`);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch place details');
+      }
+      
+      const data = await response.json();
+      
+      if (data.result) {
+        const place = data.result;
+        return {
+          id: place.place_id,
+          name: place.name,
+          lat: place.geometry.location.lat,
+          lng: place.geometry.location.lng,
+          category: place.types[0],
+          rating: place.rating,
+          priceLevel: place.price_level,
+          vicinity: place.vicinity || place.formatted_address,
+          types: place.types,
+          photoUrl: place.photos?.[0] ? getPhotoUrl(place.photos[0].photo_reference, apiKey) : undefined,
+          isOpen: place.opening_hours?.open_now,
+          userRatingsTotal: place.user_ratings_total,
+          businessStatus: place.business_status,
+          address: place.formatted_address,
+          // Additional details
+          website: place.website,
+          phoneNumber: place.formatted_phone_number,
+          openingHours: place.opening_hours?.weekday_text,
+          reviews: place.reviews || [],
+          description: place.editorial_summary?.overview || generateDescription(place)
+        };
+      }
+      
+      return null;
+    } catch (err) {
+      console.error('Error fetching place details:', err);
+      return null;
+    }
+  }, []);
+
   const clearPlaces = useCallback(() => {
     setPlaces([]);
     setError(null);
@@ -99,6 +163,7 @@ export function useGooglePlaces() {
     loading,
     error,
     searchPlaces,
+    getPlaceDetails,
     clearPlaces
   };
 }
@@ -110,10 +175,6 @@ async function searchByType(
   radius: number, 
   apiKey: string
 ): Promise<GooglePlace[]> {
-  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${center.lat},${center.lng}&radius=${radius}&type=${type}&key=${apiKey}`;
-  
-  // Note: This will cause CORS issues in browser. We need to use a proxy or server-side API
-  // For now, let's create a Next.js API route
   const response = await fetch(`/api/places/nearby?lat=${center.lat}&lng=${center.lng}&radius=${radius}&type=${type}`);
   
   if (!response.ok) {
@@ -135,7 +196,8 @@ async function searchByType(
     photoUrl: place.photos?.[0] ? getPhotoUrl(place.photos[0].photo_reference, apiKey) : undefined,
     isOpen: place.opening_hours?.open_now,
     userRatingsTotal: place.user_ratings_total,
-    businessStatus: place.business_status
+    businessStatus: place.business_status,
+    address: place.formatted_address || place.vicinity
   }));
 }
 
@@ -154,4 +216,13 @@ function removeDuplicates(places: GooglePlace[]): GooglePlace[] {
     seen.add(place.id);
     return true;
   });
+}
+
+// Helper function to generate description from place data
+function generateDescription(place: any): string {
+  const type = place.types[0]?.replace(/_/g, ' ') || 'establishment';
+  const rating = place.rating ? ` with a ${place.rating}-star rating` : '';
+  const reviews = place.user_ratings_total ? ` based on ${place.user_ratings_total} reviews` : '';
+  
+  return `This ${type} is located in ${place.vicinity || 'the area'}${rating}${reviews}. ${place.business_status === 'OPERATIONAL' ? 'Currently operational and serving customers.' : ''}`;
 }

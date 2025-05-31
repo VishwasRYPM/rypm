@@ -115,7 +115,7 @@ const MapView: React.FC<MapViewProps> = ({
       title: place.name,
       address: place.vicinity || place.address || "Address not available",
       rating: place.rating || 0,
-      thumbnail: place.photoUrl || "/images/placeholder.png",
+      thumbnail: place.photoUrl, //fallback to a default image
       distance: place.distance,
     }));
   };

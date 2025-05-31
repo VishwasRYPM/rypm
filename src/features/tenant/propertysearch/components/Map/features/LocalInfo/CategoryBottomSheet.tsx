@@ -83,11 +83,11 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
     <>
       {/* Backdrop */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black z-40"
-        onClick={onClose}
+        // initial={{ opacity: 0 }}
+        // animate={{ opacity: 0.3 }}
+        // exit={{ opacity: 0 }}
+        // className="fixed inset-0 bg-black z-40"
+        // onClick={onClose}
       />
 
       {/* Bottom Sheet */}
