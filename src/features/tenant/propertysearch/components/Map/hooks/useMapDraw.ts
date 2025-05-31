@@ -103,7 +103,7 @@ export function useMapDraw() {
   const removeBoundary = useCallback(() => {
     pointsRef.current = [];
     setDrawState({
-      isDrawMode: false,
+      isDrawMode: true,
       isDrawing: false,
       hasDrawnArea: false,
       points: []

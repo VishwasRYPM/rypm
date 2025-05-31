@@ -44,7 +44,7 @@ interface PropertyCluster {
 
 const MapView: React.FC<MapViewProps> = ({
   initialLocation = { lat: 43.6532, lng: -79.3832 },
-  zoom = 8,
+  zoom = 13,
 }) => {
   const router = useRouter();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -104,7 +104,11 @@ const MapView: React.FC<MapViewProps> = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const displayProperties = filterPropertiesInArea(properties);
+  const displayProperties = drawState.hasDrawnArea
+    ? filterPropertiesInArea(properties)
+    : drawState.isDrawMode
+    ? []
+    : properties;
   const shouldShowMarkers =
     !drawState.isDrawMode && !drawState.isDrawing && !isLocalInfoActive;
 
@@ -360,21 +364,21 @@ const MapView: React.FC<MapViewProps> = ({
 
   // Places search effect
   useEffect(() => {
-  if (!map.current || !mapLoaded) return;
-  
-  const handleZoomEnd = () => {
-    const newZoom = map.current?.getZoom() || zoom;
-    setCurrentZoom(newZoom);
-  };
+    if (!map.current || !mapLoaded) return;
 
-  map.current.on('zoomend', handleZoomEnd);
+    const handleZoomEnd = () => {
+      const newZoom = map.current?.getZoom() || zoom;
+      setCurrentZoom(newZoom);
+    };
 
-  return () => {
-    if (map.current) {
-      map.current.off('zoomend', handleZoomEnd);
-    }
-  };
-}, [mapLoaded, zoom]);
+    map.current.on("zoomend", handleZoomEnd);
+
+    return () => {
+      if (map.current) {
+        map.current.off("zoomend", handleZoomEnd);
+      }
+    };
+  }, [mapLoaded, zoom]);
 
   useEffect(() => {
     if (isLocalInfoActive && map.current) {
@@ -385,7 +389,14 @@ const MapView: React.FC<MapViewProps> = ({
     }
   }, [isLocalInfoActive, selectedCategory, searchPlaces, clearPlaces]);
 
-  // Place interaction handlers
+  useEffect(() => {
+    if (showPlacePopup) {
+      setShowCategoryBottomSheet(false);
+    } else if (selectedCategory !== "all" && isLocalInfoActive) {
+      setShowCategoryBottomSheet(true);
+    }
+  }, [showPlacePopup, selectedCategory, isLocalInfoActive]);
+
   const handlePlaceClick = (place: any) => {
     setSelectedPlace(place);
     setShowPlacePopup(true);
@@ -397,20 +408,16 @@ const MapView: React.FC<MapViewProps> = ({
     setSelectedPlace(null);
   };
 
-  // Place markers rendering
   useEffect(() => {
     if (!map.current || !mapLoaded || placesLoading) return;
 
-    // Clear existing place markers
     const existingPlaceMarkers = document.querySelectorAll(
       "[data-place-marker]"
     );
     existingPlaceMarkers.forEach((marker) => marker.remove());
 
-    // Only show place markers if local info is active
     if (!isLocalInfoActive) return;
 
-    // Add new place markers
     places.forEach((place) => {
       const markerElement = document.createElement("div");
       markerElement.setAttribute("data-place-marker", "true");
@@ -439,13 +446,18 @@ const MapView: React.FC<MapViewProps> = ({
     selectedCategory,
   ]);
 
-  // Setup drawing layers when map loads
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
-    initializeDrawingLayers();
+
+    const timer = setTimeout(() => {
+      if (map.current && map.current.isStyleLoaded()) {
+        initializeDrawingLayers();
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [mapLoaded, initializeDrawingLayers]);
 
-  // Handle style changes
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
 
@@ -738,7 +750,7 @@ const MapView: React.FC<MapViewProps> = ({
 
   const handleRemoveBoundary = () => {
     removeBoundary();
-    setActiveMode("map");
+    //setActiveMode("map");
   };
 
   // Click outside handler
@@ -776,9 +788,14 @@ const MapView: React.FC<MapViewProps> = ({
   };
 
   const handleDrawClick = () => {
-    setActiveMode("draw");
+    if (activeMode === "draw") {
+      setActiveMode("map");
+      cancelDrawing();
+    } else {
+      setActiveMode("draw");
+      toggleDrawMode();
+    }
     setShowStyleOptions(false);
-    toggleDrawMode();
   };
 
   // Bottom sheet handlers
@@ -881,30 +898,6 @@ const MapView: React.FC<MapViewProps> = ({
               {displayProperties.length > 0
                 ? `${displayProperties.length} properties found`
                 : "No Properties found"}
-            </span>
-          </div>
-        </div>
-      )}
-
-      {/* Draw Mode Instructions */}
-      {drawState.isDrawMode && (
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-[#001D3D] text-white rounded-lg px-4 py-2 shadow-lg">
-          <div className="flex items-center space-x-2">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-            </svg>
-            <span className="text-sm font-medium">
-              {drawState.isDrawing
-                ? "Drawing..."
-                : "Tap and drag to draw an area"}
             </span>
           </div>
         </div>
@@ -1014,8 +1007,8 @@ const MapView: React.FC<MapViewProps> = ({
 
       {/* Place Popup */}
       {showPlacePopup && selectedPlace && (
-        <div className="fixed inset-0 z-50 pointer-events-none">
-          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-[94vw] max-w-[420px] h-[177px] bg-white rounded-2xl shadow-xl pointer-events-auto">
+        <div className="fixed inset-0 z-50 pointer-events-none flex items-end justify-center pb-3">
+          <div className="w-[94vw] max-w-[420px] h-[177px] bg-white rounded-2xl shadow-xl pointer-events-auto">
             <PlacePopup place={selectedPlace} onClose={handlePlacePopupClose} />
           </div>
         </div>
@@ -1142,6 +1135,14 @@ const MapView: React.FC<MapViewProps> = ({
 .category-sheet-exit-active {
   transform: translateY(100%);
   transition: transform 300ms ease-in;
+}
+
+.mapboxgl-ctrl-geolocate {
+  display: none !important;
+}
+
+.mapboxgl-ctrl-group .mapboxgl-ctrl-geolocate {
+  display: none !important;
 }
 
       `}</style>

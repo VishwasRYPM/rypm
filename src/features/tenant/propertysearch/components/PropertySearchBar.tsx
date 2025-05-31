@@ -33,7 +33,7 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
   };
 
   return (
- <div className={`flex items-center justify-between ${
+ <div className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between ${
       isMapView 
         ? 'p-2 gap-2' 
         : 'bg-white shadow-md p-4 gap-2'

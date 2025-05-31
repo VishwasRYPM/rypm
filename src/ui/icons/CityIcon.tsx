@@ -20,38 +20,38 @@ const CityIcon = ({
     <path d="M4 4.09538H20V20.1055H4V4.09538Z" fill="white"/>
   </mask>
   <g mask="url(#mask0_2484_9761)">
-    <path d="M8.23438 15.865H4.46875V19.6365H8.23438V15.865Z" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M19.5312 13.0399L17.6484 11.1564L15.7656 13.0399V19.6365H19.5312V13.0399Z" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M15.7656 16.8067L13.8828 15.865L12 16.8067V19.6365H15.7656V16.8067Z" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8.23438 15.865H4.46875V19.6365H8.23438V15.865Z" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19.5312 13.0399L17.6484 11.1564L15.7656 13.0399V19.6365H19.5312V13.0399Z" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15.7656 16.8067L13.8828 15.865L12 16.8067V19.6365H15.7656V16.8067Z" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
   </g>
-  <path d="M15.7656 13.9844L13.8828 13.0433L12 13.9844" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M15.7656 13.9844L13.8828 13.0433L12 13.9844" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
   <mask id="mask1_2484_9761" style={{maskType: 'luminance'}} maskUnits="userSpaceOnUse" x="4" y="4" width="16" height="17">
     <path d="M4 4.09538H20V20.1055H4V4.09538Z" fill="white"/>
   </mask>
   <g mask="url(#mask1_2484_9761)">
-    <path d="M8.23438 7.40332L10.1172 6.44788L12 7.40332V19.6365H8.23438V7.40332Z" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M10.1172 6.44849V4.56505" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M8.23438 7.40332L10.1172 6.44788L12 7.40332V19.6365H8.23438V7.40332Z" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10.1172 6.44849V4.56505" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
   </g>
-  <path d="M8.23438 9.27344H9.17578" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M8.23438 11.1565H9.17578" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M8.23438 13.0396H9.17578" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M8.23438 14.9236H9.17578" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M8.23438 16.8066H9.17578" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11.0586 9.27344H12" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11.0586 11.1565H12" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11.0586 13.0396H12" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11.0586 14.9236H12" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11.0586 16.8066H12" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8.23438 9.27344H9.17578" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M8.23438 11.1565H9.17578" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M8.23438 13.0396H9.17578" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M8.23438 14.9236H9.17578" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M8.23438 16.8066H9.17578" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M11.0586 9.27344H12" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M11.0586 11.1565H12" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M11.0586 13.0396H12" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M11.0586 14.9236H12" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M11.0586 16.8066H12" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
   <mask id="mask2_2484_9761" style={{maskType: 'luminance'}} maskUnits="userSpaceOnUse" x="4" y="4" width="16" height="17">
     <path d="M4 4.09538H20V20.1055H4V4.09538Z" fill="white"/>
   </mask>
   <g mask="url(#mask2_2484_9761)">
-    <path d="M4.46875 17.7507H8.23438" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linejoin="round"/>
-    <path d="M13.8828 19.5906V18.6911" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M17.6484 19.5906V18.6911" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M15.7656 13.0396H19.5312" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linejoin="round"/>
+    <path d="M4.46875 17.7507H8.23438" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinejoin="round"/>
+    <path d="M13.8828 19.5906V18.6911" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M17.6484 19.5906V18.6911" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M15.7656 13.0396H19.5312" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinejoin="round"/>
   </g>
-  <path d="M17.6484 11.1565V9.27306" stroke="#001D3D" stroke-width="0.9375" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M17.6484 11.1565V9.27306" stroke="#001D3D" strokeWidth="0.9375" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
   <mask id="mask3_2484_9761" style={{maskType: 'luminance'}} maskUnits="userSpaceOnUse" x="4" y="4" width="16" height="16">
     <path d="M4 4H20V20H4V4Z" fill="white"/>
   </mask>

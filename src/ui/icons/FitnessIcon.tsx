@@ -29,8 +29,8 @@ const FitnessIcon = ({
       <path
         d="M13.0139 1.37354L15.3419 3.70157M1.37329 13.0144L3.70126 15.3425"
         stroke={color}
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

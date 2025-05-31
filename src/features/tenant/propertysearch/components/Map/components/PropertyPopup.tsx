@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MapProperty } from "../hooks/useMapProperties";
-import { BedIcon, ShowerIcon, LocationIcon } from "@/ui/icons";
+import { BedIcon, ShowerIcon, LocationIcon, CloseIcon } from "@/ui/icons";
 import HeartUnFillIcon from "@/ui/icons/HeartUnFillIcon";
 import HeartFillIcon from "@/ui/icons/HeartFillIcon";
 
@@ -59,17 +59,9 @@ const PropertyPopup: React.FC<PropertyPopupProps> = ({
               e.stopPropagation(); // Prevent popup click when closing
               onClose();
             }}
-            className="w-6 h-6 flex items-center justify-center rounded-full bg-white/70 hover:bg-white"
+            className="w-7 h-7 flex top-2 items-center justify-center rounded-full [background:rgba(0,29,61,0.3)] backdrop-blur-[3.55px]"
           >
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M9 3L3 9M3 3L9 9"
-                stroke="#333"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <CloseIcon />
           </button>
         </div>
 
