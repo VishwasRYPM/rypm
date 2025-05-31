@@ -23,7 +23,7 @@ export const StyledTextField = styled(TextField)(({ width }: { width?: string })
   },
   '& input::placeholder': {
     color: '#A7BBCE',
-    fontSize: '14px',
+    fontSize: 'clamp(12px, 3.5vw, 14px)',
     fontWeight: 400,
     lineHeight: '12px',
   },
