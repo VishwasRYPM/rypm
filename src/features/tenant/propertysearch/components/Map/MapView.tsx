@@ -8,10 +8,9 @@ import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import LocationButton from "./controls/LocationButton";
 import LocalInfoButton from "./controls/LocalInfoButton";
-import MapButton, { mapStyles } from "./controls/MapButton";
+import MapButton from "./controls/MapButton";
 import DrawButton from "./controls/DrawButton";
 import RemoveBoundaryButton from "./controls/RemoveBoundaryButton";
-import ControlsContainer from "./controls/ControlsContainer";
 import { useLocalInfo } from "./hooks/useLocalInfo";
 import { useMapProperties, MapProperty } from "./hooks/useMapProperties";
 import { useMapDraw } from "./hooks/useMapDraw";
@@ -23,8 +22,7 @@ import PlaceMarker from "./components/PlaceMarker";
 import PlacePopup from "./components/PlacePopup";
 import ClusterMarker from "./components/ClusterMarker";
 import CategoryBottomSheet from "./features/LocalInfo/CategoryBottomSheet";
-import HeartUnFillIcon from "@/ui/icons/HeartUnFillIcon";
-import HeartFillIcon from "@/ui/icons/HeartFillIcon";
+import PlaceDetailBottomSheet from "./features/LocalInfo/PlaceDetailBottomSheet";
 
 const MAPBOX_ACCESS_TOKEN =
   process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "YOUR_MAPBOX_ACCESS_TOKEN";
@@ -62,9 +60,10 @@ const MapView: React.FC<MapViewProps> = ({
   );
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [showPlacePopup, setShowPlacePopup] = useState(false);
-  const [favoriteProperties, setFavoriteProperties] = useState<Set<string>>(
-    new Set()
-  );
+  const [showPlaceDetailSheet, setShowPlaceDetailSheet] = useState(false);
+  const [selectedPlaceForDetails, setSelectedPlaceForDetails] =
+    useState<any>(null);
+  const [placeDetailsLoading, setPlaceDetailsLoading] = useState(false);
 
   const [activeMode, setActiveMode] = useState<"map" | "localInfo" | "draw">(
     "map"
@@ -99,6 +98,7 @@ const MapView: React.FC<MapViewProps> = ({
     loading: placesLoading,
     error: placesError,
     searchPlaces,
+    getPlaceDetails,
     clearPlaces,
   } = useGooglePlaces();
 
@@ -108,7 +108,7 @@ const MapView: React.FC<MapViewProps> = ({
   const shouldShowMarkers =
     !drawState.isDrawMode && !drawState.isDrawing && !isLocalInfoActive;
 
-  // Convert places to CategoryItem format
+  // detail sheet Convert places to CategoryItem format
   const convertPlacesToCategoryItems = (places: any[]) => {
     return places.map((place) => ({
       id: place.id,
@@ -797,19 +797,30 @@ const MapView: React.FC<MapViewProps> = ({
     setShowCategoryBottomSheet(false);
   };
 
-  const handleCategoryItemClick = (item: any) => {
-    console.log("Category item clicked:", item);
-    // Optionally close the bottom sheet
-    setShowCategoryBottomSheet(false);
+  const handlePlaceDetailRequest = async (placeId: string) => {
+    setPlaceDetailsLoading(true);
+    setShowPlaceDetailSheet(true);
 
-    // You can also center the map on the selected place
-    if (map.current) {
-      map.current.flyTo({
-        center: [item.lng || 0, item.lat || 0],
-        zoom: 15,
-        duration: 1000,
-      });
+    try {
+      const placeDetails = await getPlaceDetails(placeId);
+      setSelectedPlaceForDetails(placeDetails);
+    } catch (error) {
+      console.error("Error fetching place details:", error);
+      setSelectedPlaceForDetails(null);
+    } finally {
+      setPlaceDetailsLoading(false);
     }
+  };
+
+  const handlePlaceDetailClose = () => {
+    setShowPlaceDetailSheet(false);
+    setSelectedPlaceForDetails(null);
+  };
+
+  const handlePlaceDetailBack = () => {
+    setShowPlaceDetailSheet(false);
+    setSelectedPlaceForDetails(null);
+    // Keep the category bottom sheet open
   };
 
   return (
@@ -1012,12 +1023,22 @@ const MapView: React.FC<MapViewProps> = ({
 
       {/* Category Bottom Sheet */}
       <CategoryBottomSheet
-        isOpen={showCategoryBottomSheet}
+        isOpen={showCategoryBottomSheet && !showPlaceDetailSheet}
         onClose={handleCloseBottomSheet}
         category={selectedCategory}
         items={convertPlacesToCategoryItems(places)}
-        onItemClick={handleCategoryItemClick}
+        onPlaceDetailRequest={handlePlaceDetailRequest}
         initialHeight={0.35}
+      />
+
+      {/* Place Detail Bottom Sheet */}
+      <PlaceDetailBottomSheet
+        isOpen={showPlaceDetailSheet}
+        onClose={handlePlaceDetailClose}
+        onBack={handlePlaceDetailBack}
+        place={selectedPlaceForDetails}
+        loading={placeDetailsLoading}
+        category={selectedCategory}
       />
 
       {/* Custom Styles */}
