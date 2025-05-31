@@ -110,7 +110,7 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
         dragElastic={0.1}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
-        className="fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col bg-[rgba(23,41,59,0.5)] backdrop-blur-[5px]"
+        className="fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]"
         style={{
           height: `${currentHeight}px`,
         }}
