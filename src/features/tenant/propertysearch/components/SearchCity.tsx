@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useId } from 'react';
-import {MiceIcon} from '@/ui/icons';
-import SearchIcon from '@mui/icons-material/Search';
-import { Tooltip, Box } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { openModal } from '../slices/modalSlice';
-import { useVoiceSearch } from '../hooks/useVoiceSearch';
-import VoiceSearchFeedback from './VoiceSearchFeedback';
+import React, { useState, useEffect, useId } from "react";
+import { MiceIcon } from "@/ui/icons";
+import SearchIcon from "@mui/icons-material/Search";
+import { Tooltip, Box } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { openModal } from "../slices/modalSlice";
+import { useVoiceSearch } from "../hooks/useVoiceSearch";
+import VoiceSearchFeedback from "./VoiceSearchFeedback";
 import {
   StyledTextField,
   SearchIconWrapper,
@@ -21,8 +21,8 @@ import {
   MicIconWrapper,
   RippleEffect,
   MicIconContainer,
-} from '../styles/components/searchCityStyles';
-import { ListIcon } from 'lucide-react';
+} from "../styles/components/searchCityStyles";
+import { ListIcon } from "lucide-react";
 
 interface SearchCityProps {
   onChange?: (value: string) => void;
@@ -33,6 +33,7 @@ interface SearchCityProps {
   width?: string;
   insideModal?: boolean;
   isMapView?: boolean;
+  onSearchSheetOpen?: () => void;
 }
 
 const SearchCity: React.FC<SearchCityProps> = ({
@@ -44,6 +45,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
   width = "61vw",
   insideModal = false,
   isMapView = false,
+  onSearchSheetOpen,
 }) => {
   const dispatch = useDispatch();
   const [showVoiceError, setShowVoiceError] = useState(false);
@@ -55,12 +57,11 @@ const SearchCity: React.FC<SearchCityProps> = ({
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.documentElement.setAttribute('data-wg-notranslate', 'true');
-      document.documentElement.setAttribute('translate', 'no');
+    if (typeof window !== "undefined") {
+      document.documentElement.setAttribute("data-wg-notranslate", "true");
+      document.documentElement.setAttribute("translate", "no");
     }
   }, []);
-
 
   const {
     isListening,
@@ -84,30 +85,9 @@ const SearchCity: React.FC<SearchCityProps> = ({
       }, 500);
     },
     onError: (errorMessage) => {
-      console.error('Voice search error:', errorMessage);
+      console.error("Voice search error:", errorMessage);
       setShowVoiceError(true);
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,9 +103,8 @@ const SearchCity: React.FC<SearchCityProps> = ({
   };
 
   const handleClick = () => {
-
     if (!insideModal) {
-      dispatch(openModal({ modalType: 'searchCity' }));
+      dispatch(openModal({ modalType: "searchCity" }));
     }
   };
 
@@ -136,17 +115,16 @@ const SearchCity: React.FC<SearchCityProps> = ({
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && onSearch) {
+    if (event.key === "Enter" && onSearch) {
       onSearch();
     }
   };
-
 
   const handleMicClick = (event: React.MouseEvent) => {
     if (!mounted) return;
 
     event.stopPropagation();
-    
+
     if (!isSupported) {
       setShowVoiceError(true);
       return;
@@ -160,45 +138,47 @@ const SearchCity: React.FC<SearchCityProps> = ({
   };
 
   const getMicIconColor = () => {
-    if (!mounted) return '#9CA3AF';
-    
-    if (!isSupported || permissionDenied) {
+    if (!mounted) return "#9CA3AF";
 
-      return '#9CA3AF';
+    if (!isSupported || permissionDenied) {
+      return "#9CA3AF";
     }
     if (error) {
-
-      return '#EF4444';
+      return "#EF4444";
     }
     if (isListening) {
-
-      return '#10B981';
+      return "#10B981";
     }
 
-    return '#001D3D';
+    return "#001D3D";
   };
 
   const getMicTooltip = () => {
-    if (!mounted) return 'Voice search';
-    
+    if (!mounted) return "Voice search";
+
     if (!isSupported) {
-      return 'Voice search not supported in your browser';
+      return "Voice search not supported in your browser";
     }
     if (permissionDenied) {
-
-      return 'Microphone permission denied. Please enable in browser settings.';
+      return "Microphone permission denied. Please enable in browser settings.";
     }
     if (error) {
-
       return `Voice search error: ${error}`;
     }
     if (isListening) {
-      return 'Listening... Click to stop';
+      return "Listening... Click to stop";
     }
-    return 'Click to start voice search';
+    return "Click to start voice search";
   };
 
   const showSearchButton = value.length > 0;
+
+  const handleInputClick = () => {
+    if (isMapView && onSearchSheetOpen) {
+      onSearchSheetOpen();
+      return;
+    }
+  };
 
   if (!mounted) {
     return (
@@ -208,6 +188,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        onClick={handleInputClick}
         fullWidth
         size="small"
         width={width}
@@ -226,7 +207,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
                   <MiceIcon className="w-[21px] h-[15px]" />
                 </MicIconWrapper>
               )}
-              
+
               {showSearchButton ? (
                 <SearchButtonAdornment position="end">
                   <SearchActionButton
@@ -235,9 +216,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     edge="end"
                     size="small"
                   >
-                    <SearchButtonText variant="body2">
-                      Search
-                    </SearchButtonText>
+                    <SearchButtonText variant="body2">Search</SearchButtonText>
                   </SearchActionButton>
                 </SearchButtonAdornment>
               ) : (
@@ -247,9 +226,9 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     edge="end"
                     size="small"
                   >
-                    {!isMapView ? <StyledPlaceIcon /> : <ListIcon/>}
+                    {!isMapView ? <StyledPlaceIcon /> : <ListIcon />}
                     <MapButtonText variant="body2">
-                      {!isMapView ? 'Map' : 'List'}
+                      {!isMapView ? "Map" : "List"}
                     </MapButtonText>
                   </MapActionButton>
                 </MapButtonAdornment>
@@ -269,6 +248,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        onClick={handleInputClick}
         fullWidth
         size="small"
         width={width}
@@ -281,7 +261,6 @@ const SearchCity: React.FC<SearchCityProps> = ({
           ),
           endAdornment: (
             <>
-
               {!showSearchButton && (
                 <Tooltip
                   title={getMicTooltip()}
@@ -290,33 +269,29 @@ const SearchCity: React.FC<SearchCityProps> = ({
                   componentsProps={{
                     tooltip: {
                       sx: {
-
-                        bgcolor: error && mounted ? '#EF4444' : '#001D3D',
-                        color: 'white',
-                        fontSize: '12px',
-                        borderRadius: '8px',
-                        padding: '8px 12px',
-                        maxWidth: '200px',
-                        textAlign: 'center',
+                        bgcolor: error && mounted ? "#EF4444" : "#001D3D",
+                        color: "white",
+                        fontSize: "12px",
+                        borderRadius: "8px",
+                        padding: "8px 12px",
+                        maxWidth: "200px",
+                        textAlign: "center",
                       },
                     },
                     arrow: {
                       sx: {
-
-                        color: error && mounted ? '#EF4444' : '#001D3D',
+                        color: error && mounted ? "#EF4444" : "#001D3D",
                       },
                     },
                   }}
                 >
                   <MicIconWrapper onClick={handleMicClick}>
-                    <RippleEffect 
-
-                      isActive={mounted ? isListening : false} 
-                      color={getMicIconColor()} 
+                    <RippleEffect
+                      isActive={mounted ? isListening : false}
+                      color={getMicIconColor()}
                     />
-                    <MicIconContainer 
-
-                      isListening={mounted ? isListening : false} 
+                    <MicIconContainer
+                      isListening={mounted ? isListening : false}
                       color={getMicIconColor()}
                     >
                       <MiceIcon className="w-[21px] h-[15px]" />
@@ -324,12 +299,6 @@ const SearchCity: React.FC<SearchCityProps> = ({
                   </MicIconWrapper>
                 </Tooltip>
               )}
-              
-
-
-
-
-
 
               {showSearchButton ? (
                 <SearchButtonAdornment position="end">
@@ -339,9 +308,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     edge="end"
                     size="small"
                   >
-                    <SearchButtonText variant="body2">
-                      Search
-                    </SearchButtonText>
+                    <SearchButtonText variant="body2">Search</SearchButtonText>
                   </SearchActionButton>
                 </SearchButtonAdornment>
               ) : (
@@ -351,10 +318,10 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     edge="end"
                     size="small"
                   >
-                    {!isMapView ? <StyledPlaceIcon /> : <ListIcon/>}
+                    {!isMapView ? <StyledPlaceIcon /> : <ListIcon />}
 
                     <MapButtonText variant="body2">
-                      {!isMapView ? 'Map' : 'List'}
+                      {!isMapView ? "Map" : "List"}
                     </MapButtonText>
                   </MapActionButton>
                 </MapButtonAdornment>
@@ -364,28 +331,17 @@ const SearchCity: React.FC<SearchCityProps> = ({
         }}
       />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       {mounted && (
         <VoiceSearchFeedback
           isListening={isListening}
           transcript={transcript}
           interimTranscript={interimTranscript}
-          error={error || (showVoiceError && !isSupported ? 'Voice search not supported' : null)}
+          error={
+            error ||
+            (showVoiceError && !isSupported
+              ? "Voice search not supported"
+              : null)
+          }
           onErrorClose={() => setShowVoiceError(false)}
         />
       )}

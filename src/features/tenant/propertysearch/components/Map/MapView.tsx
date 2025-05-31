@@ -23,6 +23,8 @@ import PlacePopup from "./components/PlacePopup";
 import ClusterMarker from "./components/ClusterMarker";
 import CategoryBottomSheet from "./features/LocalInfo/CategoryBottomSheet";
 import PlaceDetailBottomSheet from "./features/LocalInfo/PlaceDetailBottomSheet";
+import SearchSheet from './features/SearchSheet';
+import PropertySearchBar from "../PropertySearchBar";
 
 const MAPBOX_ACCESS_TOKEN =
   process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "YOUR_MAPBOX_ACCESS_TOKEN";
@@ -71,6 +73,10 @@ const MapView: React.FC<MapViewProps> = ({
   const [showStyleOptions, setShowStyleOptions] = useState(false);
   const [currentStyle, setCurrentStyle] = useState("streets");
   const [showCategoryBottomSheet, setShowCategoryBottomSheet] = useState(false);
+
+  // ✅ Add the missing state variables
+  const [showSearchSheet, setShowSearchSheet] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const {
     isLocalInfoActive,
@@ -840,6 +846,38 @@ const MapView: React.FC<MapViewProps> = ({
     // Keep the category bottom sheet open
   };
 
+  const handleSearchSheetOpen = () => {
+    setShowSearchSheet(true);
+  };
+
+  const handleSearchSheetClose = () => {
+    setShowSearchSheet(false);
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    // Implement your search logic here
+    console.log('Searching for:', query);
+    
+    // You can integrate with your existing search functionality
+    // For example, search for places or properties
+  };
+
+  const handleNearbySearch = () => {
+    // Trigger nearby search functionality
+    if (map.current) {
+      const center = map.current.getCenter();
+      searchPlaces('all', { lat: center.lat, lng: center.lng });
+    }
+  };
+
+  const handleLocalInfoSearch = () => {
+    // Activate local info mode
+    if (!isLocalInfoActive) {
+      toggleLocalInfo();
+    }
+  };
+
   return (
     <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}>
       {/* Map Container */}
@@ -1034,6 +1072,24 @@ const MapView: React.FC<MapViewProps> = ({
         category={selectedCategory}
       />
 
+
+       <SearchSheet
+        isOpen={showSearchSheet}
+        onClose={handleSearchSheetClose}
+        onSearch={handleSearch}
+        onNearbyClick={handleNearbySearch}
+        onLocalInfoClick={handleLocalInfoSearch}
+        searchValue={searchQuery}
+      />
+
+      <PropertySearchBar
+        searchTerm={searchQuery}
+        onSearchChange={setSearchQuery}
+        isMapView={true}
+        onMapToggle={() => {}} 
+        onSearchSheetOpen={handleSearchSheetOpen} 
+      />
+      
       {/* Custom Styles */}
       <style>{`
         @keyframes slideUp {

@@ -12,6 +12,7 @@ interface PropertySearchBarProps {
   isMapView?: boolean;
   onMapToggle?: () => void;
   onClick?: () => void;
+  onSearchSheetOpen?: () => void;
 }
 
 const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
@@ -19,7 +20,8 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
   onSearchChange,
   isMapView = false,
   onMapToggle,
-  onClick 
+  onClick,
+  onSearchSheetOpen
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -37,7 +39,7 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
       isMapView 
         ? 'p-2 gap-2' 
         : 'bg-white shadow-md p-4 gap-2'
-    }`}>
+    } max-w-[480px] mx-auto`}>
           {/* <div className="flex items-center p-4 bg-white gap-2"> */}
 
         <SearchCity
@@ -45,6 +47,7 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
         onChange={onSearchChange}
         onMapToggle={onMapToggle}
         isMapView={isMapView}
+        onSearchSheetOpen={onSearchSheetOpen}
       />
       <div className="flex gap-2 ">
         <IconButton
