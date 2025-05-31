@@ -16,14 +16,15 @@ const CardContainer = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
 }));
 
-// const MediaContainer = styled(Box)(({ theme }) => ({
-const MediaContainer = styled(Box)<MediaContainerProps>(({ theme, isDetailView, height, width }) => ({
+const MediaContainer = styled(Box, {
+  shouldForwardProp: (prop) => 
+    !['isDetailView', 'elevation', 'height', 'width'].includes(prop as string)
+})<MediaContainerProps>(({ theme, isDetailView, height, width }) => ({
   position: 'relative', 
   width: width || '100%', 
   height: height || '55.63vh',
   overflow: 'hidden',
 }));
-
 const ActionButtonsContainer = styled(Box)(({ theme }) => ({
   position: 'absolute', 
   top: 16, 
