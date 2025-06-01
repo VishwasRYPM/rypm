@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React, { useState } from 'react';
 import MapView from './MapView';
 import PropertySearchBar from '../PropertySearchBar';
@@ -12,18 +13,8 @@ const PropertyMapView: React.FC<PropertyMapViewProps> = ({ onBackToList }) => {
 
   return (
     <div className="h-screen w-full relative">
-      {/* Map Component */}
-      <MapView />
-      
-      {/* Search Bar - Positioned at the top */}
-      <div className="absolute top-0 left-0 right-0 z-10 pt-2 px-2">
-        <PropertySearchBar 
-          searchTerm={searchTerm} 
-          onSearchChange={setSearchTerm} 
-          isMapView={true}
-          onMapToggle={onBackToList}
-        />
-      </div>
+      {/* Map Component - Pass the onBackToList function */}
+      <MapView onViewToggle={onBackToList} />
     </div>
   );
 };

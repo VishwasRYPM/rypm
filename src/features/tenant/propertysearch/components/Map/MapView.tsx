@@ -34,6 +34,7 @@ mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 interface MapViewProps {
   initialLocation?: { lat: number; lng: number };
   zoom?: number;
+  onViewToggle?: () => void; 
 }
 
 interface PropertyCluster {
@@ -47,6 +48,7 @@ interface PropertyCluster {
 const MapView: React.FC<MapViewProps> = ({
   initialLocation = { lat: 43.6532, lng: -79.3832 },
   zoom = 13,
+  onViewToggle
 }) => {
   const router = useRouter();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -1086,7 +1088,7 @@ const MapView: React.FC<MapViewProps> = ({
         searchTerm={searchQuery}
         onSearchChange={setSearchQuery}
         isMapView={true}
-        onMapToggle={() => {}} 
+        onMapToggle={onViewToggle}
         onSearchSheetOpen={handleSearchSheetOpen} 
       />
       

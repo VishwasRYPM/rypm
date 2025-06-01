@@ -96,7 +96,9 @@ const SearchCity: React.FC<SearchCityProps> = ({
     }
   };
 
-  const handleMapToggle = () => {
+  const handleMapToggle = (event: React.MouseEvent) => {
+  event.stopPropagation();
+  event.preventDefault(); 
     if (onMapToggle) {
       onMapToggle();
     }
@@ -173,7 +175,11 @@ const SearchCity: React.FC<SearchCityProps> = ({
 
   const showSearchButton = value.length > 0;
 
-  const handleInputClick = () => {
+  const handleInputClick = (event: React.MouseEvent) => {
+  const target = event.target as HTMLElement;
+  if (target.closest('[data-map-toggle]') || target.closest('.map-toggle-btn')) {
+    return; 
+  }
     if (isMapView && onSearchSheetOpen) {
       onSearchSheetOpen();
       return;
@@ -225,6 +231,8 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     onClick={handleMapToggle}
                     edge="end"
                     size="small"
+                    data-map-toggle="true"
+                    className="map-toggle-btn"
                   >
                     {!isMapView ? <StyledPlaceIcon /> : <ListIcon />}
                     <MapButtonText variant="body2">
