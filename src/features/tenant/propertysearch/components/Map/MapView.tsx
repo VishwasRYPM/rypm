@@ -27,7 +27,7 @@ import SearchSheet from './features/SearchSheet';
 import PropertySearchBar from "../PropertySearchBar";
 
 const MAPBOX_ACCESS_TOKEN =
-  process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "YOUR_MAPBOX_ACCESS_TOKEN";
+  process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "pk.eyJ1IjoicHJpeWVzaGd1cmphciIsImEiOiJjbWFwMmliZnQwYnJsMmlzM3E2YzFhbnMyIn0.dgFK-9QjfR8H-f3YyLg28w";
 
 mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 

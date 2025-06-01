@@ -59,7 +59,7 @@ export function useGooglePlaces() {
     center: { lat: number; lng: number },
     radius: number = 2000
   ) => {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY || "AIzaSyCHl2q8AVSHkjv9RfHbzUKxyK4UP8mAv_4";
     
     if (!apiKey) {
       console.error('Google Places API key not found');
@@ -104,7 +104,7 @@ export function useGooglePlaces() {
 
   // New function to get detailed place information
   const getPlaceDetails = useCallback(async (placeId: string): Promise<GooglePlace | null> => {
-    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY || "AIzaSyCHl2q8AVSHkjv9RfHbzUKxyK4UP8mAv_4";
     
     if (!apiKey) {
       console.error('Google Places API key not found');
