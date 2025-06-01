@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   const radius = searchParams.get('radius') || '2000';
   const type = searchParams.get('type');
   
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY || "AIzaSyCHl2q8AVSHkjv9RfHbzUKxyK4UP8mAv_4";
   
   if (!apiKey) {
     return NextResponse.json({ error: 'API key not configured' }, { status: 500 });
