@@ -417,14 +417,17 @@ const MapView: React.FC<MapViewProps> = ({
   };
 
   useEffect(() => {
-    if (!map.current || !mapLoaded || placesLoading) return;
+    if (!map.current || !mapLoaded) return;
 
     const existingPlaceMarkers = document.querySelectorAll(
       "[data-place-marker]"
     );
     existingPlaceMarkers.forEach((marker) => marker.remove());
 
-    if (!isLocalInfoActive) return;
+    // ✅ Don't render if loading or not active or no places
+    if (placesLoading || !isLocalInfoActive || !places || places.length === 0) {
+      return;
+    }
 
     places.forEach((place) => {
       const markerElement = document.createElement("div");
@@ -450,7 +453,7 @@ const MapView: React.FC<MapViewProps> = ({
     places,
     placesLoading,
     isLocalInfoActive,
-    selectedPlace,
+    selectedPlace?.id,
     selectedCategory,
   ]);
 
@@ -782,7 +785,7 @@ const MapView: React.FC<MapViewProps> = ({
   const handleLocalInfoClick = () => {
     toggleLocalInfo();
     setShowStyleOptions(false);
-
+    setActiveMode("localInfo");
     if (drawState.isDrawMode || drawState.isDrawing) {
       cancelDrawing();
     }
@@ -790,21 +793,30 @@ const MapView: React.FC<MapViewProps> = ({
 
   const handleMapClick = () => {
     setActiveMode("map");
+    if (isLocalInfoActive) {
+    toggleLocalInfo();
+  }
     if (drawState.isDrawMode || drawState.isDrawing) {
       cancelDrawing();
     }
   };
 
-  const handleDrawClick = () => {
-    if (activeMode === "draw") {
-      setActiveMode("map");
-      cancelDrawing();
-    } else {
-      setActiveMode("draw");
-      toggleDrawMode();
+const handleDrawClick = () => {
+  if (activeMode === "draw") {
+    setActiveMode("map");
+    cancelDrawing();
+  } else {
+    setActiveMode("draw");
+    
+    // ✅ Deactivate local info when activating draw
+    if (isLocalInfoActive) {
+      toggleLocalInfo();
     }
-    setShowStyleOptions(false);
-  };
+    
+    toggleDrawMode();
+  }
+  setShowStyleOptions(false);
+};
 
   // Bottom sheet handlers
   const handleCategoryTabClick = (category: any) => {
