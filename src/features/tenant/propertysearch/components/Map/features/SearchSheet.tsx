@@ -83,7 +83,7 @@ const SearchSheet: React.FC<SearchSheetProps> = ({
         className="fixed top-0 left-0 right-0 rounded-b-3xl shadow-2xl z-999 overflow-hidden flex flex-col bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]"
         style={{ 
           height: 'auto',
-          minHeight: '40vh',
+          minHeight: '37vh',
           maxHeight: '80vh'
         }}
       >
@@ -183,9 +183,6 @@ const SearchSheet: React.FC<SearchSheetProps> = ({
               </div>
             </div>
           </div>
-
-          {/* Bottom padding for better spacing */}
-          <div className="h-4" />
         </div>
       </motion.div>
     </>

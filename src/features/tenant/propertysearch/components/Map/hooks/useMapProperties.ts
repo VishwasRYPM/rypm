@@ -34,7 +34,7 @@ const dummyMapProperties: MapProperty[] = [
     city: 'Toronto',
     country: 'Canada',
     address: '123 King St W, Toronto, ON',
-    images: ['/images/toronto.png']
+    images: ['/images/Panama.png']
   },
   {
     id: '2',
@@ -60,7 +60,7 @@ const dummyMapProperties: MapProperty[] = [
     city: 'Toronto',
     country: 'Canada',
     address: '789 Dundas St W, Toronto, ON',
-    images: ['/images/toronto.png']
+    images: ['/images/Panama.png']
   },
   {
     id: '4',
@@ -86,36 +86,10 @@ const dummyMapProperties: MapProperty[] = [
     city: 'Toronto',
     country: 'Canada',
     address: '654 College St, Toronto, ON',
-    images: ['/images/toronto.png']
+    images: ['/images/Panama.png']
   },
-  {
+{
   id: '6',
-  lat: 34.1016,
-  lng: -118.3269,
-  price: '$2,800',
-  bedCount: 3,
-  bathCount: 2,
-  propertyType: 'Condo',
-  city: 'Los Angeles',
-  country: 'USA',
-  address: '100 Sunset Blvd, Los Angeles, CA',
-  images: ['/images/toronto.png']
-},
-{
-  id: '7',
-  lat: 40.7128,
-  lng: -74.0060,
-  price: '$1,950',
-  bedCount: 1,
-  bathCount: 1,
-  propertyType: 'Apartment',
-  city: 'New York',
-  country: 'USA',
-  address: '200 5th Ave, New York, NY',
-  images: ['/images/toronto.png']
-},
-{
-  id: '8',
   lat: 41.8781,
   lng: -87.6298,
   price: '$1,600',
@@ -128,7 +102,7 @@ const dummyMapProperties: MapProperty[] = [
   images: ['/images/toronto.png']
 },
 {
-  id: '9',
+  id: '7',
   lat: 29.7604,
   lng: -95.3698,
   price: '$2,200',
@@ -138,24 +112,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Houston',
   country: 'USA',
   address: '400 Westheimer Rd, Houston, TX',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
-{
-  id: '10',
-  lat: 33.7490,
-  lng: -84.3880,
-  price: '$2,400',
-  bedCount: 2,
-  bathCount: 2,
-  propertyType: 'Condo',
-  city: 'Atlanta',
-  country: 'USA',
-  address: '500 Peachtree St, Atlanta, GA',
-  images: ['/images/toronto.png']
-},
-
   {
-  id: '11',
+  id: '8',
   lat: 51.5074,
   lng: -0.1278,
   price: '£2,300',
@@ -168,7 +128,7 @@ const dummyMapProperties: MapProperty[] = [
   images: ['/images/toronto.png']
 },
 {
-  id: '12',
+  id: '9',
   lat: 53.4808,
   lng: -2.2426,
   price: '£1,600',
@@ -178,10 +138,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Manchester',
   country: 'UK',
   address: '200 Deansgate, Manchester',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
 {
-  id: '13',
+  id: '10',
   lat: 55.9533,
   lng: -3.1883,
   price: '£1,800',
@@ -194,7 +154,7 @@ const dummyMapProperties: MapProperty[] = [
   images: ['/images/toronto.png']
 },
 {
-  id: '14',
+  id: '11',
   lat: 52.4862,
   lng: -1.8904,
   price: '£1,400',
@@ -204,10 +164,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Birmingham',
   country: 'UK',
   address: '88 Broad St, Birmingham',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
 {
-  id: '15',
+  id: '12',
   lat: 51.4545,
   lng: -2.5879,
   price: '£1,750',
@@ -221,7 +181,7 @@ const dummyMapProperties: MapProperty[] = [
 },
 
  {
-  id: '16',
+  id: '13',
   lat: -33.8688,
   lng: 151.2093,
   price: '$2,200',
@@ -231,10 +191,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Sydney',
   country: 'Australia',
   address: '100 George St, Sydney',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
 {
-  id: '17',
+  id: '14',
   lat: -37.8136,
   lng: 144.9631,
   price: '$1,950',
@@ -247,33 +207,7 @@ const dummyMapProperties: MapProperty[] = [
   images: ['/images/toronto.png']
 },
 {
-  id: '18',
-  lat: -27.4698,
-  lng: 153.0251,
-  price: '$1,800',
-  bedCount: 2,
-  bathCount: 2,
-  propertyType: 'Unit',
-  city: 'Brisbane',
-  country: 'Australia',
-  address: '70 Queen St, Brisbane',
-  images: ['/images/toronto.png']
-},
-{
-  id: '19',
-  lat: -31.9505,
-  lng: 115.8605,
-  price: '$1,600',
-  bedCount: 1,
-  bathCount: 1,
-  propertyType: 'Studio',
-  city: 'Perth',
-  country: 'Australia',
-  address: '90 Murray St, Perth',
-  images: ['/images/toronto.png']
-},
-{
-  id: '20',
+  id: '15',
   lat: -34.9285,
   lng: 138.6007,
   price: '$1,750',
@@ -283,10 +217,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Adelaide',
   country: 'Australia',
   address: '15 Rundle Mall, Adelaide',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
 {
-  id: '21',
+  id: '16',
   lat: 51.509865,
   lng: -0.118092,
   price: '£2,000',
@@ -299,7 +233,7 @@ const dummyMapProperties: MapProperty[] = [
   images: ['/images/toronto.png']
 },
 {
-  id: '22',
+  id: '17',
   lat: -33.8688,
   lng: 151.2093,
   price: '$2,400',
@@ -309,10 +243,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Sydney',
   country: 'Australia',
   address: '300 Pitt St, Sydney',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
 {
-  id: '23',
+  id: '18',
   lat: 40.730610,
   lng: -73.935242,
   price: '$2,000',
@@ -325,7 +259,7 @@ const dummyMapProperties: MapProperty[] = [
   images: ['/images/toronto.png']
 },
 {
-  id: '24',
+  id: '19',
   lat: 53.349805,
   lng: -6.26031,
   price: '£1,850',
@@ -335,10 +269,10 @@ const dummyMapProperties: MapProperty[] = [
   city: 'Dublin',
   country: 'UK',
   address: '150 Dame St, Dublin',
-  images: ['/images/toronto.png']
+  images: ['/images/Panama.png']
 },
  {
-    id: '25',
+    id: '20',
     lat: 43.6510,
     lng: -79.3470,
     price: '$2,800',
@@ -351,7 +285,7 @@ const dummyMapProperties: MapProperty[] = [
     images: ['/images/toronto.png']
   },
   {
-    id: '26',
+    id: '21',
     lat: 43.6440,
     lng: -79.3950,
     price: '$1,950',
@@ -361,10 +295,10 @@ const dummyMapProperties: MapProperty[] = [
     city: 'Toronto',
     country: 'Canada',
     address: '200 Spadina Ave, Toronto, ON',
-    images: ['/images/toronto.png']
+    images: ['/images/Panama.png']
   },
   {
-    id: '27',
+    id: '22',
     lat: 43.6580,
     lng: -79.3600,
     price: '$3,500',
@@ -377,7 +311,7 @@ const dummyMapProperties: MapProperty[] = [
     images: ['/images/toronto.png']
   },
   {
-    id: '28',
+    id: '23',
     lat: 43.6350,
     lng: -79.4200,
     price: '$2,300',
@@ -387,10 +321,10 @@ const dummyMapProperties: MapProperty[] = [
     city: 'Toronto',
     country: 'Canada',
     address: '400 Ossington Ave, Toronto, ON',
-    images: ['/images/toronto.png']
+    images: ['/images/Panama.png']
   },
   {
-    id: '29',
+    id: '24',
     lat: 43.6600,
     lng: -79.3400,
     price: '$4,200',
@@ -401,60 +335,7 @@ const dummyMapProperties: MapProperty[] = [
     country: 'Canada',
     address: '500 Church St, Toronto, ON',
     images: ['/images/toronto.png']
-  },
-  {
-    id: '30',
-    lat: 43.6380,
-    lng: -79.3650,
-    price: '$1,750',
-    bedCount: 1,
-    bathCount: 1,
-    propertyType: 'Studio',
-    city: 'Toronto',
-    country: 'Canada',
-    address: '600 Richmond St W, Toronto, ON',
-    images: ['/images/toronto.png']
-  },
-  {
-    id: '31',
-    lat: 43.6520,
-    lng: -79.4000,
-    price: '$2,900',
-    bedCount: 3,
-    bathCount: 2,
-    propertyType: 'Apartment',
-    city: 'Toronto',
-    country: 'Canada',
-    address: '700 Bathurst St, Toronto, ON',
-    images: ['/images/toronto.png']
-  },
-  {
-    id: '32',
-    lat: 43.6470,
-    lng: -79.3550,
-    price: '$3,100',
-    bedCount: 2,
-    bathCount: 2,
-    propertyType: 'Condo',
-    city: 'Toronto',
-    country: 'Canada',
-    address: '800 Adelaide St E, Toronto, ON',
-    images: ['/images/toronto.png']
-  },
-  {
-    id: '33',
-    lat: 43.6320,
-    lng: -79.3900,
-    price: '$2,600',
-    bedCount: 2,
-    bathCount: 1,
-    propertyType: 'Apartment',
-    city: 'Toronto',
-    country: 'Canada',
-    address: '900 King St W, Toronto, ON',
-    images: ['/images/toronto.png']
-  },
-
+  }
 ];
 
 export function useMapProperties() {
