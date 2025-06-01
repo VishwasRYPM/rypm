@@ -159,7 +159,6 @@ const SearchCityModal: React.FC = () => {
     };
     
     const handleSearch = () => {
-        console.log("Search button clicked with term:", localSearchTerm);
         dispatch(setSearchTerm(localSearchTerm));
         dispatch(setActiveTab('newProperties'));
     };

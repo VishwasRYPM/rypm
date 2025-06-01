@@ -20,7 +20,6 @@ const PropertySearchContent: React.FC = () => {
     setViewMode(view === 'map' ? 'map' : 'list');
   }, [searchParams]);
 
-  // ✅ Handle view toggle with URL update
   const handleMapToggle = () => {
     const params = new URLSearchParams(searchParams);
     
@@ -32,10 +31,8 @@ const PropertySearchContent: React.FC = () => {
       params.delete('view');
     }
     
-    // Preserve existing search params and add/remove view param
     const newUrl = `/tenant/PropertySearch${params.toString() ? `?${params.toString()}` : ''}`;
     
-    console.log('Navigating to:', newUrl);
     router.push(newUrl);
   };
 

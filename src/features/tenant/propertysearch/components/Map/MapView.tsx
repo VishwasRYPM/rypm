@@ -858,11 +858,6 @@ const MapView: React.FC<MapViewProps> = ({
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    // Implement your search logic here
-    console.log('Searching for:', query);
-    
-    // You can integrate with your existing search functionality
-    // For example, search for places or properties
   };
 
   const handleNearbySearch = () => {

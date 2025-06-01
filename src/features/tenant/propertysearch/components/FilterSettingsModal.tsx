@@ -65,7 +65,6 @@ const FilterSettingsModal: React.FC = () => {
     values: RentalPreferenceValues, 
     { setSubmitting }: FormikHelpers<RentalPreferenceValues>
   ) => {
-    console.log(values);
     setSubmitting(false);
     dispatch(closeModal());
   };
