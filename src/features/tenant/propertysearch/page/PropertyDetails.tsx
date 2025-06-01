@@ -116,11 +116,9 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
   };
 
   const handleShareClick = () => {
-    console.log("Share property:", id);
   };
 
   const handleFavoriteClick = () => {
-    console.log("Favorite property:", id);
   };
 
   // if (isLoading) {

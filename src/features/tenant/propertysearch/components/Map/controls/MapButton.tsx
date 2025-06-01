@@ -131,40 +131,60 @@ const changeMapStyle = (styleId: string) => {
   // Get current style object
   const currentStyleObj = mapStyles.find(s => s.id === currentStyle) || mapStyles[0];
 
-  return (
-    <div className="relative">
-      {/* Main Button - Shows the currently selected style */}
-      <button
-        className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] ${
-          isActive 
-            ? "bg-[#001D3D]" 
-            : "bg-[rgba(32,54,77,0.30)]"
-        }`}
-        onClick={handleClick}
-      >
-        {currentStyleObj.icon}
-        <span className="text-white text-[10px] font-bold">{currentStyleObj.name}</span>
-      </button>
+return (
+  <div className="relative">
+    {/* Main Button - Shows the currently selected style */}
+    <button
+      className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] ${
+        isActive ? "bg-[#001D3D]" : "bg-[rgba(32,54,77,0.30)]"
+      }`}
+      onClick={handleClick}
+    >
+      {currentStyleObj.icon}
+      <span className="text-white text-[10px] font-bold">
+        {currentStyleObj.name}
+      </span>
+    </button>
 
-      {/* Map Style Options Dropdown */}
-      {showStyleOptions && (
-        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col gap-2">
+    {/* Map Style Options Dropdown */}
+    {showStyleOptions && (
+      <div 
+        className="absolute bottom-12 z-20"
+        style={{
+          left: '50%',
+          transform: 'translateX(-50%)'
+        }}
+      >
+        {/* ✅ Container Box */}
+        <div 
+          className="rounded-lg border border-[rgba(255,255,255,0.30)] bg-[rgba(255,255,255,0.30)] backdrop-blur-[3px] p-2 flex flex-col gap-2"
+          style={{ width: 'max-content' }}
+        >
           {mapStyles
-            .filter(style => style.id !== currentStyle) // Don't show the current style in the dropdown
-            .map(style => (
+            .filter((style) => style.id !== currentStyle)
+            .sort((a, b) => {
+              if (a.id === 'satellite') return -1;
+              if (b.id === 'satellite') return 1;
+              return 0;
+            })
+            .map((style) => (
               <button
                 key={style.id}
-                className={`flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] bg-[rgba(32,54,77,0.80)] hover:bg-[#001D3D] transition-colors`}
+                className="flex px-[10px] py-[5px] items-center gap-1 rounded-[16px] [background:rgba(0,29,61,0.3)] backdrop-blur-[3.55px] whitespace-nowrap"
                 onClick={() => changeMapStyle(style.id)}
               >
                 {style.icon}
-                <span className="text-white text-[10px] font-bold">{style.name}</span>
+                <span className="text-white text-[10px] font-bold">
+                  {style.name}
+                </span>
               </button>
             ))}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
+
 };
 
 // Export the mapStyles for use in other components

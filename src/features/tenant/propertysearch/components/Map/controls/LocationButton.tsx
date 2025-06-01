@@ -507,7 +507,7 @@ useEffect(() => {
                   }
                 }, 300);
               }}
-              className="w-full py-3 bg-blue-500 rounded-full text-white font-medium mb-3"
+              className="w-full py-3 bg-[#001D3D] rounded-full text-white font-medium mb-3"
             >
               Try Again
             </button>

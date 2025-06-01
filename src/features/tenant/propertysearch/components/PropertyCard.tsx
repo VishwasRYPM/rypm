@@ -52,13 +52,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const handleShareClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click
     // Implement share functionality
-    console.log('Share property:', id);
   };
   
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click
     setIsFavorited(!isFavorited);
-    console.log('Favorite property:', id, 'isFavorited:', !isFavorited);
   };
 
   const handleMediaChange = (isVideo: boolean) => {

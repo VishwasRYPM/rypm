@@ -32,7 +32,6 @@ const RentalPreference: React.FC = () => {
       moveInDate,
       propertyType,
     };
-    console.log("Applied Filters:", filters);
   };
 
   const handleClear = () => {
