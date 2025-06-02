@@ -22,7 +22,8 @@ const PhotosAndVideos: React.FC<PhotoVideosProps> = ({ id }) => {
   const [activeSection, setActiveSection] = useState<string>('mainImage');
 
   const handleBackClick = () => {
-    router.push(`/tenant/properties/${id}`);
+    // router.push(`/tenant/properties/${id}`);
+    router.back();
   };
 
   const handleNavigateVideo = () => {

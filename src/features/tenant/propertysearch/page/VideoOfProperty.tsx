@@ -13,7 +13,8 @@ const VideoOfProperty: React.FC<VideoOfPropertyProps> = ({ id }) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push(`/tenant/properties/${id}/photos-videos`);
+    // router.push(`/tenant/properties/${id}/photos-videos`);
+    router.back();
   };
 
   return (
