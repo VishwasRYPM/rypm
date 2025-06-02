@@ -390,7 +390,8 @@ const PropertyUnitFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push(`/tenant/properties/${id}`);
+    // router.push(`/tenant/properties/${id}`);
+    router.back();
   };
 
   return (
@@ -475,7 +476,7 @@ const PropertyUnitFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
 
               {/* Add divider between sections (except after the last section) */}
               {sectionIndex < unitFeaturesData.length - 1 && (
-                <div className="w-[361px] h-[1.03px] bg-[#F8F9FB]"></div>
+                <div className="w-[361px] h-[1.03px] bg-[#F6F7F8]"></div>
               )}
             </section>
           ))}

@@ -10,8 +10,8 @@ interface PropertyKnowThePlaceProps {
 const PropertyKnowThePlace: React.FC<PropertyKnowThePlaceProps> = ({ id }) => {
    const router = useRouter();
     const handleBackClick = () => {
-   router.push(`/tenant/properties/${id}`);
-//    router.back();
+  //  router.push(`/tenant/properties/${id}`);
+    router.back();
   };
     return (
     <>

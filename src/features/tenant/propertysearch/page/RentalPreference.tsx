@@ -19,7 +19,8 @@ const RentalPreference: React.FC = () => {
   const [propertyType, setPropertyType] = React.useState<string>("");
 
   const handleBackClick = () => {
-    router.push(`/tenant/PropertySearch`);
+    // router.push(`/tenant/PropertySearch`);
+    router.back();
   };
 
   const handleSubmit = (e: React.FormEvent) => {

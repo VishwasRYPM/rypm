@@ -112,7 +112,8 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
   };
 
   const handleBackClick = () => {
-    router.push(`/tenant/PropertySearch`);
+    // router.push(`/tenant/PropertySearch`);
+    router.back();
   };
 
   const handleShareClick = () => {
@@ -254,7 +255,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               Unit Features
             </h1>
-            <div className="mt-5 rounded-[16px] border-[1.5px]  border-[#F8F9FB]">
+            <div className="mt-5 rounded-[16px] border-[1.5px]  border-[#F3F4F6]">
               <div className="pl-5 relative">
                 <div>
                   <InfoBlockGridLayout
@@ -346,7 +347,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               Building Feature
             </h1>
-            <div className="mt-5 rounded-[16px] border-[1.5px] border-[#F8F9FB]">
+            <div className="mt-5 rounded-[16px] border-[1.5px] border-[#F3F4F6]">
               <div className="pl-5 relative">
                 <InfoBlockGridLayout
                   leftSection={

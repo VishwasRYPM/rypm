@@ -13,7 +13,7 @@ const InfoBlock: React.FC<InfoBlockProps> = ({ Icon, text1, text2 }) => {
       {Icon}
       <div>
         <p className='text-[#001D3D] text-[12px] font-normal mb-0.2'>{text1}</p>
-        <p className='text-[#63829E] text-[10px] font-normal mb-1.5'>{text2}</p>
+        <p className='text-[#99A1AF] text-[10px] font-normal mb-1.5'>{text2}</p>
       </div>
     </div>
   );
